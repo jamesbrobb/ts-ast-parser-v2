@@ -1,2061 +1,306 @@
 {
-  "kind": "SourceFile",
-  "children": [
+  "exports": [
     {
-      "kind": "ImportDeclaration",
-      "children": [
+      "name": "DEFAULT_CHART_OPTIONS",
+      "type": {
+        "name": "DeepPartial",
+        "typeArguments": [
+          {
+            "name": "ChartOptions"
+          }
+        ]
+      },
+      "initializer": {
+        "height": {
+          "raw": "300",
+          "kind": 9,
+          "type": "FirstLiteralToken"
+        },
+        "autoSize": true,
+        "timeScale": {
+          "fixRightEdge": true,
+          "lockVisibleTimeRangeOnResize": true,
+          "timeVisible": true,
+          "secondsVisible": false
+        },
+        "crosshair": {
+          "vertLine": {
+            "style": {
+              "raw": "LineStyle.LargeDashed",
+              "kind": 211,
+              "type": "PropertyAccessExpression"
+            }
+          },
+          "horzLine": {
+            "style": {
+              "raw": "LineStyle.LargeDashed",
+              "kind": 211,
+              "type": "PropertyAccessExpression"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "DEFAULT_DARK_CHART_OPTIONS",
+      "type": {
+        "name": "DeepPartial",
+        "typeArguments": [
+          {
+            "name": "ChartOptions"
+          }
+        ]
+      },
+      "initializer": {
+        "expression": "deepmerge",
+        "arguments": [
+          "DEFAULT_CHART_OPTIONS",
+          {
+            "layout": {
+              "background": {
+                "type": {
+                  "raw": "ColorType.Solid",
+                  "kind": 211,
+                  "type": "PropertyAccessExpression"
+                },
+                "color": "#222"
+              },
+              "textColor": "#DDD"
+            },
+            "grid": {
+              "vertLines": {
+                "color": "#444"
+              },
+              "horzLines": {
+                "color": "#444"
+              }
+            },
+            "timeScale": {
+              "borderColor": "#555"
+            },
+            "leftPriceScale": {
+              "borderColor": "#555"
+            },
+            "rightPriceScale": {
+              "borderColor": "#555"
+            },
+            "crosshair": {
+              "vertLine": {
+                "color": "#fff",
+                "labelBackgroundColor": "#aaa",
+                "style": {
+                  "raw": "LineStyle.SparseDotted",
+                  "kind": 211,
+                  "type": "PropertyAccessExpression"
+                }
+              },
+              "horzLine": {
+                "color": "#fff",
+                "labelBackgroundColor": "#aaa",
+                "style": {
+                  "raw": "LineStyle.SparseDotted",
+                  "kind": 211,
+                  "type": "PropertyAccessExpression"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "TVChartDirective",
+      "typeParameters": [
         {
-          "kind": "ImportClause",
-          "children": [
+          "name": "T",
+          "constraint": {
+            "name": "SeriesType"
+          }
+        },
+        {
+          "name": "HorzScaleItem"
+        }
+      ],
+      "members": [
+        {
+          "name": "type",
+          "initializedValue": {
+            "expression": {
+              "raw": "input.required",
+              "kind": 211,
+              "type": "PropertyAccessExpression"
+            },
+            "typeArguments": [
+              {
+                "name": "T"
+              }
+            ],
+            "arguments": [
+              {
+                "alias": "tvChart"
+              }
+            ]
+          }
+        },
+        {
+          "name": "seriesOptions",
+          "initializedValue": {
+            "expression": "input",
+            "typeArguments": [
+              {
+                "raw": "SeriesPartialOptionsMap[T]",
+                "kind": 199,
+                "type": "IndexedAccessType"
+              }
+            ],
+            "arguments": []
+          }
+        },
+        {
+          "name": "data",
+          "initializedValue": {
+            "expression": "input",
+            "typeArguments": [
+              {
+                "raw": "SeriesDataItemTypeMap<HorzScaleItem>[T][]",
+                "kind": 188,
+                "type": "ArrayType"
+              }
+            ],
+            "arguments": []
+          }
+        },
+        {
+          "name": {
+            "raw": "#inputs",
+            "kind": 81,
+            "type": "PrivateIdentifier"
+          },
+          "initializedValue": {
+            "expression": "inject",
+            "arguments": [
+              "TVChartInputsDirective"
+            ]
+          },
+          "modifiers": [
             {
-              "kind": "Identifier",
-              "children": []
+              "raw": "readonly",
+              "kind": 148,
+              "type": "ReadonlyKeyword"
             }
           ]
         },
         {
-          "kind": "StringLiteral",
-          "children": []
-        }
-      ]
-    },
-    {
-      "kind": "ImportDeclaration",
-      "children": [
-        {
-          "kind": "ImportClause",
-          "children": [
+          "name": {
+            "raw": "#element",
+            "kind": 81,
+            "type": "PrivateIdentifier"
+          },
+          "initializedValue": {
+            "raw": "inject(ElementRef<HTMLElement>).nativeElement",
+            "kind": 211,
+            "type": "PropertyAccessExpression"
+          },
+          "modifiers": [
             {
-              "kind": "NamedImports",
-              "children": [
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                }
-              ]
+              "raw": "readonly",
+              "kind": 148,
+              "type": "ReadonlyKeyword"
             }
           ]
         },
         {
-          "kind": "StringLiteral",
-          "children": []
-        }
-      ]
-    },
-    {
-      "kind": "ImportDeclaration",
-      "children": [
-        {
-          "kind": "ImportClause",
-          "children": [
+          "name": {
+            "raw": "#chart",
+            "kind": 81,
+            "type": "PrivateIdentifier"
+          },
+          "initializedValue": {
+            "expression": "inject",
+            "arguments": [
+              {
+                "expression": "TVChart",
+                "typeArguments": [
+                  {
+                    "name": "T"
+                  },
+                  {
+                    "name": "HorzScaleItem"
+                  }
+                ]
+              }
+            ]
+          },
+          "modifiers": [
             {
-              "kind": "NamedImports",
-              "children": [
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                }
-              ]
+              "raw": "readonly",
+              "kind": 148,
+              "type": "ReadonlyKeyword"
             }
           ]
         },
         {
-          "kind": "StringLiteral",
-          "children": []
-        }
-      ]
-    },
-    {
-      "kind": "ImportDeclaration",
-      "children": [
-        {
-          "kind": "ImportClause",
-          "children": [
+          "parameters": [
             {
-              "kind": "NamedImports",
-              "children": [
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                }
-              ]
+              "name": "element",
+              "type": {
+                "name": "ElementRef"
+              }
             }
           ]
         },
         {
-          "kind": "StringLiteral",
-          "children": []
-        }
-      ]
-    },
-    {
-      "kind": "ImportDeclaration",
-      "children": [
-        {
-          "kind": "ImportClause",
-          "children": [
-            {
-              "kind": "NamedImports",
-              "children": [
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "name": "ngOnInit",
+          "parameters": []
         },
         {
-          "kind": "StringLiteral",
-          "children": []
+          "name": "ngOnDestroy",
+          "parameters": []
         }
-      ]
-    },
-    {
-      "kind": "ImportDeclaration",
-      "children": [
+      ],
+      "heritageClauses": [
         {
-          "kind": "ImportClause",
-          "children": [
+          "token": "implements",
+          "types": [
             {
-              "kind": "NamedImports",
-              "children": [
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "StringLiteral",
-          "children": []
-        }
-      ]
-    },
-    {
-      "kind": "ImportDeclaration",
-      "children": [
-        {
-          "kind": "ImportClause",
-          "children": [
+              "expression": "OnInit"
+            },
             {
-              "kind": "NamedImports",
-              "children": [
-                {
-                  "kind": "ImportSpecifier",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "StringLiteral",
-          "children": []
-        }
-      ]
-    },
-    {
-      "kind": "FirstStatement",
-      "children": [
-        {
-          "kind": "ExportKeyword",
-          "children": []
-        },
-        {
-          "kind": "VariableDeclarationList",
-          "children": [
-            {
-              "kind": "VariableDeclaration",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                },
-                {
-                  "kind": "TypeReference",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    },
-                    {
-                      "kind": "TypeReference",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "kind": "ObjectLiteralExpression",
-                  "children": [
-                    {
-                      "kind": "PropertyAssignment",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "FirstLiteralToken",
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "kind": "PropertyAssignment",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "TrueKeyword",
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "kind": "PropertyAssignment",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "ObjectLiteralExpression",
-                          "children": [
-                            {
-                              "kind": "PropertyAssignment",
-                              "children": [
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "TrueKeyword",
-                                  "children": []
-                                }
-                              ]
-                            },
-                            {
-                              "kind": "PropertyAssignment",
-                              "children": [
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "TrueKeyword",
-                                  "children": []
-                                }
-                              ]
-                            },
-                            {
-                              "kind": "PropertyAssignment",
-                              "children": [
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "TrueKeyword",
-                                  "children": []
-                                }
-                              ]
-                            },
-                            {
-                              "kind": "PropertyAssignment",
-                              "children": [
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "FalseKeyword",
-                                  "children": []
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "kind": "PropertyAssignment",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "ObjectLiteralExpression",
-                          "children": [
-                            {
-                              "kind": "PropertyAssignment",
-                              "children": [
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "ObjectLiteralExpression",
-                                  "children": [
-                                    {
-                                      "kind": "PropertyAssignment",
-                                      "children": [
-                                        {
-                                          "kind": "Identifier",
-                                          "children": []
-                                        },
-                                        {
-                                          "kind": "PropertyAccessExpression",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "kind": "PropertyAssignment",
-                              "children": [
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "ObjectLiteralExpression",
-                                  "children": [
-                                    {
-                                      "kind": "PropertyAssignment",
-                                      "children": [
-                                        {
-                                          "kind": "Identifier",
-                                          "children": []
-                                        },
-                                        {
-                                          "kind": "PropertyAccessExpression",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
+              "expression": "OnDestroy"
             }
           ]
         }
-      ]
-    },
-    {
-      "kind": "FirstStatement",
-      "children": [
+      ],
+      "modifiers": [
         {
-          "kind": "ExportKeyword",
-          "children": []
+          "type": "Directive",
+          "metadata": {
+            "selector": "[tvChart]",
+            "standalone": true,
+            "providers": [
+              "tvChartProviderWithExistenceCheck"
+            ],
+            "hostDirectives": [
+              {
+                "directive": "TVChartInputsDirective",
+                "inputs": [
+                  "id",
+                  "options",
+                  "markers"
+                ]
+              },
+              "tvChartOutputsDirectiveHostDef"
+            ]
+          },
+          "signature": "@Directive({selector: [tvChart], standalone: true, providers: tvChartProviderWithExistenceCheck, hostDirectives: [object Object],tvChartOutputsDirectiveHostDef})",
+          "raw": "@Directive({\n  selector: '[tvChart]',\n  standalone: true,\n  providers: [tvChartProviderWithExistenceCheck],\n  hostDirectives: [\n    {\n      directive: TVChartInputsDirective,\n      inputs: ['id', 'options', 'markers']\n    },\n    tvChartOutputsDirectiveHostDef\n  ]\n})"
         },
         {
-          "kind": "VariableDeclarationList",
-          "children": [
-            {
-              "kind": "VariableDeclaration",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                },
-                {
-                  "kind": "TypeReference",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    },
-                    {
-                      "kind": "TypeReference",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "kind": "CallExpression",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    },
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    },
-                    {
-                      "kind": "ObjectLiteralExpression",
-                      "children": [
-                        {
-                          "kind": "PropertyAssignment",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            },
-                            {
-                              "kind": "ObjectLiteralExpression",
-                              "children": [
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "ObjectLiteralExpression",
-                                      "children": [
-                                        {
-                                          "kind": "PropertyAssignment",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "PropertyAccessExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "Identifier",
-                                                  "children": []
-                                                },
-                                                {
-                                                  "kind": "Identifier",
-                                                  "children": []
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "kind": "PropertyAssignment",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "StringLiteral",
-                                              "children": []
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "StringLiteral",
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "kind": "PropertyAssignment",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            },
-                            {
-                              "kind": "ObjectLiteralExpression",
-                              "children": [
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "ObjectLiteralExpression",
-                                      "children": [
-                                        {
-                                          "kind": "PropertyAssignment",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "StringLiteral",
-                                              "children": []
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "ObjectLiteralExpression",
-                                      "children": [
-                                        {
-                                          "kind": "PropertyAssignment",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "StringLiteral",
-                                              "children": []
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "kind": "PropertyAssignment",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            },
-                            {
-                              "kind": "ObjectLiteralExpression",
-                              "children": [
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "StringLiteral",
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "kind": "PropertyAssignment",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            },
-                            {
-                              "kind": "ObjectLiteralExpression",
-                              "children": [
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "StringLiteral",
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "kind": "PropertyAssignment",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            },
-                            {
-                              "kind": "ObjectLiteralExpression",
-                              "children": [
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "StringLiteral",
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "kind": "PropertyAssignment",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            },
-                            {
-                              "kind": "ObjectLiteralExpression",
-                              "children": [
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "ObjectLiteralExpression",
-                                      "children": [
-                                        {
-                                          "kind": "PropertyAssignment",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "StringLiteral",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "kind": "PropertyAssignment",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "StringLiteral",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "kind": "PropertyAssignment",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "PropertyAccessExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "Identifier",
-                                                  "children": []
-                                                },
-                                                {
-                                                  "kind": "Identifier",
-                                                  "children": []
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "ObjectLiteralExpression",
-                                      "children": [
-                                        {
-                                          "kind": "PropertyAssignment",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "StringLiteral",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "kind": "PropertyAssignment",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "StringLiteral",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "kind": "PropertyAssignment",
-                                          "children": [
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "PropertyAccessExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "Identifier",
-                                                  "children": []
-                                                },
-                                                {
-                                                  "kind": "Identifier",
-                                                  "children": []
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "raw": "export",
+          "kind": 95,
+          "type": "ExportKeyword"
         }
       ]
-    },
-    {
-      "kind": "ClassDeclaration",
-      "children": [
-        {
-          "kind": "Decorator",
-          "children": [
-            {
-              "kind": "CallExpression",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                },
-                {
-                  "kind": "ObjectLiteralExpression",
-                  "children": [
-                    {
-                      "kind": "PropertyAssignment",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "StringLiteral",
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "kind": "PropertyAssignment",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "TrueKeyword",
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "kind": "PropertyAssignment",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "ArrayLiteralExpression",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "kind": "PropertyAssignment",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "ArrayLiteralExpression",
-                          "children": [
-                            {
-                              "kind": "ObjectLiteralExpression",
-                              "children": [
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    }
-                                  ]
-                                },
-                                {
-                                  "kind": "PropertyAssignment",
-                                  "children": [
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "ArrayLiteralExpression",
-                                      "children": [
-                                        {
-                                          "kind": "StringLiteral",
-                                          "children": []
-                                        },
-                                        {
-                                          "kind": "StringLiteral",
-                                          "children": []
-                                        },
-                                        {
-                                          "kind": "StringLiteral",
-                                          "children": []
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "ExportKeyword",
-          "children": []
-        },
-        {
-          "kind": "Identifier",
-          "children": []
-        },
-        {
-          "kind": "TypeParameter",
-          "children": [
-            {
-              "kind": "Identifier",
-              "children": []
-            },
-            {
-              "kind": "TypeReference",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "TypeParameter",
-          "children": [
-            {
-              "kind": "Identifier",
-              "children": []
-            }
-          ]
-        },
-        {
-          "kind": "HeritageClause",
-          "children": [
-            {
-              "kind": "ExpressionWithTypeArguments",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "kind": "ExpressionWithTypeArguments",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "children": [
-            {
-              "kind": "Identifier",
-              "children": []
-            },
-            {
-              "kind": "CallExpression",
-              "children": [
-                {
-                  "kind": "PropertyAccessExpression",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    },
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "TypeReference",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "kind": "ObjectLiteralExpression",
-                  "children": [
-                    {
-                      "kind": "PropertyAssignment",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "StringLiteral",
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "children": [
-            {
-              "kind": "Identifier",
-              "children": []
-            },
-            {
-              "kind": "CallExpression",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                },
-                {
-                  "kind": "IndexedAccessType",
-                  "children": [
-                    {
-                      "kind": "TypeReference",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "kind": "TypeReference",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "children": [
-            {
-              "kind": "Identifier",
-              "children": []
-            },
-            {
-              "kind": "CallExpression",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                },
-                {
-                  "kind": "ArrayType",
-                  "children": [
-                    {
-                      "kind": "IndexedAccessType",
-                      "children": [
-                        {
-                          "kind": "TypeReference",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            },
-                            {
-                              "kind": "TypeReference",
-                              "children": [
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "kind": "TypeReference",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "children": [
-            {
-              "kind": "ReadonlyKeyword",
-              "children": []
-            },
-            {
-              "kind": "PrivateIdentifier",
-              "children": []
-            },
-            {
-              "kind": "CallExpression",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                },
-                {
-                  "kind": "Identifier",
-                  "children": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "children": [
-            {
-              "kind": "ReadonlyKeyword",
-              "children": []
-            },
-            {
-              "kind": "PrivateIdentifier",
-              "children": []
-            },
-            {
-              "kind": "PropertyAccessExpression",
-              "children": [
-                {
-                  "kind": "CallExpression",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    },
-                    {
-                      "kind": "ExpressionWithTypeArguments",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "TypeReference",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "kind": "Identifier",
-                  "children": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "children": [
-            {
-              "kind": "ReadonlyKeyword",
-              "children": []
-            },
-            {
-              "kind": "PrivateIdentifier",
-              "children": []
-            },
-            {
-              "kind": "CallExpression",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                },
-                {
-                  "kind": "ExpressionWithTypeArguments",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    },
-                    {
-                      "kind": "TypeReference",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "kind": "TypeReference",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "Constructor",
-          "children": [
-            {
-              "kind": "Parameter",
-              "children": [
-                {
-                  "kind": "Identifier",
-                  "children": []
-                },
-                {
-                  "kind": "TypeReference",
-                  "children": [
-                    {
-                      "kind": "Identifier",
-                      "children": []
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "kind": "Block",
-              "children": [
-                {
-                  "kind": "ExpressionStatement",
-                  "children": [
-                    {
-                      "kind": "CallExpression",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "ArrowFunction",
-                          "children": [
-                            {
-                              "kind": "EqualsGreaterThanToken",
-                              "children": []
-                            },
-                            {
-                              "kind": "Block",
-                              "children": [
-                                {
-                                  "kind": "ExpressionStatement",
-                                  "children": [
-                                    {
-                                      "kind": "CallExpression",
-                                      "children": [
-                                        {
-                                          "kind": "PropertyAccessExpression",
-                                          "children": [
-                                            {
-                                              "kind": "PropertyAccessExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "ThisKeyword",
-                                                  "children": []
-                                                },
-                                                {
-                                                  "kind": "PrivateIdentifier",
-                                                  "children": []
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "kind": "CallExpression",
-                                          "children": [
-                                            {
-                                              "kind": "PropertyAccessExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "PropertyAccessExpression",
-                                                  "children": [
-                                                    {
-                                                      "kind": "ThisKeyword",
-                                                      "children": []
-                                                    },
-                                                    {
-                                                      "kind": "PrivateIdentifier",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "kind": "Identifier",
-                                                  "children": []
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "kind": "ExpressionStatement",
-                  "children": [
-                    {
-                      "kind": "CallExpression",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "ArrowFunction",
-                          "children": [
-                            {
-                              "kind": "EqualsGreaterThanToken",
-                              "children": []
-                            },
-                            {
-                              "kind": "Block",
-                              "children": [
-                                {
-                                  "kind": "ExpressionStatement",
-                                  "children": [
-                                    {
-                                      "kind": "CallExpression",
-                                      "children": [
-                                        {
-                                          "kind": "PropertyAccessExpression",
-                                          "children": [
-                                            {
-                                              "kind": "PropertyAccessExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "ThisKeyword",
-                                                  "children": []
-                                                },
-                                                {
-                                                  "kind": "PrivateIdentifier",
-                                                  "children": []
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "kind": "CallExpression",
-                                          "children": [
-                                            {
-                                              "kind": "PropertyAccessExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "ThisKeyword",
-                                                  "children": []
-                                                },
-                                                {
-                                                  "kind": "Identifier",
-                                                  "children": []
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "kind": "ExpressionStatement",
-                  "children": [
-                    {
-                      "kind": "CallExpression",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "ArrowFunction",
-                          "children": [
-                            {
-                              "kind": "EqualsGreaterThanToken",
-                              "children": []
-                            },
-                            {
-                              "kind": "Block",
-                              "children": [
-                                {
-                                  "kind": "ExpressionStatement",
-                                  "children": [
-                                    {
-                                      "kind": "CallExpression",
-                                      "children": [
-                                        {
-                                          "kind": "PropertyAccessExpression",
-                                          "children": [
-                                            {
-                                              "kind": "PropertyAccessExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "ThisKeyword",
-                                                  "children": []
-                                                },
-                                                {
-                                                  "kind": "PrivateIdentifier",
-                                                  "children": []
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "kind": "BinaryExpression",
-                                          "children": [
-                                            {
-                                              "kind": "CallExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "PropertyAccessExpression",
-                                                  "children": [
-                                                    {
-                                                      "kind": "ThisKeyword",
-                                                      "children": []
-                                                    },
-                                                    {
-                                                      "kind": "Identifier",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "kind": "BarBarToken",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "ArrayLiteralExpression",
-                                              "children": []
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "kind": "ExpressionStatement",
-                  "children": [
-                    {
-                      "kind": "CallExpression",
-                      "children": [
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "ArrowFunction",
-                          "children": [
-                            {
-                              "kind": "EqualsGreaterThanToken",
-                              "children": []
-                            },
-                            {
-                              "kind": "Block",
-                              "children": [
-                                {
-                                  "kind": "ExpressionStatement",
-                                  "children": [
-                                    {
-                                      "kind": "CallExpression",
-                                      "children": [
-                                        {
-                                          "kind": "PropertyAccessExpression",
-                                          "children": [
-                                            {
-                                              "kind": "PropertyAccessExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "ThisKeyword",
-                                                  "children": []
-                                                },
-                                                {
-                                                  "kind": "PrivateIdentifier",
-                                                  "children": []
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "kind": "BinaryExpression",
-                                          "children": [
-                                            {
-                                              "kind": "CallExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "PropertyAccessExpression",
-                                                  "children": [
-                                                    {
-                                                      "kind": "PropertyAccessExpression",
-                                                      "children": [
-                                                        {
-                                                          "kind": "ThisKeyword",
-                                                          "children": []
-                                                        },
-                                                        {
-                                                          "kind": "PrivateIdentifier",
-                                                          "children": []
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "kind": "Identifier",
-                                                      "children": []
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "kind": "BarBarToken",
-                                              "children": []
-                                            },
-                                            {
-                                              "kind": "ArrayLiteralExpression",
-                                              "children": []
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "MethodDeclaration",
-          "children": [
-            {
-              "kind": "Identifier",
-              "children": []
-            },
-            {
-              "kind": "Block",
-              "children": [
-                {
-                  "kind": "FirstStatement",
-                  "children": [
-                    {
-                      "kind": "VariableDeclarationList",
-                      "children": [
-                        {
-                          "kind": "VariableDeclaration",
-                          "children": [
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            },
-                            {
-                              "kind": "CallExpression",
-                              "children": [
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "BinaryExpression",
-                                  "children": [
-                                    {
-                                      "kind": "CallExpression",
-                                      "children": [
-                                        {
-                                          "kind": "PropertyAccessExpression",
-                                          "children": [
-                                            {
-                                              "kind": "PropertyAccessExpression",
-                                              "children": [
-                                                {
-                                                  "kind": "ThisKeyword",
-                                                  "children": []
-                                                },
-                                                {
-                                                  "kind": "PrivateIdentifier",
-                                                  "children": []
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "kind": "Identifier",
-                                              "children": []
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "kind": "BarBarToken",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "ObjectLiteralExpression",
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "kind": "ExpressionStatement",
-                  "children": [
-                    {
-                      "kind": "CallExpression",
-                      "children": [
-                        {
-                          "kind": "PropertyAccessExpression",
-                          "children": [
-                            {
-                              "kind": "PropertyAccessExpression",
-                              "children": [
-                                {
-                                  "kind": "ThisKeyword",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "PrivateIdentifier",
-                                  "children": []
-                                }
-                              ]
-                            },
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "kind": "PropertyAccessExpression",
-                          "children": [
-                            {
-                              "kind": "ThisKeyword",
-                              "children": []
-                            },
-                            {
-                              "kind": "PrivateIdentifier",
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "kind": "CallExpression",
-                          "children": [
-                            {
-                              "kind": "PropertyAccessExpression",
-                              "children": [
-                                {
-                                  "kind": "ThisKeyword",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "kind": "Identifier",
-                          "children": []
-                        },
-                        {
-                          "kind": "BinaryExpression",
-                          "children": [
-                            {
-                              "kind": "CallExpression",
-                              "children": [
-                                {
-                                  "kind": "PropertyAccessExpression",
-                                  "children": [
-                                    {
-                                      "kind": "ThisKeyword",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "Identifier",
-                                      "children": []
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "kind": "BarBarToken",
-                              "children": []
-                            },
-                            {
-                              "kind": "ObjectLiteralExpression",
-                              "children": []
-                            }
-                          ]
-                        },
-                        {
-                          "kind": "CallExpression",
-                          "children": [
-                            {
-                              "kind": "PropertyAccessExpression",
-                              "children": [
-                                {
-                                  "kind": "PropertyAccessExpression",
-                                  "children": [
-                                    {
-                                      "kind": "ThisKeyword",
-                                      "children": []
-                                    },
-                                    {
-                                      "kind": "PrivateIdentifier",
-                                      "children": []
-                                    }
-                                  ]
-                                },
-                                {
-                                  "kind": "Identifier",
-                                  "children": []
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "kind": "MethodDeclaration",
-          "children": [
-            {
-              "kind": "Identifier",
-              "children": []
-            },
-            {
-              "kind": "Block",
-              "children": [
-                {
-                  "kind": "ExpressionStatement",
-                  "children": [
-                    {
-                      "kind": "CallExpression",
-                      "children": [
-                        {
-                          "kind": "PropertyAccessExpression",
-                          "children": [
-                            {
-                              "kind": "PropertyAccessExpression",
-                              "children": [
-                                {
-                                  "kind": "ThisKeyword",
-                                  "children": []
-                                },
-                                {
-                                  "kind": "PrivateIdentifier",
-                                  "children": []
-                                }
-                              ]
-                            },
-                            {
-                              "kind": "Identifier",
-                              "children": []
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "kind": "EndOfFileToken",
-      "children": []
     }
   ]
 }

@@ -100,14 +100,15 @@ export type DefaultDeclarationKindMap = {
   [ts.SyntaxKind.StringLiteral]: DeclarationKind<ts.StringLiteral> & string,
   [ts.SyntaxKind.TrueKeyword]: DeclarationKind<ts.TrueLiteral> & boolean
   [ts.SyntaxKind.FalseKeyword]: DeclarationKind<ts.FalseLiteral> & boolean
-  [ts.SyntaxKind.ObjectLiteralExpression]: DeclarationKind<ts.ObjectLiteralExpression> & Record<string, any>
+  [ts.SyntaxKind.ObjectLiteralExpression]: DeclarationKind<ts.ObjectLiteralExpression> & Record<PropertyKey, any>
   [ts.SyntaxKind.ArrayLiteralExpression]: DeclarationKind<ts.ArrayLiteralExpression> & any[]
 }
 
-
-export const defaultDeclarationDefinitionMap: DeclarationDefinitionMap<
+export type DefaultDeclarationDefinitionMap = DeclarationDefinitionMap<
   DefaultSyntaxKindToTSNodeDeclarationMap, DefaultDeclarationKindMap
-> = {
+>
+
+export const defaultDeclarationDefinitionMap: DefaultDeclarationDefinitionMap = {
   [ts.SyntaxKind.ImportDeclaration]: importDeclarationDefinition,
   [ts.SyntaxKind.ImportClause]: importClauseDefinition,
   [ts.SyntaxKind.NamespaceImport]: namespaceImportDefinition,

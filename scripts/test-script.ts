@@ -1,5 +1,6 @@
+import * as fs from "node:fs";
 import * as path from "node:path";
-import {parse} from "../src";
+import {defaultDeclarationDefinitionMap, parse, Parser} from "../src";
 
 
 function run() {
@@ -16,7 +17,14 @@ function run() {
 
     process.chdir(dir);
 
-    parse(sourcePath);
+    const parser = new Parser(defaultDeclarationDefinitionMap);
+
+    const source = parse(sourcePath, parser);
+
+    fs.writeFileSync(
+      path.join('/Users/James/WebstormProjects/ts-ast-parser-v2/scripts/output', 'test.json'),
+      JSON.stringify(source, null, '  ')
+    );
 }
 
 

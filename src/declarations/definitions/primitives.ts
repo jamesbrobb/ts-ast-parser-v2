@@ -4,7 +4,7 @@ import {Parser} from "../declaration-parser";
 
 
 
-export function parseObjectLiteral(node: ts.ObjectLiteralExpression, sourceFile: ts.SourceFile, parser: Parser<any>): Record<string, any> {
+export function parseObjectLiteral(node: ts.ObjectLiteralExpression, sourceFile: ts.SourceFile, parser: Parser<any, any>): Record<PropertyKey, any> {
 
   const res: Record<string, any> = {};
 
@@ -24,7 +24,7 @@ export function parseObjectLiteral(node: ts.ObjectLiteralExpression, sourceFile:
   return res;
 }
 
-export function parseArrayLiteral(node: ts.ArrayLiteralExpression, sourceFile: ts.SourceFile, parser: Parser<any>): any[] {
+export function parseArrayLiteral(node: ts.ArrayLiteralExpression, sourceFile: ts.SourceFile, parser: Parser<any, any>): any[] {
     return node.elements.map((element) => parser.parse(element, sourceFile));
 }
 

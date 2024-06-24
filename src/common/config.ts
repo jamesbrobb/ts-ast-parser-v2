@@ -1,5 +1,6 @@
 import * as ts from "typescript";
 
+
 export function getParsedTSConfig(): ts.ParsedCommandLine {
 
   const appConfigPath = ts.findConfigFile(process.cwd(), ts.sys.fileExists, "tsconfig.app.json"),
