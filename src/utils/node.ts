@@ -1,9 +1,12 @@
 import * as ts from "typescript";
 
 
-
 export function isNode(value: any): value is ts.Node {
-  return !!value && 'kind' in value && typeof value.kind === 'number' && 'parent' in value && 'getSourceFile' in value
+  try {
+    return !!value && 'kind' in value && typeof value.kind === 'number' && 'parent' in value && 'getSourceFile' in value
+  } catch (error) {
+    return false;
+  }
 }
 
 

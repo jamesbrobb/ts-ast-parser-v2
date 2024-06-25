@@ -106,8 +106,28 @@ export const typeElementDefinition: DeclarationDefinition<TypeElement> = {
 }
 
 
+export type IndexedAccessTypeNode = {
+  objectType: string,
+  indexType: string,
+  raw: string
+} & DeclarationKind<ts.IndexedAccessTypeNode>
+
+export const indexedAccessTypeNodeDefinition: DeclarationDefinition<IndexedAccessTypeNode> = {
+  props: ['objectType', 'indexType']
+}
+
+
+export type ArrayTypeNode = {
+  elementType: string
+} & DeclarationKind<ts.ArrayTypeNode>
+
+export const arrayTypeNodeDefinition: DeclarationDefinition<ArrayTypeNode> = {
+  props: ['elementType']
+}
+
+
 // TODO - remove this and allow the parser/map to handle it
-export function getType(node: ts.TypeNode, sourceFile: ts.SourceFile, parser: Parser<any>): string | any {
+export function getType(node: ts.TypeNode, sourceFile: ts.SourceFile, parser: Parser<any, any>): string | any {
 
   if(ts.isTypeReferenceNode(node) || ts.isTypeLiteralNode(node)) {
     return parser.parse(node, sourceFile);

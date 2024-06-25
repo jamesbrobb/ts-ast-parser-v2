@@ -57,6 +57,22 @@ export const propertySignatureDefinition: DeclarationDefinition<PropertySignatur
 }
 
 
+export type PropertyAccessExpression = {
+  name: string,
+  expression: string,
+  optional: boolean
+} & DeclarationKind<ts.PropertyAccessExpression>;
+
+export const propertyAccessExpressionDefinition: DeclarationDefinition<PropertyAccessExpression> = {
+  props: ['name', 'expression', 'questionDotToken'],
+  propHandlers: {
+    questionDotToken: {
+      propName: 'optional',
+      parseFn: (value: ts.QuestionDotToken) => !!value
+    }
+  }
+}
+
 
 /*function getSignature(name: string, modifiers?: Modifiers, optional?: boolean, exclamation?: boolean, type?: string, initializedValue?: string): string {
 

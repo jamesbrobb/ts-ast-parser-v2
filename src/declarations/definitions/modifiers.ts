@@ -27,7 +27,7 @@ const modifiersMap: {[key: number]: ModifierKeywords} = {
 }
 
 
-export function getModifiers(node: ts.Node, sourceFile: ts.SourceFile, parser: Parser<any>): Modifiers | undefined {
+export function getModifiers(node: ts.Node, sourceFile: ts.SourceFile, parser: Parser<any, any>): Modifiers | undefined {
 
   if (!('modifiers' in node) || !Array.isArray(node.modifiers) || node.modifiers.length === 0) {
     return;

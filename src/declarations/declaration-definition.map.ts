@@ -60,9 +60,12 @@ import {
   namedTupleMemberDefinition,
   parseArrayLiteral,
   parseString,
-  parseBoolean,
   parseObjectLiteral,
-  getDecorator
+  IndexedAccessTypeNode,
+  indexedAccessTypeNodeDefinition,
+  ArrayTypeNode,
+  arrayTypeNodeDefinition,
+  PropertyAccessExpression, propertyAccessExpressionDefinition, decoratorDefinition
 } from "./definitions";
 import {DeclarationKind} from "./declaration-kind.types";
 
@@ -81,10 +84,13 @@ export type DefaultDeclarationKindMap = {
   [ts.SyntaxKind.ExpressionWithTypeArguments]: ExpressionWithTypeArguments
   [ts.SyntaxKind.TypeAliasDeclaration]: TypeAliasDeclaration
   [ts.SyntaxKind.TypeLiteral]: TypeLiteral
+  [ts.SyntaxKind.IndexedAccessType]: IndexedAccessTypeNode
+  [ts.SyntaxKind.ArrayType]: ArrayTypeNode
   [ts.SyntaxKind.HeritageClause]: HeritageClause
   [ts.SyntaxKind.Constructor]: ConstructorDeclaration
   [ts.SyntaxKind.PropertyDeclaration]: PropertyDeclaration
   [ts.SyntaxKind.PropertySignature]: PropertySignature
+  [ts.SyntaxKind.PropertyAccessExpression]: PropertyAccessExpression
   [ts.SyntaxKind.MethodDeclaration]: MethodDeclaration
   [ts.SyntaxKind.GetAccessor]: GetAccessorDeclaration
   [ts.SyntaxKind.SetAccessor]: SetAccessorDeclaration
@@ -96,12 +102,9 @@ export type DefaultDeclarationKindMap = {
   [ts.SyntaxKind.Parameter]: ParameterDeclaration
   [ts.SyntaxKind.CallExpression]: CallExpression
   [ts.SyntaxKind.FunctionDeclaration]: FunctionDeclaration
-  [ts.SyntaxKind.Identifier]: DeclarationKind<ts.Identifier> & string
-  [ts.SyntaxKind.StringLiteral]: DeclarationKind<ts.StringLiteral> & string,
-  [ts.SyntaxKind.TrueKeyword]: DeclarationKind<ts.TrueLiteral> & boolean
-  [ts.SyntaxKind.FalseKeyword]: DeclarationKind<ts.FalseLiteral> & boolean
   [ts.SyntaxKind.ObjectLiteralExpression]: DeclarationKind<ts.ObjectLiteralExpression> & Record<PropertyKey, any>
-  [ts.SyntaxKind.ArrayLiteralExpression]: DeclarationKind<ts.ArrayLiteralExpression> & any[]
+  [ts.SyntaxKind.ArrayLiteralExpression]: DeclarationKind<ts.ArrayLiteralExpression> & any[],
+  [ts.SyntaxKind.Identifier]: DeclarationKind<ts.Identifier> & string
 }
 
 export type DefaultDeclarationDefinitionMap = DeclarationDefinitionMap<
@@ -116,16 +119,19 @@ export const defaultDeclarationDefinitionMap: DefaultDeclarationDefinitionMap = 
   [ts.SyntaxKind.ImportSpecifier]: importSpecifierDefinition,
   [ts.SyntaxKind.ClassDeclaration]: classDeclarationDefinition,
   [ts.SyntaxKind.InterfaceDeclaration]: interfaceDeclarationDefinition,
-  [ts.SyntaxKind.Decorator]: getDecorator,
+  [ts.SyntaxKind.Decorator]: decoratorDefinition,
   [ts.SyntaxKind.TypeParameter]: typeParameterDeclarationDefinition,
   [ts.SyntaxKind.TypeReference]: typeReferenceDefinition,
   [ts.SyntaxKind.ExpressionWithTypeArguments]: expressionWithTypeArgumentsDefinition,
   [ts.SyntaxKind.TypeAliasDeclaration]: typeAliasDeclarationDefinition,
   [ts.SyntaxKind.TypeLiteral]: typeLiteralDefinition,
+  [ts.SyntaxKind.IndexedAccessType]: indexedAccessTypeNodeDefinition,
+  [ts.SyntaxKind.ArrayType]: arrayTypeNodeDefinition,
   [ts.SyntaxKind.HeritageClause]: heritageClauseDefinition,
   [ts.SyntaxKind.Constructor]: constructorDeclarationDefinition,
   [ts.SyntaxKind.PropertyDeclaration]: propertyDeclarationDefinition,
   [ts.SyntaxKind.PropertySignature]: propertySignatureDefinition,
+  [ts.SyntaxKind.PropertyAccessExpression]: propertyAccessExpressionDefinition,
   [ts.SyntaxKind.MethodDeclaration]: methodDeclarationDefinition,
   [ts.SyntaxKind.GetAccessor]: getAccessorDeclarationDefinition,
   [ts.SyntaxKind.SetAccessor]: setAccessorDeclarationDefinition,
@@ -138,9 +144,6 @@ export const defaultDeclarationDefinitionMap: DefaultDeclarationDefinitionMap = 
   [ts.SyntaxKind.TupleType]: tupleTypeNodeDefinition,
   [ts.SyntaxKind.NamedTupleMember]: namedTupleMemberDefinition,
   [ts.SyntaxKind.Identifier]: parseString,
-  [ts.SyntaxKind.StringLiteral]: parseString,
-  [ts.SyntaxKind.TrueKeyword]: parseBoolean,
-  [ts.SyntaxKind.FalseKeyword]: parseBoolean,
   [ts.SyntaxKind.ObjectLiteralExpression]: parseObjectLiteral,
   [ts.SyntaxKind.ArrayLiteralExpression]: parseArrayLiteral
 }

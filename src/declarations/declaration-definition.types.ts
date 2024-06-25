@@ -21,6 +21,7 @@ export type PropHandlerEntry<N extends ts.Node, K extends keyof N> = PropHandler
 
 export type _DeclarationDefinitionInner<N extends ts.Node, R extends DeclarationKind<any>> = {
   __resultType?: R,
+  removeKind?: boolean,
   props: Exclude<keyof N, keyof ts.Node>[],
   propHandlers?: {
     [key in Exclude<keyof N, keyof ts.Node>]?: PropHandlerEntry<N, key>

@@ -27,10 +27,12 @@ export type DefaultSyntaxKindToTSNodeDeclarationMap = {
   [ts.SyntaxKind.ExpressionWithTypeArguments]: ts.ExpressionWithTypeArguments
   [ts.SyntaxKind.TypeAliasDeclaration]: ts.TypeAliasDeclaration
   [ts.SyntaxKind.TypeLiteral]: ts.TypeLiteralNode
+  [ts.SyntaxKind.IndexedAccessType]: ts.IndexedAccessTypeNode
   [ts.SyntaxKind.HeritageClause]: ts.HeritageClause
   [ts.SyntaxKind.Constructor]: ts.ConstructorDeclaration
   [ts.SyntaxKind.PropertyDeclaration]: ts.PropertyDeclaration
   [ts.SyntaxKind.PropertySignature]: ts.PropertySignature
+  [ts.SyntaxKind.PropertyAccessExpression]: ts.PropertyAccessExpression
   [ts.SyntaxKind.MethodDeclaration]: ts.MethodDeclaration
   [ts.SyntaxKind.GetAccessor]: ts.GetAccessorDeclaration
   [ts.SyntaxKind.SetAccessor]: ts.SetAccessorDeclaration
@@ -44,8 +46,6 @@ export type DefaultSyntaxKindToTSNodeDeclarationMap = {
   [ts.SyntaxKind.FunctionDeclaration]: ts.FunctionDeclaration
   [ts.SyntaxKind.ObjectLiteralExpression]: ts.ObjectLiteralExpression
   [ts.SyntaxKind.ArrayLiteralExpression]: ts.ArrayLiteralExpression
+  [ts.SyntaxKind.ArrayType]: ts.ArrayTypeNode
   [ts.SyntaxKind.Identifier]: ts.Identifier
-  [ts.SyntaxKind.StringLiteral]: ts.StringLiteral
-  [ts.SyntaxKind.TrueKeyword]: ts.TrueLiteral
-  [ts.SyntaxKind.FalseKeyword]: ts.FalseLiteral
 }

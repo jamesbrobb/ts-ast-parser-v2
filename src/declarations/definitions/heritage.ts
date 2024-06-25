@@ -13,10 +13,7 @@ export type HeritageClause = {
 
 
 export const heritageClauseDefinition: DeclarationDefinition<HeritageClause> = {
-  props: ['token', 'types'],
-  propHandlers: {
-    token: (token: ts.SyntaxKind) => token === ts.SyntaxKind.ExtendsKeyword ? 'extends' : 'implements',
-  }
+  props: ['token', 'types']
 }
 
 

@@ -7,7 +7,8 @@ import {
 } from "./declaration-definition.types";
 import {SyntaxKindToTSNodeDeclarationMap} from "../syntax-kind";
 import {DeclarationKindMap} from "./declaration-kind.types";
-import {isNode, isNodeArray} from "../utils/node";
+import {isNode, isNodeArray} from "../utils";
+import {UnregisteredSyntaxKindNode, unregisteredSyntaxKindParser} from "../syntax-kind/syntax-kind.parser";
 
 
 export type ParseOverload<N extends ts.Node, R> = {
@@ -15,11 +16,7 @@ export type ParseOverload<N extends ts.Node, R> = {
   (node: N[], sourceFile: ts.SourceFile, debug?: boolean): R[]
 }
 
-export type NoParseFunctionReturnType = {
-  raw: string,
-  kind: ts.SyntaxKind,
-  type: string
-}
+export type ParseReturnType<D = undefined> = Record<PropertyKey, any> | UnregisteredSyntaxKindNode | D | undefined
 
 
 export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends DeclarationKindMap<T>> {
@@ -36,7 +33,7 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
     node: N | ts.NodeArray<N> | undefined,
     sourceFile: ts.SourceFile,
     defaultValue?: D,
-  ): Record<PropertyKey, any> | NoParseFunctionReturnType | D | undefined => {
+  ): ParseReturnType<D> => {
 
     // get DecType by T[N['kind']]
     // get return type by M[DecType]
@@ -53,7 +50,8 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
     const def: DeclarationDefinitionMapEntry<any> | undefined = this.#map[node.kind] as any;
 
     if(!def) {
-      return this.#createNoDefResult(node, sourceFile);
+      // TODO - make unregisteredSyntaxKindParser a dependency
+      return unregisteredSyntaxKindParser(node, sourceFile, this.#debug);
     }
 
     if(def instanceof Function) {
@@ -63,20 +61,12 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
     return this.#createDefResult(def, node, sourceFile);
   }
 
-  #createNoDefResult(node: ts.Node, sourceFile: ts.SourceFile): NoParseFunctionReturnType {
-    if(this.#debug) {
-      console.warn(`No parse function registered for ${ts.SyntaxKind[node.kind]} - kind: ${node.kind}`);
-    }
-
-    return {
-      raw: node.getText(sourceFile),
-      kind: node.kind,
-      type: ts.SyntaxKind[node.kind]
-    }
-  }
-
   #createDefResult<D extends DeclarationDefinition<any>, N extends ts.Node>(def: D, node: N, sourceFile: ts.SourceFile): D['__resultType'] {
     const res: D['__resultType'] = {}
+
+    if(!def.removeKind) {
+      res.kind = ts.SyntaxKind[node.kind];
+    }
 
     def.props.forEach((prop: keyof N) => {
 

@@ -1,57 +1,60 @@
 {
   "exports": [
     {
+      "kind": "VariableDeclaration",
       "name": "DEFAULT_CHART_OPTIONS",
       "type": {
+        "kind": "TypeReference",
         "name": "DeepPartial",
         "typeArguments": [
           {
+            "kind": "TypeReference",
             "name": "ChartOptions"
           }
         ]
       },
       "initializer": {
-        "height": {
-          "raw": "300",
-          "kind": 9,
-          "type": "FirstLiteralToken"
-        },
+        "height": "300",
         "autoSize": true,
         "timeScale": {
           "fixRightEdge": true,
           "lockVisibleTimeRangeOnResize": true,
           "timeVisible": true,
-          "secondsVisible": false
+          "secondsVisible": "false"
         },
         "crosshair": {
           "vertLine": {
             "style": {
-              "raw": "LineStyle.LargeDashed",
-              "kind": 211,
-              "type": "PropertyAccessExpression"
+              "kind": "PropertyAccessExpression",
+              "name": "LargeDashed",
+              "expression": "LineStyle"
             }
           },
           "horzLine": {
             "style": {
-              "raw": "LineStyle.LargeDashed",
-              "kind": 211,
-              "type": "PropertyAccessExpression"
+              "kind": "PropertyAccessExpression",
+              "name": "LargeDashed",
+              "expression": "LineStyle"
             }
           }
         }
       }
     },
     {
+      "kind": "VariableDeclaration",
       "name": "DEFAULT_DARK_CHART_OPTIONS",
       "type": {
+        "kind": "TypeReference",
         "name": "DeepPartial",
         "typeArguments": [
           {
+            "kind": "TypeReference",
             "name": "ChartOptions"
           }
         ]
       },
       "initializer": {
+        "kind": "CallExpression",
         "expression": "deepmerge",
         "arguments": [
           "DEFAULT_CHART_OPTIONS",
@@ -59,9 +62,9 @@
             "layout": {
               "background": {
                 "type": {
-                  "raw": "ColorType.Solid",
-                  "kind": 211,
-                  "type": "PropertyAccessExpression"
+                  "kind": "PropertyAccessExpression",
+                  "name": "Solid",
+                  "expression": "ColorType"
                 },
                 "color": "#222"
               },
@@ -89,18 +92,18 @@
                 "color": "#fff",
                 "labelBackgroundColor": "#aaa",
                 "style": {
-                  "raw": "LineStyle.SparseDotted",
-                  "kind": 211,
-                  "type": "PropertyAccessExpression"
+                  "kind": "PropertyAccessExpression",
+                  "name": "SparseDotted",
+                  "expression": "LineStyle"
                 }
               },
               "horzLine": {
                 "color": "#fff",
                 "labelBackgroundColor": "#aaa",
                 "style": {
-                  "raw": "LineStyle.SparseDotted",
-                  "kind": 211,
-                  "type": "PropertyAccessExpression"
+                  "kind": "PropertyAccessExpression",
+                  "name": "SparseDotted",
+                  "expression": "LineStyle"
                 }
               }
             }
@@ -109,29 +112,36 @@
       }
     },
     {
+      "kind": "ClassDeclaration",
       "name": "TVChartDirective",
       "typeParameters": [
         {
+          "kind": "TypeParameter",
           "name": "T",
           "constraint": {
+            "kind": "TypeReference",
             "name": "SeriesType"
           }
         },
         {
+          "kind": "TypeParameter",
           "name": "HorzScaleItem"
         }
       ],
       "members": [
         {
+          "kind": "PropertyDeclaration",
           "name": "type",
           "initializedValue": {
+            "kind": "CallExpression",
             "expression": {
-              "raw": "input.required",
-              "kind": 211,
-              "type": "PropertyAccessExpression"
+              "kind": "PropertyAccessExpression",
+              "name": "required",
+              "expression": "input"
             },
             "typeArguments": [
               {
+                "kind": "TypeReference",
                 "name": "T"
               }
             ],
@@ -143,88 +153,116 @@
           }
         },
         {
+          "kind": "PropertyDeclaration",
           "name": "seriesOptions",
           "initializedValue": {
+            "kind": "CallExpression",
             "expression": "input",
             "typeArguments": [
               {
-                "raw": "SeriesPartialOptionsMap[T]",
-                "kind": 199,
-                "type": "IndexedAccessType"
+                "kind": "IndexedAccessType",
+                "objectType": {
+                  "kind": "TypeReference",
+                  "name": "SeriesPartialOptionsMap"
+                },
+                "indexType": {
+                  "kind": "TypeReference",
+                  "name": "T"
+                }
               }
             ],
             "arguments": []
           }
         },
         {
+          "kind": "PropertyDeclaration",
           "name": "data",
           "initializedValue": {
+            "kind": "CallExpression",
             "expression": "input",
             "typeArguments": [
               {
-                "raw": "SeriesDataItemTypeMap<HorzScaleItem>[T][]",
-                "kind": 188,
-                "type": "ArrayType"
+                "kind": "ArrayType",
+                "elementType": {
+                  "kind": "IndexedAccessType",
+                  "objectType": {
+                    "kind": "TypeReference",
+                    "name": "SeriesDataItemTypeMap",
+                    "typeArguments": [
+                      {
+                        "kind": "TypeReference",
+                        "name": "HorzScaleItem"
+                      }
+                    ]
+                  },
+                  "indexType": {
+                    "kind": "TypeReference",
+                    "name": "T"
+                  }
+                }
               }
             ],
             "arguments": []
           }
         },
         {
-          "name": {
-            "raw": "#inputs",
-            "kind": 81,
-            "type": "PrivateIdentifier"
-          },
+          "kind": "PropertyDeclaration",
+          "name": "#inputs",
           "initializedValue": {
+            "kind": "CallExpression",
             "expression": "inject",
             "arguments": [
               "TVChartInputsDirective"
             ]
           },
           "modifiers": [
-            {
-              "raw": "readonly",
-              "kind": 148,
-              "type": "ReadonlyKeyword"
-            }
+            "readonly"
           ]
         },
         {
-          "name": {
-            "raw": "#element",
-            "kind": 81,
-            "type": "PrivateIdentifier"
-          },
+          "kind": "PropertyDeclaration",
+          "name": "#element",
           "initializedValue": {
-            "raw": "inject(ElementRef<HTMLElement>).nativeElement",
-            "kind": 211,
-            "type": "PropertyAccessExpression"
+            "kind": "PropertyAccessExpression",
+            "name": "nativeElement",
+            "expression": {
+              "kind": "CallExpression",
+              "expression": "inject",
+              "arguments": [
+                {
+                  "kind": "ExpressionWithTypeArguments",
+                  "expression": "ElementRef",
+                  "typeArguments": [
+                    {
+                      "kind": "TypeReference",
+                      "name": "HTMLElement"
+                    }
+                  ]
+                }
+              ]
+            }
           },
           "modifiers": [
-            {
-              "raw": "readonly",
-              "kind": 148,
-              "type": "ReadonlyKeyword"
-            }
+            "readonly"
           ]
         },
         {
-          "name": {
-            "raw": "#chart",
-            "kind": 81,
-            "type": "PrivateIdentifier"
-          },
+          "kind": "PropertyDeclaration",
+          "name": "#chart",
           "initializedValue": {
+            "kind": "CallExpression",
             "expression": "inject",
             "arguments": [
               {
+                "kind": "ExpressionWithTypeArguments",
                 "expression": "TVChart",
                 "typeArguments": [
                   {
+                    "kind": "TypeReference",
                     "name": "T"
                   },
                   {
+                    "kind": "TypeReference",
                     "name": "HorzScaleItem"
                   }
                 ]
@@ -232,40 +270,44 @@
             ]
           },
           "modifiers": [
-            {
-              "raw": "readonly",
-              "kind": 148,
-              "type": "ReadonlyKeyword"
-            }
+            "readonly"
           ]
         },
         {
+          "kind": "Constructor",
           "parameters": [
             {
+              "kind": "Parameter",
               "name": "element",
               "type": {
+                "kind": "TypeReference",
                 "name": "ElementRef"
               }
             }
           ]
         },
         {
+          "kind": "MethodDeclaration",
           "name": "ngOnInit",
           "parameters": []
         },
         {
+          "kind": "MethodDeclaration",
           "name": "ngOnDestroy",
           "parameters": []
         }
       ],
       "heritageClauses": [
         {
+          "kind": "HeritageClause",
           "token": "implements",
           "types": [
             {
+              "kind": "ExpressionWithTypeArguments",
               "expression": "OnInit"
             },
             {
+              "kind": "ExpressionWithTypeArguments",
               "expression": "OnDestroy"
             }
           ]
@@ -273,33 +315,33 @@
       ],
       "modifiers": [
         {
-          "type": "Directive",
-          "metadata": {
-            "selector": "[tvChart]",
-            "standalone": true,
-            "providers": [
-              "tvChartProviderWithExistenceCheck"
-            ],
-            "hostDirectives": [
+          "kind": "Decorator",
+          "expression": {
+            "kind": "CallExpression",
+            "expression": "Directive",
+            "arguments": [
               {
-                "directive": "TVChartInputsDirective",
-                "inputs": [
-                  "id",
-                  "options",
-                  "markers"
+                "selector": "[tvChart]",
+                "standalone": true,
+                "providers": [
+                  "tvChartProviderWithExistenceCheck"
+                ],
+                "hostDirectives": [
+                  {
+                    "directive": "TVChartInputsDirective",
+                    "inputs": [
+                      "id",
+                      "options",
+                      "markers"
+                    ]
+                  },
+                  "tvChartOutputsDirectiveHostDef"
                 ]
-              },
-              "tvChartOutputsDirectiveHostDef"
+              }
             ]
-          },
-          "signature": "@Directive({selector: [tvChart], standalone: true, providers: tvChartProviderWithExistenceCheck, hostDirectives: [object Object],tvChartOutputsDirectiveHostDef})",
-          "raw": "@Directive({\n  selector: '[tvChart]',\n  standalone: true,\n  providers: [tvChartProviderWithExistenceCheck],\n  hostDirectives: [\n    {\n      directive: TVChartInputsDirective,\n      inputs: ['id', 'options', 'markers']\n    },\n    tvChartOutputsDirectiveHostDef\n  ]\n})"
+          }
         },
-        {
-          "raw": "export",
-          "kind": 95,
-          "type": "ExportKeyword"
-        }
+        "export"
       ]
     }
   ]

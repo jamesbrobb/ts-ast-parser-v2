@@ -1,6 +1,7 @@
 import * as ts from "typescript";
 import {Parser} from "../declaration-parser";
 import {DeclarationKind} from "../declaration-kind.types";
+import {DeclarationDefinition} from "../declaration-definition.types";
 
 
 export type DecoratorMetadata = {
@@ -16,6 +17,11 @@ export type Decorator = {
   signature: string
 } & DeclarationKind<ts.Decorator>
 
+export const decoratorDefinition: DeclarationDefinition<Decorator> = {
+  props: ['expression']
+
+}
+
 
 export type GetDecoratorMetadata<T extends {}> = {
   [K in keyof T]: T[K] extends infer K ? K extends Array<unknown> ? string[] : K extends undefined ? never : string : never
@@ -29,7 +35,7 @@ export type DecoratorDef<T extends string, M extends DecoratorMetadataTypes> = {
 }
 
 
-export function getDecorator<T extends Decorator>(node: ts.Decorator, sourceFile: ts.SourceFile, parser: Parser<any>): T {
+export function getDecorator<T extends Decorator>(node: ts.Decorator, sourceFile: ts.SourceFile, parser: Parser<any, any>): T {
 
   if(!ts.isCallLikeExpression(node)) {
     throw new Error("Decorator Node is not a call like expression");
@@ -39,11 +45,11 @@ export function getDecorator<T extends Decorator>(node: ts.Decorator, sourceFile
     metadata: Decorator['metadata'] = {};
 
   if(ts.isIdentifier(node.expression)) {
-    type = parser.parse(node.expression, sourceFile);
+    type = parser.parse(node.expression, sourceFile) as string;
   }
 
   if (ts.isCallExpression(node.expression)) {
-    type = parser.parse(node.expression.expression, sourceFile);
+    type = parser.parse(node.expression.expression, sourceFile) as string;
     metadata = getDecoratorMetadata<T['metadata']>(node.expression, sourceFile, parser);
   }
 
@@ -58,7 +64,7 @@ export function getDecorator<T extends Decorator>(node: ts.Decorator, sourceFile
 }
 
 
-function getDecoratorMetadata<T extends Decorator['metadata']>(node: ts.CallExpression, sourceFile: ts.SourceFile, parser: Parser<any>): T {
+function getDecoratorMetadata<T extends Decorator['metadata']>(node: ts.CallExpression, sourceFile: ts.SourceFile, parser: Parser<any, any>): T {
 
   let metadata: any | string | (any | string)[] | undefined;
 
