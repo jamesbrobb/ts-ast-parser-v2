@@ -1,16 +1,35 @@
 import * as ts from "typescript";
-import {Modifiers} from "./modifiers";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
+import {getModifiers, Modifiers} from "./modifiers";
+import {TypeParameterDeclaration} from "./type";
+import {ParameterDeclaration} from "./parameter";
 
 
 export type GetAccessorDeclaration = {
-  name: string,
+  name: string
   type?: string
-} & DeclarationKind<ts.GetAccessorDeclaration> & Modifiers;
+  typeParameters?: TypeParameterDeclaration[]
+  parameters: ParameterDeclaration[]
+  modifiers?: Modifiers,
+  asteriskToken?: boolean
+  questionToken?: boolean
+  exclamationToken?: boolean
+} & DeclarationKind<ts.GetAccessorDeclaration>;
 
-// TODO - add props from ts.FunctionLikeDeclarationBase and ts.SignatureDeclarationBase
 
 export const getAccessorDeclarationDefinition: DeclarationDefinition<GetAccessorDeclaration> = {
-  props: ['name', 'type', 'modifiers']
+  props: [
+    'name',
+    'type',
+    'typeParameters',
+    'parameters',
+    'modifiers',
+    'asteriskToken',
+    'questionToken',
+    'exclamationToken',
+  ],
+  propHandlers: {
+    modifiers: getModifiers
+  }
 }

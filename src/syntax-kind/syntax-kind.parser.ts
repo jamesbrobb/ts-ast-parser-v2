@@ -21,6 +21,8 @@ const kindConversionMap: KindConversionMap = {
   [ts.SyntaxKind.FalseKeyword]: false,
   [ts.SyntaxKind.ExtendsKeyword]: 'extends',
   [ts.SyntaxKind.ImplementsKeyword]: 'implements',
+  [ts.SyntaxKind.QuestionToken]: true,
+  [ts.SyntaxKind.ExclamationToken]: true
 }
 
 

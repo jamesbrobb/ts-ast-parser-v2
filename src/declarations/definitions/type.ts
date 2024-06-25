@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import {Modifiers} from "./modifiers";
+import {getModifierKeywords, Modifiers} from "./modifiers";
 import {PropertySignature} from "./property";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
@@ -10,12 +10,19 @@ export type TypeParameterDeclaration = {
   name: string,
   constraint?: string,
   default?: string,
-  // expression: Expression // TODO - check this out
+  modifiers?: Modifiers,
+  expression: string,
   raw: string
 } & DeclarationKind<ts.TypeParameterDeclaration> & Modifiers;
 
 export const typeParameterDeclarationDefinition: DeclarationDefinition<TypeParameterDeclaration> = {
-  props: ['name', 'constraint', 'default', 'modifiers']
+  props: ['name', 'constraint', 'default', 'modifiers'],
+  propHandlers: {
+    modifiers: {
+      propName: 'keywords',
+      parseFn: getModifierKeywords
+    }
+  }
 }
 
 
@@ -55,11 +62,11 @@ export type TypeAliasDeclaration = {
 
 export const typeAliasDeclarationDefinition: DeclarationDefinition<TypeAliasDeclaration> = {
   props: ['name', 'typeParameters', 'type', 'modifiers'],
-  propHandlers: {
+  /*propHandlers: {
     type: {
       parseFn: getType
     }
-  }
+  }*/
 }
 
 
@@ -123,6 +130,40 @@ export type ArrayTypeNode = {
 
 export const arrayTypeNodeDefinition: DeclarationDefinition<ArrayTypeNode> = {
   props: ['elementType']
+}
+
+
+export type UnionTypeNode = {
+  types: string[]
+} & DeclarationKind<ts.UnionTypeNode>
+
+export const unionTypeNodeDefinition: DeclarationDefinition<UnionTypeNode> = {
+  removeKind: true,
+  props: ['types']
+}
+
+
+export type LiteralTypeNode = {
+  value: string
+} & DeclarationKind<ts.LiteralTypeNode>
+
+export const literalTypeNodeDefinition: DeclarationDefinition<LiteralTypeNode> = {
+  props: ['literal'],
+  propHandlers: {
+    literal: { propName: 'value' }
+  }
+}
+
+
+export type FunctionTypeNode = {
+  name: string
+  parameters: string[]
+  type?: string
+  typeParameters?: TypeParameterDeclaration[]
+} & DeclarationKind<ts.FunctionTypeNode>
+
+export const functionTypeDefinition: DeclarationDefinition<FunctionTypeNode> = {
+  props: ['name', 'parameters', 'type', 'typeParameters']
 }
 
 

@@ -1,18 +1,21 @@
 import * as ts from "typescript";
 import {DeclarationDefinition} from "../declaration-definition.types";
 import {DeclarationKind} from "../declaration-kind.types";
-import {Modifiers} from "./modifiers";
+import {getModifiers, Modifiers} from "./modifiers";
 
 
 export type EnumDeclaration = {
   name: string
   members: string[]
-} & DeclarationKind<ts.EnumDeclaration> & Modifiers
+  modifiers: Modifiers
+} & DeclarationKind<ts.EnumDeclaration>
 
 
 export const enumDeclarationDefinition: DeclarationDefinition<EnumDeclaration> = {
-  kind: "EnumDeclaration",
-  props: ["name", "members", "modifiers"]
+  props: ["name", "members", "modifiers"],
+  propHandlers: {
+    modifiers: getModifiers
+  }
 }
 
 

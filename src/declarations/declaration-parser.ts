@@ -58,13 +58,13 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
       return def(node, sourceFile, this);
     }
 
-    return this.#createDefResult(def, node, sourceFile);
+    return this.#processDef(def, node, sourceFile);
   }
 
-  #createDefResult<D extends DeclarationDefinition<any>, N extends ts.Node>(def: D, node: N, sourceFile: ts.SourceFile): D['__resultType'] {
+  #processDef<D extends DeclarationDefinition<any>, N extends ts.Node>(def: D, node: N, sourceFile: ts.SourceFile): D['__resultType'] {
     const res: D['__resultType'] = {}
 
-    if(!def.removeKind) {
+    if(this.#debug || !def.removeKind) {
       res.kind = ts.SyntaxKind[node.kind];
     }
 
@@ -96,6 +96,12 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
 
       res[propName] = this.parse(cNode, sourceFile, propHandler.defaultValue);
     });
+
+    if(def.postProcess) {
+      def.postProcess.forEach((handler) => {
+        handler(res, node, sourceFile, this);
+      })
+    }
 
     return res;
   }

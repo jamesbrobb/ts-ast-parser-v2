@@ -31,6 +31,9 @@ import {
   ClassDeclaration,
   EnumDeclaration,
   TypeAliasDeclaration,
+  IndexedAccessTypeNode,
+  ArrayTypeNode,
+  PropertyAccessExpression,
   enumMemberDefinition,
   variableDeclarationDefinition,
   importDeclarationDefinition,
@@ -58,14 +61,23 @@ import {
   enumDeclarationDefinition,
   tupleTypeNodeDefinition,
   namedTupleMemberDefinition,
+  indexedAccessTypeNodeDefinition,
+  arrayTypeNodeDefinition,
+  propertyAccessExpressionDefinition,
+  decoratorDefinition,
   parseArrayLiteral,
   parseString,
   parseObjectLiteral,
-  IndexedAccessTypeNode,
-  indexedAccessTypeNodeDefinition,
-  ArrayTypeNode,
-  arrayTypeNodeDefinition,
-  PropertyAccessExpression, propertyAccessExpressionDefinition, decoratorDefinition
+  unionTypeNodeDefinition,
+  UnionTypeNode,
+  LiteralTypeNode,
+  literalTypeNodeDefinition,
+  arrowFunctionDefinition,
+  ArrowFunction,
+  NewExpression,
+  newExpressionDefinition,
+  binaryExpressionDefinition,
+  BinaryExpression, FunctionTypeNode, functionTypeDefinition
 } from "./definitions";
 import {DeclarationKind} from "./declaration-kind.types";
 
@@ -84,8 +96,11 @@ export type DefaultDeclarationKindMap = {
   [ts.SyntaxKind.ExpressionWithTypeArguments]: ExpressionWithTypeArguments
   [ts.SyntaxKind.TypeAliasDeclaration]: TypeAliasDeclaration
   [ts.SyntaxKind.TypeLiteral]: TypeLiteral
+  [ts.SyntaxKind.UnionType]: UnionTypeNode
   [ts.SyntaxKind.IndexedAccessType]: IndexedAccessTypeNode
+  [ts.SyntaxKind.FunctionType]: FunctionTypeNode
   [ts.SyntaxKind.ArrayType]: ArrayTypeNode
+  [ts.SyntaxKind.LiteralType]: LiteralTypeNode
   [ts.SyntaxKind.HeritageClause]: HeritageClause
   [ts.SyntaxKind.Constructor]: ConstructorDeclaration
   [ts.SyntaxKind.PropertyDeclaration]: PropertyDeclaration
@@ -101,7 +116,10 @@ export type DefaultDeclarationKindMap = {
   [ts.SyntaxKind.VariableDeclaration]: VariableDeclaration
   [ts.SyntaxKind.Parameter]: ParameterDeclaration
   [ts.SyntaxKind.CallExpression]: CallExpression
+  [ts.SyntaxKind.NewExpression]: NewExpression
+  [ts.SyntaxKind.BinaryExpression]: BinaryExpression
   [ts.SyntaxKind.FunctionDeclaration]: FunctionDeclaration
+  [ts.SyntaxKind.ArrowFunction]: ArrowFunction
   [ts.SyntaxKind.ObjectLiteralExpression]: DeclarationKind<ts.ObjectLiteralExpression> & Record<PropertyKey, any>
   [ts.SyntaxKind.ArrayLiteralExpression]: DeclarationKind<ts.ArrayLiteralExpression> & any[],
   [ts.SyntaxKind.Identifier]: DeclarationKind<ts.Identifier> & string
@@ -125,8 +143,11 @@ export const defaultDeclarationDefinitionMap: DefaultDeclarationDefinitionMap = 
   [ts.SyntaxKind.ExpressionWithTypeArguments]: expressionWithTypeArgumentsDefinition,
   [ts.SyntaxKind.TypeAliasDeclaration]: typeAliasDeclarationDefinition,
   [ts.SyntaxKind.TypeLiteral]: typeLiteralDefinition,
+  [ts.SyntaxKind.UnionType]: unionTypeNodeDefinition,
   [ts.SyntaxKind.IndexedAccessType]: indexedAccessTypeNodeDefinition,
   [ts.SyntaxKind.ArrayType]: arrayTypeNodeDefinition,
+  [ts.SyntaxKind.LiteralType]: literalTypeNodeDefinition,
+  [ts.SyntaxKind.FunctionType]: functionTypeDefinition,
   [ts.SyntaxKind.HeritageClause]: heritageClauseDefinition,
   [ts.SyntaxKind.Constructor]: constructorDeclarationDefinition,
   [ts.SyntaxKind.PropertyDeclaration]: propertyDeclarationDefinition,
@@ -140,7 +161,10 @@ export const defaultDeclarationDefinitionMap: DefaultDeclarationDefinitionMap = 
   [ts.SyntaxKind.VariableDeclaration]: variableDeclarationDefinition,
   [ts.SyntaxKind.Parameter]: parameterDeclarationDefinition,
   [ts.SyntaxKind.CallExpression]: callExpressionDefinition,
+  [ts.SyntaxKind.NewExpression]: newExpressionDefinition,
+  [ts.SyntaxKind.BinaryExpression]: binaryExpressionDefinition,
   [ts.SyntaxKind.FunctionDeclaration]: functionDeclarationDefinition,
+  [ts.SyntaxKind.ArrowFunction]: arrowFunctionDefinition,
   [ts.SyntaxKind.TupleType]: tupleTypeNodeDefinition,
   [ts.SyntaxKind.NamedTupleMember]: namedTupleMemberDefinition,
   [ts.SyntaxKind.Identifier]: parseString,

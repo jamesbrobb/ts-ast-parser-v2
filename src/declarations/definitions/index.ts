@@ -1,4 +1,4 @@
-export * from './call-expression';
+export * from './expressions';
 export * from './class';
 export * from './constructor';
 export * from './decorator';

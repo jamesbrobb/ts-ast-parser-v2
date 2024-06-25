@@ -27,7 +27,10 @@ export type DefaultSyntaxKindToTSNodeDeclarationMap = {
   [ts.SyntaxKind.ExpressionWithTypeArguments]: ts.ExpressionWithTypeArguments
   [ts.SyntaxKind.TypeAliasDeclaration]: ts.TypeAliasDeclaration
   [ts.SyntaxKind.TypeLiteral]: ts.TypeLiteralNode
+  [ts.SyntaxKind.UnionType]: ts.UnionTypeNode
+  [ts.SyntaxKind.LiteralType]: ts.LiteralTypeNode
   [ts.SyntaxKind.IndexedAccessType]: ts.IndexedAccessTypeNode
+  [ts.SyntaxKind.FunctionType]: ts.FunctionTypeNode
   [ts.SyntaxKind.HeritageClause]: ts.HeritageClause
   [ts.SyntaxKind.Constructor]: ts.ConstructorDeclaration
   [ts.SyntaxKind.PropertyDeclaration]: ts.PropertyDeclaration
@@ -43,7 +46,10 @@ export type DefaultSyntaxKindToTSNodeDeclarationMap = {
   [ts.SyntaxKind.VariableDeclaration]: ts.VariableDeclaration
   [ts.SyntaxKind.Parameter]: ts.ParameterDeclaration
   [ts.SyntaxKind.CallExpression]: ts.CallExpression
+  [ts.SyntaxKind.NewExpression]: ts.NewExpression
+  [ts.SyntaxKind.BinaryExpression]: ts.BinaryExpression
   [ts.SyntaxKind.FunctionDeclaration]: ts.FunctionDeclaration
+  [ts.SyntaxKind.ArrowFunction]: ts.ArrowFunction
   [ts.SyntaxKind.ObjectLiteralExpression]: ts.ObjectLiteralExpression
   [ts.SyntaxKind.ArrayLiteralExpression]: ts.ArrayLiteralExpression
   [ts.SyntaxKind.ArrayType]: ts.ArrayTypeNode

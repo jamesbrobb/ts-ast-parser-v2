@@ -1,7 +1,7 @@
 import * as ts from "typescript";
-import {Modifiers} from "./modifiers";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
+import {getModifiers, Modifiers} from "./modifiers";
 
 
 
@@ -9,12 +9,15 @@ export type ImportDeclaration = {
   moduleSpecifier: string,
   importClause?: ImportClause,
   //attributes?: ts.ImportAttributes, // TODO - add declaration
-  raw: string,
+  modifiers?: Modifiers,
   children?: ImportClause[] // TODO - needed in import map factory - look at removing
-} & DeclarationKind<ts.ImportDeclaration> & Modifiers
+} & DeclarationKind<ts.ImportDeclaration>
 
 export const importDeclarationDefinition: DeclarationDefinition<ImportDeclaration> = {
-  props: ['moduleSpecifier', 'importClause', 'modifiers']
+  props: ['moduleSpecifier', 'importClause', 'modifiers'],
+  propHandlers: {
+    modifiers: getModifiers
+  }
 }
 
 

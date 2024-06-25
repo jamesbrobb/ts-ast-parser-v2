@@ -1,15 +1,19 @@
 import * as ts from "typescript";
 import {ParameterDeclaration} from "./parameter";
-import {Modifiers} from "./modifiers";
+import {getModifiers, Modifiers} from "./modifiers";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
 
 
 export type ConstructorDeclaration = {
-  parameters: ParameterDeclaration[]
+  parameters: ParameterDeclaration[],
+  modifiers?: Modifiers
 } & DeclarationKind<ts.ConstructorDeclaration> & Modifiers;
 
 
 export const constructorDeclarationDefinition: DeclarationDefinition<ConstructorDeclaration> = {
-  props: ['parameters', 'modifiers']
+  props: ['parameters', 'modifiers'],
+  propHandlers: {
+    modifiers: getModifiers
+  }
 }

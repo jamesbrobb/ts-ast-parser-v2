@@ -1,35 +1,36 @@
 import * as ts from "typescript";
-import {Modifiers} from "./modifiers";
-import {getType} from "./type";
+import {getModifierKeywords, getModifiers, Modifiers} from "./modifiers";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
+import {TypeReferenceNode} from "./type";
+import {Expression} from "./expressions";
+
 
 
 export type PropertyDeclaration = {
   name: string,
   optional: boolean,
   exclamation: boolean,
-  signature: string,
-  raw: string
-  type?: string,
-  initializedValue?: string,
-} & DeclarationKind<ts.PropertyDeclaration> & Modifiers;
+  type?: TypeReferenceNode,
+  initializedValue?: Expression | string,
+  modifiers?: Modifiers
+} & DeclarationKind<ts.PropertyDeclaration>;
 
 
 export const propertyDeclarationDefinition: DeclarationDefinition<PropertyDeclaration> = {
-  props: ['name', 'type', 'questionToken', 'exclamationToken', 'initializer', 'modifiers'],
+  props: [
+    'name',
+    'type',
+    'questionToken',
+    'exclamationToken',
+    'initializer',
+    'modifiers'
+  ],
   propHandlers: {
-    questionToken: {
-      propName: 'optional',
-      parseFn: (value: ts.QuestionToken) => !!value // these have syntaxkind - add to parse map
-    },
-    exclamationToken: {
-      propName: 'exclamation',
-      parseFn: (value: ts.ExclamationToken) => !!value // these have syntaxkind - add to parse map
-    },
-    initializer: {
-      propName: 'initializedValue'
-    }
+    questionToken: { propName: 'optional' },
+    exclamationToken: { propName: 'exclamation' },
+    initializer: { propName: 'initializedValue' },
+    modifiers: getModifiers
   }
 }
 
@@ -38,37 +39,20 @@ export type PropertySignature = {
   name: string,
   optional: boolean,
   type?: string,
-  signature: string,
-  raw: string
-} & DeclarationKind<ts.PropertySignature> & Modifiers;
+  modifiers?: Modifiers
+} & DeclarationKind<ts.PropertySignature>;
 
 
 export const propertySignatureDefinition: DeclarationDefinition<PropertySignature> = {
   props: ['name', 'type', 'questionToken', 'modifiers'],
   propHandlers: {
-    questionToken: {
-      propName: 'optional',
-      parseFn: (value: ts.QuestionToken) => !!value // these have syntaxkind - add to parse map
-    },
-    type: {
+    questionToken: { propName: 'optional' },
+    /*type: {
       parseFn: getType
-    }
-  }
-}
-
-
-export type PropertyAccessExpression = {
-  name: string,
-  expression: string,
-  optional: boolean
-} & DeclarationKind<ts.PropertyAccessExpression>;
-
-export const propertyAccessExpressionDefinition: DeclarationDefinition<PropertyAccessExpression> = {
-  props: ['name', 'expression', 'questionDotToken'],
-  propHandlers: {
-    questionDotToken: {
-      propName: 'optional',
-      parseFn: (value: ts.QuestionDotToken) => !!value
+    },*/
+    modifiers: {
+      propName: 'keywords',
+      parseFn: getModifierKeywords
     }
   }
 }

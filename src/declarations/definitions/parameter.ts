@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import {Modifiers} from "./modifiers";
+import {getModifiers, Modifiers} from "./modifiers";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
 
@@ -7,21 +7,25 @@ import {DeclarationDefinition} from "../declaration-definition.types";
 export type ParameterDeclaration = {
   name: string,
   optional: boolean,
-  signature: string
   type?: string,
   initializer?: string,
-  //dotDotDotToken?: DotDotDotToken // TODO
-  raw: string
-} & DeclarationKind<ts.ParameterDeclaration> & Modifiers;
+  modifiers?: Modifiers,
+  dotDotDotToken?: boolean
+} & DeclarationKind<ts.ParameterDeclaration>;
 
 
 export const parameterDeclarationDefinition: DeclarationDefinition<ParameterDeclaration> = {
-  props: ['name', 'questionToken', 'type', 'initializer', 'modifiers'],
+  props: [
+    'name',
+    'questionToken',
+    'type',
+    'initializer',
+    'modifiers',
+    'dotDotDotToken'
+  ],
   propHandlers: {
-    questionToken: {
-      propName: 'optional',
-      parseFn: (value: ts.QuestionToken) => !!value
-    }
+    questionToken: { propName: 'optional'},
+    modifiers: getModifiers
   }
 }
 

@@ -9,7 +9,7 @@ import {
 import {SyntaxKindToTSNodeDeclarationMap} from "../syntax-kind";
 
 
-export type NodePropValueParseFunc<N extends ts.Node, K extends keyof N> = (node: N[K] | N[K][] | undefined, sourceFile: ts.SourceFile, parser: any) => any
+export type NodePropValueParseFunc<N extends ts.Node, K extends keyof N> = (node: N[K] | undefined, sourceFile: ts.SourceFile, parser: any) => any
 
 export type PropHandlerDefinition<N extends ts.Node, K extends keyof N> = {
   parseFn?: NodePropValueParseFunc<N, K>,

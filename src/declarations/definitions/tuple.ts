@@ -22,13 +22,7 @@ export type NamedTupleMember = {
 export const namedTupleMemberDefinition: DeclarationDefinition<NamedTupleMember> = {
   props: ["name", "type", "dotDotDotToken", "questionToken"],
   propHandlers: {
-    dotDotDotToken: {
-      propName: 'rest',
-      parseFn: (node) => !!node
-    },
-    questionToken: {
-      propName: 'optional',
-      parseFn: (node) => !!node
-    }
+    dotDotDotToken: { propName: 'rest' },
+    questionToken: { propName: 'optional' }
   }
 }

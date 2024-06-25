@@ -150,7 +150,8 @@
                 "alias": "tvChart"
               }
             ]
-          }
+          },
+          "isInput": true
         },
         {
           "kind": "PropertyDeclaration",
@@ -172,7 +173,8 @@
               }
             ],
             "arguments": []
-          }
+          },
+          "isInput": true
         },
         {
           "kind": "PropertyDeclaration",
@@ -203,11 +205,22 @@
               }
             ],
             "arguments": []
-          }
+          },
+          "isInput": true
         },
         {
           "kind": "PropertyDeclaration",
           "name": "#inputs",
+          "type": {
+            "kind": "TypeReference",
+            "name": "TVChartInputsDirective",
+            "typeArguments": [
+              {
+                "kind": "TypeReference",
+                "name": "HorzScaleItem"
+              }
+            ]
+          },
           "initializedValue": {
             "kind": "CallExpression",
             "expression": "inject",
@@ -215,9 +228,12 @@
               "TVChartInputsDirective"
             ]
           },
-          "modifiers": [
-            "readonly"
-          ]
+          "modifiers": {
+            "keywords": [
+              "readonly"
+            ]
+          },
+          "injectedDependency": true
         },
         {
           "kind": "PropertyDeclaration",
@@ -242,9 +258,12 @@
               ]
             }
           },
-          "modifiers": [
-            "readonly"
-          ]
+          "modifiers": {
+            "keywords": [
+              "readonly"
+            ]
+          },
+          "injectedDependency": true
         },
         {
           "kind": "PropertyDeclaration",
@@ -269,27 +288,163 @@
               }
             ]
           },
-          "modifiers": [
-            "readonly"
-          ]
+          "modifiers": {
+            "keywords": [
+              "readonly"
+            ]
+          },
+          "injectedDependency": true
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "output",
+          "initializedValue": {
+            "kind": "CallExpression",
+            "expression": "output",
+            "typeArguments": [
+              "string"
+            ],
+            "arguments": []
+          },
+          "isOutput": true
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "output2",
+          "type": {
+            "kind": "TypeReference",
+            "name": "OutputEmitterRef",
+            "typeArguments": [
+              "number"
+            ]
+          },
+          "initializedValue": {
+            "kind": "CallExpression",
+            "expression": "output",
+            "typeArguments": [
+              "number"
+            ],
+            "arguments": []
+          },
+          "isOutput": true
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "testInput",
+          "type": "string",
+          "optional": true,
+          "initializedValue": "test",
+          "modifiers": {
+            "decorators": [
+              {
+                "type": "Input",
+                "metadata": {
+                  "alias": "testInput"
+                }
+              }
+            ]
+          },
+          "isInput": true
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "testInput2",
+          "initializedValue": {
+            "kind": "CallExpression",
+            "expression": "input",
+            "typeArguments": [
+              "string"
+            ],
+            "arguments": []
+          },
+          "isInput": true
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "testInput3",
+          "initializedValue": {
+            "kind": "CallExpression",
+            "expression": "input",
+            "typeArguments": [
+              "string"
+            ],
+            "arguments": [
+              "test"
+            ]
+          },
+          "isInput": true
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "testOutput",
+          "initializedValue": {
+            "kind": "NewExpression",
+            "expression": "EventEmitter",
+            "typeArguments": [
+              "string"
+            ],
+            "arguments": []
+          },
+          "modifiers": {
+            "decorators": [
+              {
+                "type": "Output"
+              }
+            ]
+          },
+          "isOutput": true
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "sjdhfkjds",
+          "type": {
+            "kind": "TypeReference",
+            "name": "TVChart",
+            "typeArguments": [
+              {
+                "kind": "TypeReference",
+                "name": "T"
+              },
+              {
+                "kind": "TypeReference",
+                "name": "HorzScaleItem"
+              }
+            ]
+          },
+          "optional": true,
+          "modifiers": {
+            "decorators": [
+              {
+                "type": "Inject",
+                "metadata": "TVChart"
+              }
+            ]
+          },
+          "injectedDependency": true
         },
         {
           "kind": "PropertyDeclaration",
           "name": "test",
           "type": "string",
           "optional": true,
-          "modifiers": [
-            "readonly"
-          ]
+          "modifiers": {
+            "keywords": [
+              "public",
+              "readonly"
+            ]
+          }
         },
         {
           "kind": "PropertyDeclaration",
           "name": "test2",
           "type": "string",
           "exclamation": true,
-          "modifiers": [
-            "readonly"
-          ]
+          "modifiers": {
+            "keywords": [
+              "protected",
+              "readonly"
+            ]
+          }
         },
         {
           "kind": "Constructor",
@@ -331,36 +486,35 @@
           ]
         }
       ],
-      "modifiers": [
-        {
-          "kind": "Decorator",
-          "expression": {
-            "kind": "CallExpression",
-            "expression": "Directive",
-            "arguments": [
-              {
-                "selector": "[tvChart]",
-                "standalone": true,
-                "providers": [
-                  "tvChartProviderWithExistenceCheck"
-                ],
-                "hostDirectives": [
-                  {
-                    "directive": "TVChartInputsDirective",
-                    "inputs": [
-                      "id",
-                      "options",
-                      "markers"
-                    ]
-                  },
-                  "tvChartOutputsDirectiveHostDef"
-                ]
-              }
-            ]
+      "modifiers": {
+        "decorators": [
+          {
+            "type": "Directive",
+            "metadata": {
+              "selector": "[tvChart]",
+              "standalone": true,
+              "providers": [
+                "tvChartProviderWithExistenceCheck"
+              ],
+              "hostDirectives": [
+                {
+                  "directive": "TVChartInputsDirective",
+                  "inputs": [
+                    "id",
+                    "options",
+                    "markers"
+                  ]
+                },
+                "tvChartOutputsDirectiveHostDef"
+              ]
+            }
           }
-        },
-        "export"
-      ]
+        ],
+        "keywords": [
+          "export"
+        ]
+      },
+      "isUI": true
     }
   ]
 }

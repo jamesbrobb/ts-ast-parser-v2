@@ -1,6 +1,7 @@
 import * as ts from "typescript";
 import {Decorator, getDecorator} from "./decorator";
 import {Parser} from "../declaration-parser";
+import {Modifier, ModifierLike, NodeArray} from "typescript";
 
 
 export type ModifierKeywords = 'private' | 'protected' | 'public' | 'readonly' | 'static' | 'abstract' | 'async' | 'const' | 'declare' | 'default' | 'export';
@@ -27,25 +28,25 @@ const modifiersMap: {[key: number]: ModifierKeywords} = {
 }
 
 
-export function getModifiers(node: ts.Node, sourceFile: ts.SourceFile, parser: Parser<any, any>): Modifiers | undefined {
+export function getModifierKeywords(nodes: NodeArray<Modifier>): ModifierKeywords[] {
+  return nodes.map(node => modifiersMap[node.kind])
+}
 
-  if (!('modifiers' in node) || !Array.isArray(node.modifiers) || node.modifiers.length === 0) {
-    return;
-  }
+
+export function getModifiers(nodes: NodeArray<ModifierLike>, sourceFile: ts.SourceFile, parser: Parser<any, any>): Modifiers {
 
   const modifiers: Modifiers = {};
 
-  node.modifiers.forEach(modifier => {
-
-    if(ts.isDecorator(modifier)) {
+  nodes.forEach(node => {
+    if(ts.isDecorator(node)) {
       if(!modifiers.decorators) {
         modifiers.decorators = [];
       }
-      modifiers.decorators.push(getDecorator(modifier, sourceFile, parser));
+      modifiers.decorators.push(getDecorator(node, sourceFile, parser));
       return;
     }
 
-    const keyword = modifiersMap[modifier.kind];
+    const keyword = modifiersMap[node.kind];
 
     if(keyword) {
       if(!modifiers.keywords) {
@@ -53,7 +54,7 @@ export function getModifiers(node: ts.Node, sourceFile: ts.SourceFile, parser: P
       }
       modifiers.keywords.push(keyword);
     }
-  })
+  });
 
   return modifiers;
 }
@@ -130,7 +131,7 @@ export function isDecoratedWith(type: string, modifiers?: Modifiers): boolean {
   return modifiers.decorators.some(decorator => decorator.type === type);
 }
 
-export function getDecoratorsAsString(modifiers?: Modifiers, separator: string = '\n'): string {
+/*export function getDecoratorsAsString(modifiers?: Modifiers, separator: string = '\n'): string {
 
     if(!isDecorated(modifiers)) {
       return '';
@@ -140,7 +141,7 @@ export function getDecoratorsAsString(modifiers?: Modifiers, separator: string =
         .map(decorator => decorator.signature)
         .join(separator)
       }${separator}`;
-}
+}*/
 
 
 export function hasKeywords(modifiers?: Modifiers): modifiers is Modifiers & {keywords: ModifierKeywords[]} {

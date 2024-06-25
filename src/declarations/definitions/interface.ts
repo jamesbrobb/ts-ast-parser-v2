@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import {Modifiers} from "./modifiers";
+import {getModifiers, Modifiers} from "./modifiers";
 import {TypeParameterDeclaration} from "./type";
 import {HeritageClause} from "./heritage";
 import {ClassElement} from "typescript";
@@ -8,13 +8,17 @@ import {DeclarationDefinition} from "../declaration-definition.types";
 
 
 export type InterfaceDeclaration = {
-  name: string,
-  typeParameters?: TypeParameterDeclaration[],
-  heritage?: HeritageClause[],
+  name: string
+  typeParameters?: TypeParameterDeclaration[]
+  heritage?: HeritageClause[]
+  modifiers?: Modifiers
   members: ClassElement[]
-} & DeclarationKind<ts.InterfaceDeclaration> & Modifiers;
+} & DeclarationKind<ts.InterfaceDeclaration>;
 
 
 export const interfaceDeclarationDefinition: DeclarationDefinition<InterfaceDeclaration> = {
-  props: ['name', 'typeParameters', 'members', 'heritageClauses', 'modifiers']
+  props: ['name', 'typeParameters', 'members', 'heritageClauses', 'modifiers'],
+  propHandlers: {
+    modifiers: getModifiers
+  }
 }
