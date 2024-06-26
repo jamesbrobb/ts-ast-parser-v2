@@ -1,13 +1,15 @@
 import * as ts from "typescript";
 import {DeclarationDefinition} from "../declaration-definition.types";
 import {DeclarationKind} from "../declaration-kind.types";
-import {getModifiers, Modifiers} from "./modifiers";
+import {getModifiers, Modifiers, setAccess} from "./modifiers";
+import {AccessTypes} from "./common";
 
 
 export type EnumDeclaration = {
   name: string
+  access: AccessTypes
   members: string[]
-  modifiers: Modifiers
+  modifiers?: Modifiers,
 } & DeclarationKind<ts.EnumDeclaration>
 
 
@@ -15,7 +17,10 @@ export const enumDeclarationDefinition: DeclarationDefinition<EnumDeclaration> =
   props: ["name", "members", "modifiers"],
   propHandlers: {
     modifiers: getModifiers
-  }
+  },
+  postProcess: [
+    setAccess
+  ]
 }
 
 

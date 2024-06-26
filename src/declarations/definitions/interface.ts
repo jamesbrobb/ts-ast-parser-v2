@@ -13,7 +13,7 @@ export type InterfaceDeclaration = {
   heritage?: HeritageClause[]
   modifiers?: Modifiers
   members: ClassElement[]
-} & DeclarationKind<ts.InterfaceDeclaration>;
+} & DeclarationKind<ts.InterfaceDeclaration>
 
 
 export const interfaceDeclarationDefinition: DeclarationDefinition<InterfaceDeclaration> = {

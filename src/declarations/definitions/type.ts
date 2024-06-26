@@ -6,6 +6,9 @@ import {DeclarationDefinition} from "../declaration-definition.types";
 import {Parser} from "../declaration-parser";
 
 
+export type TypeNode = TypeReferenceNode | TypeLiteral | IndexedAccessTypeNode | ArrayTypeNode | UnionTypeNode | LiteralTypeNode | FunctionTypeNode | ExpressionWithTypeArguments | TypeParameterDeclaration | TypeAliasDeclaration;
+
+
 export type TypeParameterDeclaration = {
   name: string,
   constraint?: string,
@@ -13,7 +16,7 @@ export type TypeParameterDeclaration = {
   modifiers?: Modifiers,
   expression: string,
   raw: string
-} & DeclarationKind<ts.TypeParameterDeclaration> & Modifiers;
+} & DeclarationKind<ts.TypeParameterDeclaration>
 
 export const typeParameterDeclarationDefinition: DeclarationDefinition<TypeParameterDeclaration> = {
   props: ['name', 'constraint', 'default', 'modifiers'],
@@ -27,7 +30,7 @@ export const typeParameterDeclarationDefinition: DeclarationDefinition<TypeParam
 
 
 export type TypeReferenceNode = {
-  name: string,
+  name: string
   // typeArguments?: NodeArray<TypeNode> // TODO - check this out
   raw: string
 } & DeclarationKind<ts.TypeReferenceNode>
@@ -43,8 +46,8 @@ export const typeReferenceDefinition: DeclarationDefinition<TypeReferenceNode> =
 
 
 export type ExpressionWithTypeArguments = {
-  expression: string,
-  typeArguments?: string[],
+  expression: string
+  typeArguments?: string[]
   raw: string
 } & DeclarationKind<ts.ExpressionWithTypeArguments>
 
@@ -54,11 +57,11 @@ export const expressionWithTypeArgumentsDefinition: DeclarationDefinition<Expres
 
 
 export type TypeAliasDeclaration = {
-  name: string,
-  typeParameters?: TypeParameterDeclaration[],
-  type: string,
+  name: string
+  typeParameters?: TypeParameterDeclaration[]
+  type: string
   raw: string
-} & DeclarationKind<ts.TypeAliasDeclaration> & Modifiers;
+} & DeclarationKind<ts.TypeAliasDeclaration>
 
 export const typeAliasDeclarationDefinition: DeclarationDefinition<TypeAliasDeclaration> = {
   props: ['name', 'typeParameters', 'type', 'modifiers'],

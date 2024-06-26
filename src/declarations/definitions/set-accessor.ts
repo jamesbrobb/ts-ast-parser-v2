@@ -1,13 +1,15 @@
 import * as ts from "typescript";
-import {getModifiers, Modifiers} from "./modifiers";
+import {getModifiers, Modifiers, setAccess} from "./modifiers";
 import {DeclarationKind} from "../declaration-kind.types";
 import {ParameterDeclaration} from "./parameter";
 import {DeclarationDefinition} from "../declaration-definition.types";
 import {TypeParameterDeclaration} from "./type";
+import {AccessTypes} from "./common";
 
 
 export type SetAccessorDeclaration = {
   name: string
+  access: AccessTypes
   type?: string
   typeParameters?: TypeParameterDeclaration[]
   parameters: ParameterDeclaration[]
@@ -31,5 +33,8 @@ export const setAccessorDeclarationDefinition: DeclarationDefinition<SetAccessor
   ],
   propHandlers: {
     modifiers: getModifiers
-  }
+  },
+  postProcess: [
+    setAccess
+  ]
 }

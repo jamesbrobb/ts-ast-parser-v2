@@ -1,13 +1,15 @@
 import * as ts from "typescript";
-import {getModifierKeywords, getModifiers, Modifiers} from "./modifiers";
+import {getModifierKeywords, getModifiers, Modifiers, setAccess} from "./modifiers";
 import {TypeParameterDeclaration} from "./type";
 import {ParameterDeclaration} from "./parameter";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
+import {AccessTypes} from "./common";
 
 
 export type FunctionDeclaration = {
   name: string
+  access: AccessTypes
   type?: string
   typeParameters?: TypeParameterDeclaration[]
   parameters: ParameterDeclaration[]
@@ -15,7 +17,7 @@ export type FunctionDeclaration = {
   asteriskToken?: boolean
   questionToken?: boolean
   exclamationToken?: boolean
-} & DeclarationKind<ts.FunctionDeclaration>;
+} & DeclarationKind<ts.FunctionDeclaration>
 
 export const functionDeclarationDefinition: DeclarationDefinition<FunctionDeclaration> = {
   props: [
@@ -30,7 +32,10 @@ export const functionDeclarationDefinition: DeclarationDefinition<FunctionDeclar
   ],
   propHandlers: {
     modifiers: getModifiers
-  }
+  },
+  postProcess: [
+    setAccess
+  ]
 }
 
 

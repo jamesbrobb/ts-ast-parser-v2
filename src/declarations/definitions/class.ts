@@ -19,7 +19,7 @@ export type ClassDeclaration = {
   typeParameters?: TypeParameterDeclaration[],
   heritage?: HeritageClause[],
   members: ClassElement[],
-  modifiers: Modifiers
+  modifiers?: Modifiers
 } & DeclarationKind<ts.ClassDeclaration>
 
 

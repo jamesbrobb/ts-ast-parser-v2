@@ -1,5 +1,6 @@
 export * from './expressions';
 export * from './class';
+export * from './common';
 export * from './constructor';
 export * from './decorator';
 export * from './enum';

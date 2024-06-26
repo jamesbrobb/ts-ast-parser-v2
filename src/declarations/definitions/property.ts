@@ -1,20 +1,22 @@
 import * as ts from "typescript";
-import {getModifierKeywords, getModifiers, Modifiers} from "./modifiers";
+import {getModifierKeywords, getModifiers, ModifierKeywords, Modifiers, setAccess} from "./modifiers";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
 import {TypeReferenceNode} from "./type";
 import {Expression} from "./expressions";
+import {AccessTypes} from "./common";
 
 
 
 export type PropertyDeclaration = {
-  name: string,
-  optional: boolean,
-  exclamation: boolean,
-  type?: TypeReferenceNode,
-  initializedValue?: Expression | string,
+  name: string
+  access: AccessTypes
+  optional: boolean
+  exclamation: boolean
+  type?: TypeReferenceNode
+  initializedValue?: Expression | string
   modifiers?: Modifiers
-} & DeclarationKind<ts.PropertyDeclaration>;
+} & DeclarationKind<ts.PropertyDeclaration>
 
 
 export const propertyDeclarationDefinition: DeclarationDefinition<PropertyDeclaration> = {
@@ -31,16 +33,19 @@ export const propertyDeclarationDefinition: DeclarationDefinition<PropertyDeclar
     exclamationToken: { propName: 'exclamation' },
     initializer: { propName: 'initializedValue' },
     modifiers: getModifiers
-  }
+  },
+  postProcess: [
+    setAccess
+  ]
 }
 
 
 export type PropertySignature = {
-  name: string,
-  optional: boolean,
-  type?: string,
-  modifiers?: Modifiers
-} & DeclarationKind<ts.PropertySignature>;
+  name: string
+  optional: boolean
+  type?: string
+  keywords?: ModifierKeywords[]
+} & DeclarationKind<ts.PropertySignature>
 
 
 export const propertySignatureDefinition: DeclarationDefinition<PropertySignature> = {

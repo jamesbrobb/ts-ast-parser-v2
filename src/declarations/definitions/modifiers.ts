@@ -2,6 +2,8 @@ import * as ts from "typescript";
 import {Decorator, getDecorator} from "./decorator";
 import {Parser} from "../declaration-parser";
 import {Modifier, ModifierLike, NodeArray} from "typescript";
+import {DeclarationKind} from "../declaration-kind.types";
+import {HasAccess, HasModifiers, HasName} from "./common";
 
 
 export type ModifierKeywords = 'private' | 'protected' | 'public' | 'readonly' | 'static' | 'abstract' | 'async' | 'const' | 'declare' | 'default' | 'export';
@@ -60,28 +62,44 @@ export function getModifiers(nodes: NodeArray<ModifierLike>, sourceFile: ts.Sour
 }
 
 
-export function isPublic(name: string, modifiers?: Modifiers): boolean {
 
-  return !(isPrivate(name, modifiers) || isProtected(name, modifiers));
+export function setAccess<N extends ts.Node, D extends DeclarationKind<N>>(dec: D & HasModifiers & HasName & HasAccess, _node: N): void {
+  console.log(dec);
+  switch(true) {
+    case isPrivate(dec):
+      dec.access = 'private';
+      break;
+    case isProtected(dec):
+      dec.access = 'protected';
+      break;
+    case isPublic(dec):
+      dec.access = 'public';
+      break;
+  }
 }
 
 
-export function isPrivate(name: string, modifiers?: Modifiers): boolean {
+export function isPublic<D extends DeclarationKind<any>>(dec: D & HasModifiers & HasName): boolean {
+  return !(isPrivate(dec) || isProtected(dec));
+}
 
-  if(name.startsWith('#')) {
+
+export function isPrivate<D extends DeclarationKind<any>>(dec: D & HasModifiers & HasName): boolean {
+
+  if(dec.name.startsWith('#')) {
     return true;
   }
 
-  return hasKeyword('private', modifiers);
+  return hasKeyword('private', dec.modifiers);
 }
 
-export function isProtected(name: string, modifiers?: Modifiers): boolean {
+export function isProtected<D extends DeclarationKind<any>>(dec: D & HasModifiers & HasName): boolean {
 
-    if(isPrivate(name, modifiers)) {
+    if(isPrivate(dec)) {
       return false;
     }
 
-    return hasKeyword('protected', modifiers);
+    return hasKeyword('protected', dec.modifiers);
 }
 
 export function isStatic(modifiers?: Modifiers): boolean {

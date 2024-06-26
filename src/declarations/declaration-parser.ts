@@ -70,7 +70,7 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
 
     def.props.forEach((prop: keyof N) => {
 
-      const propHandler: PropHandlerEntry<N, keyof N> | undefined = def.propHandlers?.[prop],
+      const propHandler: PropHandlerEntry<N, keyof N, D['__resultType'] > | undefined = def.propHandlers?.[prop],
         cNode = node[prop] as any;
 
       if(!cNode && !isNodeArray(cNode) && !isNode(cNode)) {
@@ -91,10 +91,15 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
 
       if(propHandler.parseFn) {
         res[propName] = propHandler.parseFn(cNode, sourceFile, this);
-        return;
+      } else {
+        res[propName] = this.parse(cNode, sourceFile, propHandler.defaultValue);
       }
 
-      res[propName] = this.parse(cNode, sourceFile, propHandler.defaultValue);
+      if(propHandler.postProcess) {
+        propHandler.postProcess.forEach((handler) => {
+          handler(node, cNode, res, sourceFile, this);
+        });
+      }
     });
 
     if(def.postProcess) {

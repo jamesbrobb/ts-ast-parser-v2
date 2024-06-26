@@ -8,7 +8,7 @@ import {DeclarationDefinition} from "../declaration-definition.types";
 export type ConstructorDeclaration = {
   parameters: ParameterDeclaration[],
   modifiers?: Modifiers
-} & DeclarationKind<ts.ConstructorDeclaration> & Modifiers;
+} & DeclarationKind<ts.ConstructorDeclaration>
 
 
 export const constructorDeclarationDefinition: DeclarationDefinition<ConstructorDeclaration> = {

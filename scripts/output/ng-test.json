@@ -151,6 +151,7 @@
               }
             ]
           },
+          "access": "public",
           "isInput": true
         },
         {
@@ -174,6 +175,7 @@
             ],
             "arguments": []
           },
+          "access": "public",
           "isInput": true
         },
         {
@@ -206,6 +208,7 @@
             ],
             "arguments": []
           },
+          "access": "public",
           "isInput": true
         },
         {
@@ -233,7 +236,14 @@
               "readonly"
             ]
           },
-          "injectedDependency": true
+          "access": "private",
+          "injectedDependency": {
+            "type": "TVChartInputsDirective",
+            "text": "TVChartInputsDirective<HorzScaleItem>",
+            "args": [
+              "HorzScaleItem"
+            ]
+          }
         },
         {
           "kind": "PropertyDeclaration",
@@ -263,7 +273,14 @@
               "readonly"
             ]
           },
-          "injectedDependency": true
+          "access": "private",
+          "injectedDependency": {
+            "type": "ElementRef",
+            "text": "ElementRef<HTMLElement>",
+            "args": [
+              "HTMLElement"
+            ]
+          }
         },
         {
           "kind": "PropertyDeclaration",
@@ -293,7 +310,15 @@
               "readonly"
             ]
           },
-          "injectedDependency": true
+          "access": "private",
+          "injectedDependency": {
+            "type": "TVChart",
+            "text": "TVChart<T, HorzScaleItem>",
+            "args": [
+              "T",
+              "HorzScaleItem"
+            ]
+          }
         },
         {
           "kind": "PropertyDeclaration",
@@ -306,6 +331,7 @@
             ],
             "arguments": []
           },
+          "access": "public",
           "isOutput": true
         },
         {
@@ -326,6 +352,7 @@
             ],
             "arguments": []
           },
+          "access": "public",
           "isOutput": true
         },
         {
@@ -344,6 +371,7 @@
               }
             ]
           },
+          "access": "public",
           "isInput": true
         },
         {
@@ -357,6 +385,7 @@
             ],
             "arguments": []
           },
+          "access": "public",
           "isInput": true
         },
         {
@@ -372,6 +401,7 @@
               "test"
             ]
           },
+          "access": "public",
           "isInput": true
         },
         {
@@ -392,6 +422,7 @@
               }
             ]
           },
+          "access": "public",
           "isOutput": true
         },
         {
@@ -420,7 +451,15 @@
               }
             ]
           },
-          "injectedDependency": true
+          "access": "public",
+          "injectedDependency": {
+            "type": "TVChart",
+            "text": "TVChart<T, HorzScaleItem>",
+            "args": [
+              "T",
+              "HorzScaleItem"
+            ]
+          }
         },
         {
           "kind": "PropertyDeclaration",
@@ -432,7 +471,8 @@
               "public",
               "readonly"
             ]
-          }
+          },
+          "access": "public"
         },
         {
           "kind": "PropertyDeclaration",
@@ -444,7 +484,8 @@
               "protected",
               "readonly"
             ]
-          }
+          },
+          "access": "protected"
         },
         {
           "kind": "Constructor",
@@ -462,12 +503,16 @@
         {
           "kind": "MethodDeclaration",
           "name": "ngOnInit",
-          "parameters": []
+          "parameters": [],
+          "access": "public",
+          "isLifeCycleMethod": true
         },
         {
           "kind": "MethodDeclaration",
           "name": "ngOnDestroy",
-          "parameters": []
+          "parameters": [],
+          "access": "public",
+          "isLifeCycleMethod": true
         }
       ],
       "heritageClauses": [

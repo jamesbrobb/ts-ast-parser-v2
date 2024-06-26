@@ -13,28 +13,20 @@ export function isUIClass(classDeclaration: ClassDeclaration): boolean {
 }
 
 export function isInjectedDependency(property: PropertyDeclaration): boolean {
-
-  // check if property is injected
-  // if so
-  // check property for 'type' value
-  // if none, walk initializedValue for arguments array
-  // Array of either strings - if so get first value in array
-  // or objects with expression set as type
-
-  return checkProperty(property, 'Inject');
+  return checkPropertyForKeyWithValue(property, 'expression', 'Inject');
 }
 
 export function isInput(property: PropertyDeclaration): boolean {
-  return checkProperty(property, 'Input');
+  return checkPropertyForKeyWithValue(property, 'expression', 'Input');
 }
 
 export function isOutput(property: PropertyDeclaration): boolean {
-  return checkProperty(property, 'Output');
+  return checkPropertyForKeyWithValue(property, 'expression', 'Output');
 }
 
 
 
-export function checkProperty(property: PropertyDeclaration, value: string): boolean {
+export function checkPropertyForKeyWithValue(property: PropertyDeclaration, key: string, value: string): boolean {
 
   if(isDecoratedWith(value, property.modifiers)) {
     return true;
@@ -44,39 +36,18 @@ export function checkProperty(property: PropertyDeclaration, value: string): boo
     return property.initializedValue === value.toLowerCase();
   }
 
-  return findExpressionValue(property.initializedValue, value.toLowerCase());
+  return findKeyWithValue(property.initializedValue, key, value.toLowerCase());
 }
 
 
-function findExpressionValue(obj: any, key: string): any {
+function findKeyWithValue(obj: any, key: string, value: string): any {
   let res = false
 
-  walkObjectTree(obj, (value: any) => {
-    if(typeof value === 'string' && value === key) {
+  walkObjectTree(obj, (val: any) => {
+    if(typeof val === 'string' && val === value) {
       res = true;
     }
-  }, 'expression');
+  }, key);
 
   return res;
 }
-
-
-
-
-/*export function getInputs(properties: PropertyDeclaration[]): PropertyDeclaration[] {
-  return properties
-    .filter(prop => isDecoratedWith('Input', prop))
-}
-
-export function getOutputs(properties: PropertyDeclaration[]): string[] {
-  return properties
-    .filter(prop => isDecoratedWith('Output', prop))
-    .map(prop => prop.signature);
-}
-
-export function getPublicProperties(properties: PropertyDeclaration[]): string[] {
-  return properties
-    .filter(prop => isPublic(prop.name, prop))
-    .filter(prop => !isDecoratedWith('Input', prop) && !isDecoratedWith('Output', prop))
-    .map(prop => prop.signature);
-}*/

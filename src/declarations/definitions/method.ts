@@ -1,13 +1,15 @@
 import * as ts from "typescript";
 import {ParameterDeclaration} from "./parameter";
-import {getModifiers, Modifiers} from "./modifiers";
+import {getModifiers, Modifiers, setAccess} from "./modifiers";
 import {TypeParameterDeclaration} from "./type";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
+import {AccessTypes} from "./common";
 
 
 export type MethodDeclaration = {
   name: string
+  access: AccessTypes
   type?: string
   typeParameters?: TypeParameterDeclaration[]
   parameters: ParameterDeclaration[]
@@ -31,7 +33,10 @@ export const methodDeclarationDefinition: DeclarationDefinition<MethodDeclaratio
   ],
   propHandlers: {
     modifiers: getModifiers
-  }
+  },
+  postProcess: [
+    setAccess
+  ]
 }
 
 

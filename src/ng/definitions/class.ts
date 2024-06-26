@@ -9,6 +9,7 @@ import {
     classDeclarationDefinition
 } from "../../declarations";
 import {NgPropertyDeclaration} from "./property";
+import {extendDefinition} from "../../utils/declarations";
 
 
 export type NgClassElement = NgPropertyDeclaration | MethodDeclaration | GetAccessorDeclaration | SetAccessorDeclaration | ConstructorDeclaration
@@ -20,14 +21,18 @@ export type NgClassDeclaration = ClassDeclaration & {
 }
 
 
-export const ngClassDeclaration: DeclarationDefinition<NgClassDeclaration> = {
-    props: classDeclarationDefinition.props,
-    propHandlers: classDeclarationDefinition.propHandlers,
+export const ngClassDeclarationDefinition: DeclarationDefinition<NgClassDeclaration> = extendDefinition(
+  classDeclarationDefinition , {
     postProcess: [addUIFlag]
-}
+  }
+);
 
 
 function addUIFlag(classDeclaration: NgClassDeclaration): NgClassDeclaration {
-    classDeclaration.isUI = isUIClass(classDeclaration);
+
+    if(isUIClass(classDeclaration)) {
+        classDeclaration.isUI = true;
+    }
+
     return classDeclaration;
 }

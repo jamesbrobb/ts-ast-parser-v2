@@ -7,10 +7,10 @@ export type Expression = CallExpression | PropertyAccessExpression | NewExpressi
 
 
 export type CallExpression = {
-  expression: string,
+  expression: Expression | string,
   questionDotToken?: string,
   typeArguments?: string,
-  arguments: string,
+  arguments: Expression[],
 } & DeclarationKind<ts.CallExpression>
 
 
@@ -24,7 +24,7 @@ export type PropertyAccessExpression = {
   name: string,
   expression: string,
   optional: boolean
-} & DeclarationKind<ts.PropertyAccessExpression>;
+} & DeclarationKind<ts.PropertyAccessExpression>
 
 export const propertyAccessExpressionDefinition: DeclarationDefinition<PropertyAccessExpression> = {
   removeKind: true,
