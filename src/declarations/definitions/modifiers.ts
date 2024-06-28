@@ -64,7 +64,6 @@ export function getModifiers(nodes: NodeArray<ModifierLike>, sourceFile: ts.Sour
 
 
 export function setAccess<N extends ts.Node, D extends DeclarationKind<N>>(dec: D & HasModifiers & HasName & HasAccess, _node: N): void {
-  console.log(dec);
   switch(true) {
     case isPrivate(dec):
       dec.access = 'private';
@@ -146,7 +145,7 @@ export function isDecoratedWith(type: string, modifiers?: Modifiers): boolean {
     return false;
   }
 
-  return modifiers.decorators.some(decorator => decorator.type === type);
+  return modifiers.decorators.some(decorator => decorator.type.toLowerCase() === type.toLowerCase());
 }
 
 /*export function getDecoratorsAsString(modifiers?: Modifiers, separator: string = '\n'): string {

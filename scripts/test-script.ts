@@ -1,11 +1,30 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
-import {defaultDeclarationDefinitionMap, parse, Parser} from "../src";
+import {
+    CommonPathHandler,
+    LightweightChartsPathHandler,
+    NgPathHandler,
+    NodeModulesPathHandler,
+    parse,
+    Parser,
+    RxjsPathHandler
+} from "../src";
+import {ngDeclarationDefinitionMap} from "../src/ng/declarations";
+
+
+const pathHandlers = [
+    new CommonPathHandler(),
+    new NodeModulesPathHandler(),
+    new RxjsPathHandler(),
+    new NgPathHandler(),
+    new LightweightChartsPathHandler()
+]
 
 
 function run() {
 
-    const sourcePath = process.argv.slice(2)[0];
+    const sourcePath = process.argv.slice(2)[0],
+      stats = fs.statSync(sourcePath);
 
     let relativePath = sourcePath;
 
@@ -13,13 +32,16 @@ function run() {
         relativePath = path.relative(process.cwd(), sourcePath);
     }
 
-    const dir = path.dirname(relativePath);
+    const dir: string = stats.isDirectory() ? relativePath : path.dirname(relativePath);
 
-    process.chdir(dir);
+    // can be empty if cwd === relativePath
+    if(dir) {
+        process.chdir(dir);
+    }
 
-    const parser = new Parser(defaultDeclarationDefinitionMap);
+    const parser = new Parser(ngDeclarationDefinitionMap);
 
-    const source = parse(sourcePath, parser);
+    const source = parse(sourcePath, parser, pathHandlers, {walk: true});
 
     fs.writeFileSync(
       path.join('/Users/James/WebstormProjects/ts-ast-parser-v2/scripts/output', 'test.json'),

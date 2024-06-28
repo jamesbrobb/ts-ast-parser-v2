@@ -13,15 +13,16 @@ export function isUIClass(classDeclaration: ClassDeclaration): boolean {
 }
 
 export function isInjectedDependency(property: PropertyDeclaration): boolean {
-  return checkPropertyForKeyWithValue(property, 'expression', 'Inject');
+  return checkPropertyForKeyWithValue(property, 'expression', 'inject');
 }
 
 export function isInput(property: PropertyDeclaration): boolean {
-  return checkPropertyForKeyWithValue(property, 'expression', 'Input');
+  return checkPropertyForKeyWithValue(property, 'expression', 'input');
 }
 
 export function isOutput(property: PropertyDeclaration): boolean {
-  return checkPropertyForKeyWithValue(property, 'expression', 'Output');
+  const outputs = ['output', 'outputFromObservable'];
+  return outputs.some(output => checkPropertyForKeyWithValue(property, 'expression', output));
 }
 
 
@@ -33,10 +34,10 @@ export function checkPropertyForKeyWithValue(property: PropertyDeclaration, key:
   }
 
   if (typeof property.initializedValue === 'string') {
-    return property.initializedValue === value.toLowerCase();
+    return property.initializedValue === value;
   }
 
-  return findKeyWithValue(property.initializedValue, key, value.toLowerCase());
+  return findKeyWithValue(property.initializedValue, key, value);
 }
 
 

@@ -8,13 +8,11 @@ import {getModifiers, Modifiers} from "./modifiers";
 export type ImportDeclaration = {
   moduleSpecifier: string,
   importClause?: ImportClause,
-  //attributes?: ts.ImportAttributes, // TODO - add declaration
   modifiers?: Modifiers,
-  children?: ImportClause[] // TODO - needed in import map factory - look at removing
 } & DeclarationKind<ts.ImportDeclaration>
 
 export const importDeclarationDefinition: DeclarationDefinition<ImportDeclaration> = {
-  props: ['moduleSpecifier', 'importClause', 'modifiers'],
+  props: ['moduleSpecifier', 'importClause', 'modifiers', 'attributes'],
   propHandlers: {
     modifiers: getModifiers
   }
@@ -24,9 +22,7 @@ export const importDeclarationDefinition: DeclarationDefinition<ImportDeclaratio
 export type ImportClause = {
   name?: string
   isTypeOnly?: boolean
-  //namedBindings?: NamedImportBindings // TODO - add declaration
-  raw: string
-  children?: NamedImports[]
+  namedBindings?: NamespaceImport | NamedImports
 } & DeclarationKind<ts.ImportClause>
 
 export const importClauseDefinition: DeclarationDefinition<ImportClause> = {
@@ -36,8 +32,6 @@ export const importClauseDefinition: DeclarationDefinition<ImportClause> = {
 
 export type NamedImports = {
   elements: ImportSpecifier[]
-  raw: string
-  children?: ImportSpecifier[]
 } & DeclarationKind<ts.NamedImports>
 
 export const namedImportsDefinition: DeclarationDefinition<NamedImports> = {
@@ -48,8 +42,7 @@ export const namedImportsDefinition: DeclarationDefinition<NamedImports> = {
 export type ImportSpecifier = {
   name: string
   propertyName?: string,
-  isTypeOnly: boolean,
-  raw: string
+  isTypeOnly: boolean
 } & DeclarationKind<ts.ImportSpecifier>
 
 export const importSpecifierDefinition: DeclarationDefinition<ImportSpecifier> = {
@@ -59,7 +52,6 @@ export const importSpecifierDefinition: DeclarationDefinition<ImportSpecifier> =
 
 export type NamespaceImport = {
   name: string,
-  raw: string
 } & DeclarationKind<ts.NamespaceImport>
 
 export const namespaceImportDefinition: DeclarationDefinition<NamespaceImport> = {

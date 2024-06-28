@@ -1,0 +1,152 @@
+[
+  {
+    "name": "deepmerge",
+    "module": "deepmerge",
+    "resolvedModulePath": "deepmerge"
+  },
+  {
+    "name": "Directive",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/Directive"
+  },
+  {
+    "name": "ElementRef",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/ElementRef"
+  },
+  {
+    "name": "OnInit",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/OnInit"
+  },
+  {
+    "name": "OnDestroy",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/OnDestroy"
+  },
+  {
+    "name": "inject",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/inject"
+  },
+  {
+    "name": "input",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/input"
+  },
+  {
+    "name": "effect",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/effect"
+  },
+  {
+    "name": "output",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/output"
+  },
+  {
+    "name": "OutputEmitterRef",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/OutputEmitterRef"
+  },
+  {
+    "name": "Input",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/Input"
+  },
+  {
+    "name": "Output",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/Output"
+  },
+  {
+    "name": "EventEmitter",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/EventEmitter"
+  },
+  {
+    "name": "Inject",
+    "module": "@angular/core",
+    "resolvedModulePath": "@angular/core",
+    "convertedModulePath": "https://angular.dev/api/core/Inject"
+  },
+  {
+    "name": "ChartOptions",
+    "module": "lightweight-charts",
+    "resolvedModulePath": "lightweight-charts",
+    "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api#chartoptions"
+  },
+  {
+    "name": "ColorType",
+    "module": "lightweight-charts",
+    "resolvedModulePath": "lightweight-charts",
+    "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api/enums/colortype"
+  },
+  {
+    "name": "DeepPartial",
+    "module": "lightweight-charts",
+    "resolvedModulePath": "lightweight-charts",
+    "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api#deeppartial"
+  },
+  {
+    "name": "LineStyle",
+    "module": "lightweight-charts",
+    "resolvedModulePath": "lightweight-charts",
+    "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api/enums/linestyle"
+  },
+  {
+    "name": "SeriesDataItemTypeMap",
+    "module": "lightweight-charts",
+    "resolvedModulePath": "lightweight-charts",
+    "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api/interfaces/seriesdataitemtypemap"
+  },
+  {
+    "name": "SeriesPartialOptionsMap",
+    "module": "lightweight-charts",
+    "resolvedModulePath": "lightweight-charts",
+    "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api/interfaces/seriespartialoptionsmap"
+  },
+  {
+    "name": "SeriesType",
+    "module": "lightweight-charts",
+    "resolvedModulePath": "lightweight-charts",
+    "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api#seriestype"
+  },
+  {
+    "name": "TVChart",
+    "module": "../../core",
+    "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/core"
+  },
+  {
+    "name": "tvChartProviderWithExistenceCheck",
+    "module": "../providers/tv-chart.provider",
+    "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/providers/tv-chart.provider"
+  },
+  {
+    "name": "TVChartInputsDirective",
+    "module": "./chart-inputs.directive",
+    "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/chart-inputs.directive"
+  },
+  {
+    "name": "tvChartInputsDirectiveHostDef",
+    "module": "./chart-inputs.directive",
+    "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/chart-inputs.directive"
+  },
+  {
+    "name": "tvChartOutputsDirectiveHostDef",
+    "module": "./charts-outputs.directive",
+    "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/charts-outputs.directive"
+  }
+]

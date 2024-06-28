@@ -18,12 +18,7 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "target": "ES2022",
-    "types": ["node"],
-    "paths": {
-      "@jamesbenrobb/ts-ast-parser": [
-        "dist/@jamesbenrobb/ts-ast-parser-v2/src"
-      ]
-    }
+    "types": ["node"]
   },
   "include": ["src/**/*"],
   "exclude": ["src/*/files/**/*"]

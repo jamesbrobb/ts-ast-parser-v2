@@ -18,7 +18,7 @@ function run() {
 
   process.chdir(dir);
 
-  const parser = new Parser(ngDeclarationDefinitionMap, true);
+  const parser = new Parser(ngDeclarationDefinitionMap, false);
 
   const source = parse(sourcePath, parser);
 

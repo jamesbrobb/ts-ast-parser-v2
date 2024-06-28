@@ -1,4 +1,143 @@
 {
+  "fileName": "chart.directive.ts",
+  "path": "/Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts",
+  "imports": [
+    {
+      "name": "deepmerge",
+      "module": "deepmerge",
+      "resolvedModulePath": "deepmerge"
+    },
+    {
+      "name": "Directive",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "ElementRef",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "OnInit",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "OnDestroy",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "inject",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "input",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "effect",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "output",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "OutputEmitterRef",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "Input",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "Output",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "EventEmitter",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "Inject",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core"
+    },
+    {
+      "name": "ChartOptions",
+      "module": "lightweight-charts",
+      "resolvedModulePath": "lightweight-charts"
+    },
+    {
+      "name": "ColorType",
+      "module": "lightweight-charts",
+      "resolvedModulePath": "lightweight-charts"
+    },
+    {
+      "name": "DeepPartial",
+      "module": "lightweight-charts",
+      "resolvedModulePath": "lightweight-charts"
+    },
+    {
+      "name": "LineStyle",
+      "module": "lightweight-charts",
+      "resolvedModulePath": "lightweight-charts"
+    },
+    {
+      "name": "SeriesDataItemTypeMap",
+      "module": "lightweight-charts",
+      "resolvedModulePath": "lightweight-charts"
+    },
+    {
+      "name": "SeriesPartialOptionsMap",
+      "module": "lightweight-charts",
+      "resolvedModulePath": "lightweight-charts"
+    },
+    {
+      "name": "SeriesType",
+      "module": "lightweight-charts",
+      "resolvedModulePath": "lightweight-charts"
+    },
+    {
+      "name": "TVChart",
+      "module": "../../core",
+      "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/core"
+    },
+    {
+      "name": "tvChartProviderWithExistenceCheck",
+      "module": "../providers/tv-chart.provider",
+      "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/providers/tv-chart.provider"
+    },
+    {
+      "name": "TVChartInputsDirective",
+      "module": "./chart-inputs.directive",
+      "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/chart-inputs.directive"
+    },
+    {
+      "name": "tvChartInputsDirectiveHostDef",
+      "module": "./chart-inputs.directive",
+      "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/chart-inputs.directive"
+    },
+    {
+      "name": "tvChartOutputsDirectiveHostDef",
+      "module": "./charts-outputs.directive",
+      "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/charts-outputs.directive"
+    },
+    {
+      "name": "outputFromObservable",
+      "module": "@angular/core/rxjs-interop",
+      "resolvedModulePath": "@angular/core/rxjs-interop"
+    }
+  ],
   "exports": [
     {
       "kind": "VariableDeclaration",
@@ -25,14 +164,12 @@
         "crosshair": {
           "vertLine": {
             "style": {
-              "kind": "PropertyAccessExpression",
               "name": "LargeDashed",
               "expression": "LineStyle"
             }
           },
           "horzLine": {
             "style": {
-              "kind": "PropertyAccessExpression",
               "name": "LargeDashed",
               "expression": "LineStyle"
             }
@@ -54,7 +191,6 @@
         ]
       },
       "initializer": {
-        "kind": "CallExpression",
         "expression": "deepmerge",
         "arguments": [
           "DEFAULT_CHART_OPTIONS",
@@ -62,7 +198,6 @@
             "layout": {
               "background": {
                 "type": {
-                  "kind": "PropertyAccessExpression",
                   "name": "Solid",
                   "expression": "ColorType"
                 },
@@ -92,7 +227,6 @@
                 "color": "#fff",
                 "labelBackgroundColor": "#aaa",
                 "style": {
-                  "kind": "PropertyAccessExpression",
                   "name": "SparseDotted",
                   "expression": "LineStyle"
                 }
@@ -101,7 +235,6 @@
                 "color": "#fff",
                 "labelBackgroundColor": "#aaa",
                 "style": {
-                  "kind": "PropertyAccessExpression",
                   "name": "SparseDotted",
                   "expression": "LineStyle"
                 }
@@ -133,9 +266,7 @@
           "kind": "PropertyDeclaration",
           "name": "type",
           "initializedValue": {
-            "kind": "CallExpression",
             "expression": {
-              "kind": "PropertyAccessExpression",
               "name": "required",
               "expression": "input"
             },
@@ -158,7 +289,6 @@
           "kind": "PropertyDeclaration",
           "name": "seriesOptions",
           "initializedValue": {
-            "kind": "CallExpression",
             "expression": "input",
             "typeArguments": [
               {
@@ -182,7 +312,6 @@
           "kind": "PropertyDeclaration",
           "name": "data",
           "initializedValue": {
-            "kind": "CallExpression",
             "expression": "input",
             "typeArguments": [
               {
@@ -225,7 +354,6 @@
             ]
           },
           "initializedValue": {
-            "kind": "CallExpression",
             "expression": "inject",
             "arguments": [
               "TVChartInputsDirective"
@@ -249,10 +377,8 @@
           "kind": "PropertyDeclaration",
           "name": "#element",
           "initializedValue": {
-            "kind": "PropertyAccessExpression",
             "name": "nativeElement",
             "expression": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 {
@@ -286,7 +412,6 @@
           "kind": "PropertyDeclaration",
           "name": "#chart",
           "initializedValue": {
-            "kind": "CallExpression",
             "expression": "inject",
             "arguments": [
               {
@@ -324,7 +449,6 @@
           "kind": "PropertyDeclaration",
           "name": "output",
           "initializedValue": {
-            "kind": "CallExpression",
             "expression": "output",
             "typeArguments": [
               "string"
@@ -345,12 +469,29 @@
             ]
           },
           "initializedValue": {
-            "kind": "CallExpression",
             "expression": "output",
             "typeArguments": [
               "number"
             ],
             "arguments": []
+          },
+          "access": "public",
+          "isOutput": true
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "ouput3",
+          "initializedValue": {
+            "expression": "outputFromObservable",
+            "arguments": [
+              {
+                "expression": "EventEmitter",
+                "typeArguments": [
+                  "string"
+                ],
+                "arguments": []
+              }
+            ]
           },
           "access": "public",
           "isOutput": true
@@ -378,7 +519,6 @@
           "kind": "PropertyDeclaration",
           "name": "testInput2",
           "initializedValue": {
-            "kind": "CallExpression",
             "expression": "input",
             "typeArguments": [
               "string"
@@ -392,7 +532,6 @@
           "kind": "PropertyDeclaration",
           "name": "testInput3",
           "initializedValue": {
-            "kind": "CallExpression",
             "expression": "input",
             "typeArguments": [
               "string"
@@ -408,7 +547,6 @@
           "kind": "PropertyDeclaration",
           "name": "testOutput",
           "initializedValue": {
-            "kind": "NewExpression",
             "expression": "EventEmitter",
             "typeArguments": [
               "string"
