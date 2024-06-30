@@ -1,10 +1,9 @@
 
-export function walkObjectTree(obj: any, callback: Function, key: string) {
+export type WalkCallbackFn = (key: string, value: any) => void;
+
+export function walkObjectTree(obj: any, callback: WalkCallbackFn, key: string) {
   for (let ky in obj) {
-    if(ky !== key) {
-      continue;
-    }
-    callback(obj[ky]);
+    callback(key, obj[ky]);
     if (typeof obj[ky] === 'object' && obj[ky] !== null) {
       walkObjectTree(obj[ky], callback, key);
     }

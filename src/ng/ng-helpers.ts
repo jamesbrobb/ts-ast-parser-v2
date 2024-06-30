@@ -20,6 +20,14 @@ export function isInput(property: PropertyDeclaration): boolean {
   return checkPropertyForKeyWithValue(property, 'expression', 'input');
 }
 
+export function isRequiredInput(property: PropertyDeclaration): boolean {
+  if(isInput(property)) {
+    return checkPropertyForKeyWithValue(property, 'name', 'required');
+  }
+
+  return false;
+}
+
 export function isOutput(property: PropertyDeclaration): boolean {
   const outputs = ['output', 'outputFromObservable'];
   return outputs.some(output => checkPropertyForKeyWithValue(property, 'expression', output));
@@ -44,8 +52,8 @@ export function checkPropertyForKeyWithValue(property: PropertyDeclaration, key:
 function findKeyWithValue(obj: any, key: string, value: string): any {
   let res = false
 
-  walkObjectTree(obj, (val: any) => {
-    if(typeof val === 'string' && val === value) {
+  walkObjectTree(obj, (ky: string, val: any) => {
+    if(ky === key && typeof val === 'string' && val === value) {
       res = true;
     }
   }, key);

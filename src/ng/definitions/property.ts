@@ -1,9 +1,7 @@
 import * as ts from "typescript";
 import {DeclarationDefinition, Parser, PropertyDeclaration, propertyDeclarationDefinition} from "../../declarations";
-import {isInjectedDependency, isInput, isOutput} from "../ng-helpers";
-import {findChildNodeOfKind} from "../../utils";
-import {isTypeNode} from "typescript";
-import {extendDefinition} from "../../utils/declarations";
+import {isInjectedDependency, isInput, isOutput, isRequiredInput} from "../ng-helpers";
+import {findChildNodeOfKind, extendDefinition} from "../../utils";
 
 
 export type NgPropertyDeclaration = PropertyDeclaration & {
@@ -13,6 +11,7 @@ export type NgPropertyDeclaration = PropertyDeclaration & {
     args?: string[]
   }
   isInput?: boolean
+  isRequired?: boolean
   isOutput?: boolean
   isPublic?: boolean
 }
@@ -22,7 +21,7 @@ export const ngPropertyDeclarationDefinition: DeclarationDefinition<NgPropertyDe
   propertyDeclarationDefinition, {
     postProcess: [
       addInjectedFlag,
-      addInputFlag,
+      addInputFlags,
       addOutputFlag
     ]
   }
@@ -41,7 +40,7 @@ function addInjectedFlag(
     const type = findChildNodeOfKind(
       node,
       sourceFile,
-      isTypeNode
+      ts.isTypeNode
     );
 
     if(type && ts.isTypeNode(type)) {
@@ -76,11 +75,16 @@ function addInjectedFlag(
 }
 
 
-function addInputFlag(property: NgPropertyDeclaration): NgPropertyDeclaration {
+function addInputFlags(property: NgPropertyDeclaration): NgPropertyDeclaration {
   let addFlag = isInput(property);
+  let isRequired = isRequiredInput(property);
 
   if(addFlag) {
     property.isInput = true;
+  }
+
+  if(isRequired) {
+    property.isRequired = true;
   }
 
   return property;

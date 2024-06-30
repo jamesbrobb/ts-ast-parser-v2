@@ -752,7 +752,8 @@
               ]
             },
             "access": "public",
-            "isInput": true
+            "isInput": true,
+            "isRequired": true
           },
           {
             "kind": "PropertyDeclaration",
