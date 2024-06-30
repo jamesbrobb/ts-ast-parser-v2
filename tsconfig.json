@@ -12,7 +12,7 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "rootDir": "src/",
-    "outDir": "dist/@jamesbenrobb/ts-ast-parser-v2/src",
+    "outDir": "dist/@jamesbenrobb/ts-ast-parser/src",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
