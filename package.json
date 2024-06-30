@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p tsconfig.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/",
     "build:prod": "tsc -p tsconfig.prod.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/",
-    "cd:dist": "cd dist/@jamesbenrobb/ts-ast-parser-v2",
+    "cd:dist": "cd dist/@jamesbenrobb/ts-ast-parser",
     "publish:beta": "npm version prerelease --preid=beta && npm run build:prod && npm run cd:dist && npm publish --access public --tag beta",
     "publish:major": "npm version major && npm run build:prod && npm run cd:dist && npm publish --tag latest",
     "publish:minor": "npm version minor && npm run build:prod && npm run cd:dist && npm publish --tag latest",
