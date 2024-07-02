@@ -55,8 +55,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -77,8 +76,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -102,8 +100,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           }
         ],
         "modifiers": {
@@ -119,8 +116,7 @@
           "keywords": [
             "export"
           ]
-        },
-        "isUI": true
+        }
       },
       {
         "kind": "VariableDeclaration",
@@ -216,15 +212,7 @@
                 "readonly"
               ]
             },
-            "access": "private",
-            "injectedDependency": {
-              "type": "TVChart",
-              "text": "TVChart<T, HorzScaleItem>",
-              "args": [
-                "T",
-                "HorzScaleItem"
-              ]
-            }
+            "access": "private"
           },
           {
             "kind": "PropertyDeclaration",
@@ -246,8 +234,7 @@
                 "readonly"
               ]
             },
-            "access": "public",
-            "isOutput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -269,8 +256,7 @@
                 "readonly"
               ]
             },
-            "access": "public",
-            "isOutput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -292,8 +278,7 @@
                 "readonly"
               ]
             },
-            "access": "public",
-            "isOutput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -315,8 +300,7 @@
                 "readonly"
               ]
             },
-            "access": "public",
-            "isOutput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -338,8 +322,7 @@
                 "readonly"
               ]
             },
-            "access": "public",
-            "isOutput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -361,8 +344,7 @@
                 "readonly"
               ]
             },
-            "access": "public",
-            "isOutput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -384,8 +366,7 @@
                 "readonly"
               ]
             },
-            "access": "public",
-            "isOutput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -407,8 +388,7 @@
                 "readonly"
               ]
             },
-            "access": "public",
-            "isOutput": true
+            "access": "public"
           }
         ],
         "modifiers": {
@@ -424,8 +404,7 @@
           "keywords": [
             "export"
           ]
-        },
-        "isUI": true
+        }
       },
       {
         "kind": "VariableDeclaration",
@@ -498,42 +477,6 @@
         "convertedModulePath": "https://angular.dev/api/core/effect"
       },
       {
-        "name": "output",
-        "module": "@angular/core",
-        "resolvedModulePath": "@angular/core",
-        "convertedModulePath": "https://angular.dev/api/core/output"
-      },
-      {
-        "name": "OutputEmitterRef",
-        "module": "@angular/core",
-        "resolvedModulePath": "@angular/core",
-        "convertedModulePath": "https://angular.dev/api/core/OutputEmitterRef"
-      },
-      {
-        "name": "Input",
-        "module": "@angular/core",
-        "resolvedModulePath": "@angular/core",
-        "convertedModulePath": "https://angular.dev/api/core/Input"
-      },
-      {
-        "name": "Output",
-        "module": "@angular/core",
-        "resolvedModulePath": "@angular/core",
-        "convertedModulePath": "https://angular.dev/api/core/Output"
-      },
-      {
-        "name": "EventEmitter",
-        "module": "@angular/core",
-        "resolvedModulePath": "@angular/core",
-        "convertedModulePath": "https://angular.dev/api/core/EventEmitter"
-      },
-      {
-        "name": "Inject",
-        "module": "@angular/core",
-        "resolvedModulePath": "@angular/core",
-        "convertedModulePath": "https://angular.dev/api/core/Inject"
-      },
-      {
         "name": "ChartOptions",
         "module": "lightweight-charts",
         "resolvedModulePath": "lightweight-charts",
@@ -550,6 +493,12 @@
         "module": "lightweight-charts",
         "resolvedModulePath": "lightweight-charts",
         "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api#deeppartial"
+      },
+      {
+        "name": "ICustomSeriesPaneView",
+        "module": "lightweight-charts",
+        "resolvedModulePath": "lightweight-charts",
+        "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api/interfaces/icustomseriespaneview"
       },
       {
         "name": "LineStyle",
@@ -599,12 +548,6 @@
         "name": "tvChartOutputsDirectiveHostDef",
         "module": "./charts-outputs.directive",
         "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/charts-outputs.directive"
-      },
-      {
-        "name": "outputFromObservable",
-        "module": "@angular/core/rxjs-interop",
-        "resolvedModulePath": "@angular/core/rxjs-interop",
-        "convertedModulePath": "https://angular.dev/api/core/rxjs-interop/outputFromObservable"
       }
     ],
     "exports": [
@@ -751,9 +694,7 @@
                 }
               ]
             },
-            "access": "public",
-            "isInput": true,
-            "isRequired": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -775,8 +716,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -807,22 +747,32 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
+          },
+          {
+            "kind": "PropertyDeclaration",
+            "name": "customSeriesView",
+            "initializedValue": {
+              "expression": "input",
+              "typeArguments": [
+                {
+                  "kind": "TypeReference",
+                  "name": "ICustomSeriesPaneView",
+                  "typeArguments": [
+                    {
+                      "kind": "TypeReference",
+                      "name": "HorzScaleItem"
+                    }
+                  ]
+                }
+              ],
+              "arguments": []
+            },
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
             "name": "#inputs",
-            "type": {
-              "kind": "TypeReference",
-              "name": "TVChartInputsDirective",
-              "typeArguments": [
-                {
-                  "kind": "TypeReference",
-                  "name": "HorzScaleItem"
-                }
-              ]
-            },
             "initializedValue": {
               "expression": "inject",
               "arguments": [
@@ -834,14 +784,7 @@
                 "readonly"
               ]
             },
-            "access": "private",
-            "injectedDependency": {
-              "type": "TVChartInputsDirective",
-              "text": "TVChartInputsDirective<HorzScaleItem>",
-              "args": [
-                "HorzScaleItem"
-              ]
-            }
+            "access": "private"
           },
           {
             "kind": "PropertyDeclaration",
@@ -869,14 +812,7 @@
                 "readonly"
               ]
             },
-            "access": "private",
-            "injectedDependency": {
-              "type": "ElementRef",
-              "text": "ElementRef<HTMLElement>",
-              "args": [
-                "HTMLElement"
-              ]
-            }
+            "access": "private"
           },
           {
             "kind": "PropertyDeclaration",
@@ -905,222 +841,23 @@
                 "readonly"
               ]
             },
-            "access": "private",
-            "injectedDependency": {
-              "type": "TVChart",
-              "text": "TVChart<T, HorzScaleItem>",
-              "args": [
-                "T",
-                "HorzScaleItem"
-              ]
-            }
-          },
-          {
-            "kind": "PropertyDeclaration",
-            "name": "output",
-            "initializedValue": {
-              "expression": "output",
-              "typeArguments": [
-                "string"
-              ],
-              "arguments": []
-            },
-            "access": "public",
-            "isOutput": true
-          },
-          {
-            "kind": "PropertyDeclaration",
-            "name": "output2",
-            "type": {
-              "kind": "TypeReference",
-              "name": "OutputEmitterRef",
-              "typeArguments": [
-                "number"
-              ]
-            },
-            "initializedValue": {
-              "expression": "output",
-              "typeArguments": [
-                "number"
-              ],
-              "arguments": []
-            },
-            "access": "public",
-            "isOutput": true
-          },
-          {
-            "kind": "PropertyDeclaration",
-            "name": "ouput3",
-            "initializedValue": {
-              "expression": "outputFromObservable",
-              "arguments": [
-                {
-                  "expression": "EventEmitter",
-                  "typeArguments": [
-                    "string"
-                  ],
-                  "arguments": []
-                }
-              ]
-            },
-            "access": "public",
-            "isOutput": true
-          },
-          {
-            "kind": "PropertyDeclaration",
-            "name": "testInput",
-            "type": "string",
-            "optional": true,
-            "initializedValue": "test",
-            "modifiers": {
-              "decorators": [
-                {
-                  "type": "Input",
-                  "metadata": {
-                    "alias": "testInput"
-                  }
-                }
-              ]
-            },
-            "access": "public",
-            "isInput": true
-          },
-          {
-            "kind": "PropertyDeclaration",
-            "name": "testInput2",
-            "initializedValue": {
-              "expression": "input",
-              "typeArguments": [
-                "string"
-              ],
-              "arguments": []
-            },
-            "access": "public",
-            "isInput": true
-          },
-          {
-            "kind": "PropertyDeclaration",
-            "name": "testInput3",
-            "initializedValue": {
-              "expression": "input",
-              "typeArguments": [
-                "string"
-              ],
-              "arguments": [
-                "test"
-              ]
-            },
-            "access": "public",
-            "isInput": true
-          },
-          {
-            "kind": "PropertyDeclaration",
-            "name": "testOutput",
-            "initializedValue": {
-              "expression": "EventEmitter",
-              "typeArguments": [
-                "string"
-              ],
-              "arguments": []
-            },
-            "modifiers": {
-              "decorators": [
-                {
-                  "type": "Output"
-                }
-              ]
-            },
-            "access": "public",
-            "isOutput": true
-          },
-          {
-            "kind": "PropertyDeclaration",
-            "name": "sjdhfkjds",
-            "type": {
-              "kind": "TypeReference",
-              "name": "TVChart",
-              "typeArguments": [
-                {
-                  "kind": "TypeReference",
-                  "name": "T"
-                },
-                {
-                  "kind": "TypeReference",
-                  "name": "HorzScaleItem"
-                }
-              ]
-            },
-            "optional": true,
-            "modifiers": {
-              "decorators": [
-                {
-                  "type": "Inject",
-                  "metadata": "TVChart"
-                }
-              ]
-            },
-            "access": "public",
-            "injectedDependency": {
-              "type": "TVChart",
-              "text": "TVChart<T, HorzScaleItem>",
-              "args": [
-                "T",
-                "HorzScaleItem"
-              ]
-            }
-          },
-          {
-            "kind": "PropertyDeclaration",
-            "name": "test",
-            "type": "string",
-            "optional": true,
-            "modifiers": {
-              "keywords": [
-                "public",
-                "readonly"
-              ]
-            },
-            "access": "public"
-          },
-          {
-            "kind": "PropertyDeclaration",
-            "name": "test2",
-            "type": "string",
-            "exclamation": true,
-            "modifiers": {
-              "keywords": [
-                "protected",
-                "readonly"
-              ]
-            },
-            "access": "protected"
+            "access": "private"
           },
           {
             "kind": "Constructor",
-            "parameters": [
-              {
-                "kind": "Parameter",
-                "name": "element",
-                "type": {
-                  "kind": "TypeReference",
-                  "name": "ElementRef"
-                }
-              }
-            ]
+            "parameters": []
           },
           {
             "kind": "MethodDeclaration",
             "name": "ngOnInit",
             "parameters": [],
-            "access": "public",
-            "isLifeCycleMethod": true
+            "access": "public"
           },
           {
             "kind": "MethodDeclaration",
             "name": "ngOnDestroy",
             "parameters": [],
-            "access": "public",
-            "isLifeCycleMethod": true
+            "access": "public"
           }
         ],
         "heritageClauses": [
@@ -1150,14 +887,7 @@
                   "tvChartProviderWithExistenceCheck"
                 ],
                 "hostDirectives": [
-                  {
-                    "directive": "TVChartInputsDirective",
-                    "inputs": [
-                      "id",
-                      "options",
-                      "markers"
-                    ]
-                  },
+                  "tvChartInputsDirectiveHostDef",
                   "tvChartOutputsDirectiveHostDef"
                 ]
               }
@@ -1166,8 +896,212 @@
           "keywords": [
             "export"
           ]
-        },
-        "isUI": true
+        }
+      }
+    ]
+  },
+  {
+    "fileName": "custom-chart.component.ts",
+    "path": "/Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/custom-chart",
+    "imports": [
+      {
+        "name": "ChangeDetectionStrategy",
+        "module": "@angular/core",
+        "resolvedModulePath": "@angular/core",
+        "convertedModulePath": "https://angular.dev/api/core/ChangeDetectionStrategy"
+      },
+      {
+        "name": "Component",
+        "module": "@angular/core",
+        "resolvedModulePath": "@angular/core",
+        "convertedModulePath": "https://angular.dev/api/core/Component"
+      },
+      {
+        "name": "inject",
+        "module": "@angular/core",
+        "resolvedModulePath": "@angular/core",
+        "convertedModulePath": "https://angular.dev/api/core/inject"
+      },
+      {
+        "name": "input",
+        "module": "@angular/core",
+        "resolvedModulePath": "@angular/core",
+        "convertedModulePath": "https://angular.dev/api/core/input"
+      },
+      {
+        "name": "TVChartDirective",
+        "module": "../chart.directive",
+        "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/chart.directive"
+      },
+      {
+        "name": "tvChartProvider",
+        "module": "../../providers/tv-chart.provider",
+        "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/providers/tv-chart.provider"
+      },
+      {
+        "name": "TVChartInputsDirective",
+        "module": "../chart-inputs.directive",
+        "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/chart-inputs.directive"
+      },
+      {
+        "name": "tvChartInputsDirectiveHostDef",
+        "module": "../chart-inputs.directive",
+        "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/chart-inputs.directive"
+      },
+      {
+        "name": "tvChartOutputsDirectiveHostDef",
+        "module": "../charts-outputs.directive",
+        "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/charts-outputs.directive"
+      },
+      {
+        "name": "CustomData",
+        "module": "lightweight-charts",
+        "resolvedModulePath": "lightweight-charts",
+        "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api/interfaces/customdata"
+      },
+      {
+        "name": "CustomSeriesPartialOptions",
+        "module": "lightweight-charts",
+        "resolvedModulePath": "lightweight-charts",
+        "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api#customseriespartialoptions"
+      },
+      {
+        "name": "ICustomSeriesPaneView",
+        "module": "lightweight-charts",
+        "resolvedModulePath": "lightweight-charts",
+        "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api/interfaces/icustomseriespaneview"
+      },
+      {
+        "name": "Time",
+        "module": "lightweight-charts",
+        "resolvedModulePath": "lightweight-charts",
+        "convertedModulePath": "https://tradingview.github.io/lightweight-charts/docs/api#time"
+      }
+    ],
+    "exports": [
+      {
+        "kind": "ClassDeclaration",
+        "name": "TVChartCustomSeriesComponent",
+        "typeParameters": [
+          {
+            "kind": "TypeParameter",
+            "name": "HorzScaleItem",
+            "default": {
+              "kind": "TypeReference",
+              "name": "Time"
+            }
+          }
+        ],
+        "members": [
+          {
+            "kind": "PropertyDeclaration",
+            "name": "seriesOptions",
+            "initializedValue": {
+              "expression": "input",
+              "typeArguments": [
+                {
+                  "kind": "TypeReference",
+                  "name": "CustomSeriesPartialOptions"
+                }
+              ],
+              "arguments": [
+                {}
+              ]
+            },
+            "access": "public"
+          },
+          {
+            "kind": "PropertyDeclaration",
+            "name": "data",
+            "initializedValue": {
+              "expression": "input",
+              "typeArguments": [
+                {
+                  "kind": "ArrayType",
+                  "elementType": {
+                    "kind": "TypeReference",
+                    "name": "CustomData",
+                    "typeArguments": [
+                      {
+                        "kind": "TypeReference",
+                        "name": "HorzScaleItem"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "arguments": []
+            },
+            "access": "public"
+          },
+          {
+            "kind": "PropertyDeclaration",
+            "name": "customSeriesView",
+            "initializedValue": {
+              "expression": "input",
+              "typeArguments": [
+                {
+                  "kind": "TypeReference",
+                  "name": "ICustomSeriesPaneView",
+                  "typeArguments": [
+                    {
+                      "kind": "TypeReference",
+                      "name": "HorzScaleItem"
+                    }
+                  ]
+                }
+              ],
+              "arguments": []
+            },
+            "access": "public"
+          },
+          {
+            "kind": "PropertyDeclaration",
+            "name": "inputs",
+            "initializedValue": {
+              "expression": "inject",
+              "arguments": [
+                "TVChartInputsDirective"
+              ]
+            },
+            "modifiers": {
+              "keywords": [
+                "readonly"
+              ]
+            },
+            "access": "public"
+          }
+        ],
+        "modifiers": {
+          "decorators": [
+            {
+              "type": "Component",
+              "metadata": {
+                "selector": "tv-custom-series-chart",
+                "standalone": true,
+                "imports": [
+                  "TVChartDirective"
+                ],
+                "providers": [
+                  "tvChartProvider"
+                ],
+                "hostDirectives": [
+                  "tvChartInputsDirectiveHostDef",
+                  "tvChartOutputsDirectiveHostDef"
+                ],
+                "templateUrl": "./custom-chart.component.html",
+                "styleUrl": "./custom-chart.component.scss",
+                "changeDetection": {
+                  "name": "OnPush",
+                  "expression": "ChangeDetectionStrategy"
+                }
+              }
+            }
+          ],
+          "keywords": [
+            "export"
+          ]
+        }
       }
     ]
   },
@@ -1292,8 +1226,7 @@
                 {}
               ]
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -1310,8 +1243,7 @@
                 "DEFAULT_HISTOGRAM_SERIES_OPTIONS"
               ]
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -1335,8 +1267,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -1360,8 +1291,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -1443,14 +1373,7 @@
                 "readonly"
               ]
             },
-            "access": "public",
-            "injectedDependency": {
-              "type": "TVChartInputsDirective",
-              "text": "TVChartInputsDirective<HorzScaleItem>",
-              "args": [
-                "HorzScaleItem"
-              ]
-            }
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -1534,8 +1457,7 @@
           "keywords": [
             "export"
           ]
-        },
-        "isUI": true
+        }
       }
     ]
   },
@@ -1631,8 +1553,7 @@
                 "DEFAULT_HISTOGRAM_SERIES_OPTIONS"
               ]
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -1656,8 +1577,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -1705,8 +1625,7 @@
           "keywords": [
             "export"
           ]
-        },
-        "isUI": true
+        }
       }
     ]
   },
@@ -1802,8 +1721,7 @@
                 {}
               ]
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -1827,8 +1745,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -1876,8 +1793,7 @@
           "keywords": [
             "export"
           ]
-        },
-        "isUI": true
+        }
       }
     ]
   },
@@ -1973,8 +1889,7 @@
                 "DEFAULT_BAR_SERIES_OPTIONS"
               ]
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -1998,8 +1913,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -2047,8 +1961,7 @@
           "keywords": [
             "export"
           ]
-        },
-        "isUI": true
+        }
       }
     ]
   },
@@ -2144,8 +2057,7 @@
                 {}
               ]
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -2169,8 +2081,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -2218,8 +2129,7 @@
           "keywords": [
             "export"
           ]
-        },
-        "isUI": true
+        }
       }
     ]
   },
@@ -2315,8 +2225,7 @@
                 {}
               ]
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -2340,8 +2249,7 @@
               ],
               "arguments": []
             },
-            "access": "public",
-            "isInput": true
+            "access": "public"
           },
           {
             "kind": "PropertyDeclaration",
@@ -2389,8 +2297,7 @@
           "keywords": [
             "export"
           ]
-        },
-        "isUI": true
+        }
       }
     ]
   }
