@@ -1,14 +1,14 @@
 {
   "name": "@jamesbenrobb/ts-ast-parser",
-  "version": "0.0.1-beta.6",
+  "version": "0.0.1-beta.7",
   "description": "",
   "main": "public-api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -p tsconfig.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/",
-    "build:prod": "tsc -p tsconfig.prod.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/",
-    "cd:dist": "cd dist/@jamesbenrobb/ts-ast-parser",
-    "publish:beta": "npm version prerelease --preid=beta && npm run build:prod && npm run cd:dist && npm publish --access public --tag beta",
+    "build": "tsc -p tsconfig.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/src",
+    "build:prod": "tsc -p tsconfig.prod.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/src",
+    "cd:dist": "cd dist/@jamesbenrobb/ts-ast-parser/src",
+    "publish:beta": "npm version prerelease --preid=beta && npm run build:prod && cd dist/@jamesbenrobb/ts-ast-parser/src && npm publish --tag beta",
     "publish:major": "npm version major && npm run build:prod && npm run cd:dist && npm publish --tag latest",
     "publish:minor": "npm version minor && npm run build:prod && npm run cd:dist && npm publish --tag latest",
     "publish:patch": "npm version patch && npm run build:prod && npm run cd:dist && npm publish --tag latest"
@@ -18,10 +18,10 @@
   "devDependencies": {
     "@types/node": "^20.11.30",
     "copyfiles": "^2.4.1",
-    "tsx": "^4.15.6",
-    "typescript": "^5.4.3"
+    "tsx": "^4.15.6"
   },
   "dependencies": {
-    "deepmerge": "^4.3.1"
+    "deepmerge": "^4.3.1",
+    "typescript": "^5.4.3"
   }
 }

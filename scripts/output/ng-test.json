@@ -43,36 +43,6 @@
       "resolvedModulePath": "@angular/core"
     },
     {
-      "name": "output",
-      "module": "@angular/core",
-      "resolvedModulePath": "@angular/core"
-    },
-    {
-      "name": "OutputEmitterRef",
-      "module": "@angular/core",
-      "resolvedModulePath": "@angular/core"
-    },
-    {
-      "name": "Input",
-      "module": "@angular/core",
-      "resolvedModulePath": "@angular/core"
-    },
-    {
-      "name": "Output",
-      "module": "@angular/core",
-      "resolvedModulePath": "@angular/core"
-    },
-    {
-      "name": "EventEmitter",
-      "module": "@angular/core",
-      "resolvedModulePath": "@angular/core"
-    },
-    {
-      "name": "Inject",
-      "module": "@angular/core",
-      "resolvedModulePath": "@angular/core"
-    },
-    {
       "name": "ChartOptions",
       "module": "lightweight-charts",
       "resolvedModulePath": "lightweight-charts"
@@ -84,6 +54,11 @@
     },
     {
       "name": "DeepPartial",
+      "module": "lightweight-charts",
+      "resolvedModulePath": "lightweight-charts"
+    },
+    {
+      "name": "ICustomSeriesPaneView",
       "module": "lightweight-charts",
       "resolvedModulePath": "lightweight-charts"
     },
@@ -131,11 +106,6 @@
       "name": "tvChartOutputsDirectiveHostDef",
       "module": "./charts-outputs.directive",
       "resolvedModulePath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/charts-outputs.directive"
-    },
-    {
-      "name": "outputFromObservable",
-      "module": "@angular/core/rxjs-interop",
-      "resolvedModulePath": "@angular/core/rxjs-interop"
     }
   ],
   "exports": [
@@ -283,7 +253,8 @@
             ]
           },
           "access": "public",
-          "isInput": true
+          "isInput": true,
+          "isRequired": true
         },
         {
           "kind": "PropertyDeclaration",
@@ -342,17 +313,29 @@
         },
         {
           "kind": "PropertyDeclaration",
-          "name": "#inputs",
-          "type": {
-            "kind": "TypeReference",
-            "name": "TVChartInputsDirective",
+          "name": "customSeriesView",
+          "initializedValue": {
+            "expression": "input",
             "typeArguments": [
               {
                 "kind": "TypeReference",
-                "name": "HorzScaleItem"
+                "name": "ICustomSeriesPaneView",
+                "typeArguments": [
+                  {
+                    "kind": "TypeReference",
+                    "name": "HorzScaleItem"
+                  }
+                ]
               }
-            ]
+            ],
+            "arguments": []
           },
+          "access": "public",
+          "isInput": true
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "#inputs",
           "initializedValue": {
             "expression": "inject",
             "arguments": [
@@ -364,14 +347,7 @@
               "readonly"
             ]
           },
-          "access": "private",
-          "injectedDependency": {
-            "type": "TVChartInputsDirective",
-            "text": "TVChartInputsDirective<HorzScaleItem>",
-            "args": [
-              "HorzScaleItem"
-            ]
-          }
+          "access": "private"
         },
         {
           "kind": "PropertyDeclaration",
@@ -446,197 +422,8 @@
           }
         },
         {
-          "kind": "PropertyDeclaration",
-          "name": "output",
-          "initializedValue": {
-            "expression": "output",
-            "typeArguments": [
-              "string"
-            ],
-            "arguments": []
-          },
-          "access": "public",
-          "isOutput": true
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "name": "output2",
-          "type": {
-            "kind": "TypeReference",
-            "name": "OutputEmitterRef",
-            "typeArguments": [
-              "number"
-            ]
-          },
-          "initializedValue": {
-            "expression": "output",
-            "typeArguments": [
-              "number"
-            ],
-            "arguments": []
-          },
-          "access": "public",
-          "isOutput": true
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "name": "ouput3",
-          "initializedValue": {
-            "expression": "outputFromObservable",
-            "arguments": [
-              {
-                "expression": "EventEmitter",
-                "typeArguments": [
-                  "string"
-                ],
-                "arguments": []
-              }
-            ]
-          },
-          "access": "public",
-          "isOutput": true
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "name": "testInput",
-          "type": "string",
-          "optional": true,
-          "initializedValue": "test",
-          "modifiers": {
-            "decorators": [
-              {
-                "type": "Input",
-                "metadata": {
-                  "alias": "testInput"
-                }
-              }
-            ]
-          },
-          "access": "public",
-          "isInput": true
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "name": "testInput2",
-          "initializedValue": {
-            "expression": "input",
-            "typeArguments": [
-              "string"
-            ],
-            "arguments": []
-          },
-          "access": "public",
-          "isInput": true
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "name": "testInput3",
-          "initializedValue": {
-            "expression": "input",
-            "typeArguments": [
-              "string"
-            ],
-            "arguments": [
-              "test"
-            ]
-          },
-          "access": "public",
-          "isInput": true
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "name": "testOutput",
-          "initializedValue": {
-            "expression": "EventEmitter",
-            "typeArguments": [
-              "string"
-            ],
-            "arguments": []
-          },
-          "modifiers": {
-            "decorators": [
-              {
-                "type": "Output"
-              }
-            ]
-          },
-          "access": "public",
-          "isOutput": true
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "name": "sjdhfkjds",
-          "type": {
-            "kind": "TypeReference",
-            "name": "TVChart",
-            "typeArguments": [
-              {
-                "kind": "TypeReference",
-                "name": "T"
-              },
-              {
-                "kind": "TypeReference",
-                "name": "HorzScaleItem"
-              }
-            ]
-          },
-          "optional": true,
-          "modifiers": {
-            "decorators": [
-              {
-                "type": "Inject",
-                "metadata": "TVChart"
-              }
-            ]
-          },
-          "access": "public",
-          "injectedDependency": {
-            "type": "TVChart",
-            "text": "TVChart<T, HorzScaleItem>",
-            "args": [
-              "T",
-              "HorzScaleItem"
-            ]
-          }
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "name": "test",
-          "type": "string",
-          "optional": true,
-          "modifiers": {
-            "keywords": [
-              "public",
-              "readonly"
-            ]
-          },
-          "access": "public"
-        },
-        {
-          "kind": "PropertyDeclaration",
-          "name": "test2",
-          "type": "string",
-          "exclamation": true,
-          "modifiers": {
-            "keywords": [
-              "protected",
-              "readonly"
-            ]
-          },
-          "access": "protected"
-        },
-        {
           "kind": "Constructor",
-          "parameters": [
-            {
-              "kind": "Parameter",
-              "name": "element",
-              "type": {
-                "kind": "TypeReference",
-                "name": "ElementRef"
-              }
-            }
-          ]
+          "parameters": []
         },
         {
           "kind": "MethodDeclaration",
@@ -680,14 +467,7 @@
                 "tvChartProviderWithExistenceCheck"
               ],
               "hostDirectives": [
-                {
-                  "directive": "TVChartInputsDirective",
-                  "inputs": [
-                    "id",
-                    "options",
-                    "markers"
-                  ]
-                },
+                "tvChartInputsDirectiveHostDef",
                 "tvChartOutputsDirectiveHostDef"
               ]
             }

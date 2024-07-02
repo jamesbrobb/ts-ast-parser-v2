@@ -7,9 +7,9 @@ import {
     NodeModulesPathHandler,
     parse,
     Parser,
-    RxjsPathHandler
+    RxjsPathHandler,
+    defaultDeclarationDefinitionMap
 } from "../src";
-import {ngDeclarationDefinitionMap} from "../src/ng/declarations";
 
 
 const pathHandlers = [
@@ -39,7 +39,7 @@ function run() {
         process.chdir(dir);
     }
 
-    const parser = new Parser(ngDeclarationDefinitionMap);
+    const parser = new Parser(defaultDeclarationDefinitionMap);
 
     const source = parse(sourcePath, parser, pathHandlers, {walk: true});
 

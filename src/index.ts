@@ -7,5 +7,3 @@ export * from './parsing';
 export * from './paths';
 export * from './syntax-kind';
 export * from './utils';
-
-export * from './ng'; // TODO: temp for testing ng
