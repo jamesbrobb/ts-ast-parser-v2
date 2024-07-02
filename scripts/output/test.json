@@ -55,7 +55,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -76,7 +77,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -100,7 +102,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           }
         ],
         "modifiers": {
@@ -116,7 +119,8 @@
           "keywords": [
             "export"
           ]
-        }
+        },
+        "isUI": true
       },
       {
         "kind": "VariableDeclaration",
@@ -212,7 +216,15 @@
                 "readonly"
               ]
             },
-            "access": "private"
+            "access": "private",
+            "injectedDependency": {
+              "type": "TVChart",
+              "text": "TVChart<T, HorzScaleItem>",
+              "args": [
+                "T",
+                "HorzScaleItem"
+              ]
+            }
           },
           {
             "kind": "PropertyDeclaration",
@@ -234,7 +246,8 @@
                 "readonly"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isOutput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -256,7 +269,8 @@
                 "readonly"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isOutput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -278,7 +292,8 @@
                 "readonly"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isOutput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -300,7 +315,8 @@
                 "readonly"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isOutput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -322,7 +338,8 @@
                 "readonly"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isOutput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -344,7 +361,8 @@
                 "readonly"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isOutput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -366,7 +384,8 @@
                 "readonly"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isOutput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -388,7 +407,8 @@
                 "readonly"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isOutput": true
           }
         ],
         "modifiers": {
@@ -404,7 +424,8 @@
           "keywords": [
             "export"
           ]
-        }
+        },
+        "isUI": true
       },
       {
         "kind": "VariableDeclaration",
@@ -694,7 +715,9 @@
                 }
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true,
+            "isRequired": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -716,7 +739,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -747,7 +771,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -768,7 +793,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -812,7 +838,14 @@
                 "readonly"
               ]
             },
-            "access": "private"
+            "access": "private",
+            "injectedDependency": {
+              "type": "ElementRef",
+              "text": "ElementRef<HTMLElement>",
+              "args": [
+                "HTMLElement"
+              ]
+            }
           },
           {
             "kind": "PropertyDeclaration",
@@ -841,7 +874,15 @@
                 "readonly"
               ]
             },
-            "access": "private"
+            "access": "private",
+            "injectedDependency": {
+              "type": "TVChart",
+              "text": "TVChart<T, HorzScaleItem>",
+              "args": [
+                "T",
+                "HorzScaleItem"
+              ]
+            }
           },
           {
             "kind": "Constructor",
@@ -851,13 +892,15 @@
             "kind": "MethodDeclaration",
             "name": "ngOnInit",
             "parameters": [],
-            "access": "public"
+            "access": "public",
+            "isLifeCycleMethod": true
           },
           {
             "kind": "MethodDeclaration",
             "name": "ngOnDestroy",
             "parameters": [],
-            "access": "public"
+            "access": "public",
+            "isLifeCycleMethod": true
           }
         ],
         "heritageClauses": [
@@ -896,7 +939,8 @@
           "keywords": [
             "export"
           ]
-        }
+        },
+        "isUI": true
       }
     ]
   },
@@ -1008,7 +1052,8 @@
                 {}
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1032,7 +1077,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1053,7 +1099,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1101,7 +1148,8 @@
           "keywords": [
             "export"
           ]
-        }
+        },
+        "isUI": true
       }
     ]
   },
@@ -1226,7 +1274,8 @@
                 {}
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1243,7 +1292,8 @@
                 "DEFAULT_HISTOGRAM_SERIES_OPTIONS"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1267,7 +1317,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1291,7 +1342,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1373,7 +1425,14 @@
                 "readonly"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "injectedDependency": {
+              "type": "TVChartInputsDirective",
+              "text": "TVChartInputsDirective<HorzScaleItem>",
+              "args": [
+                "HorzScaleItem"
+              ]
+            }
           },
           {
             "kind": "PropertyDeclaration",
@@ -1457,7 +1516,8 @@
           "keywords": [
             "export"
           ]
-        }
+        },
+        "isUI": true
       }
     ]
   },
@@ -1553,7 +1613,8 @@
                 "DEFAULT_HISTOGRAM_SERIES_OPTIONS"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1577,7 +1638,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1625,7 +1687,8 @@
           "keywords": [
             "export"
           ]
-        }
+        },
+        "isUI": true
       }
     ]
   },
@@ -1721,7 +1784,8 @@
                 {}
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1745,7 +1809,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1793,7 +1858,8 @@
           "keywords": [
             "export"
           ]
-        }
+        },
+        "isUI": true
       }
     ]
   },
@@ -1889,7 +1955,8 @@
                 "DEFAULT_BAR_SERIES_OPTIONS"
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1913,7 +1980,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -1961,7 +2029,8 @@
           "keywords": [
             "export"
           ]
-        }
+        },
+        "isUI": true
       }
     ]
   },
@@ -2057,7 +2126,8 @@
                 {}
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -2081,7 +2151,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -2129,7 +2200,8 @@
           "keywords": [
             "export"
           ]
-        }
+        },
+        "isUI": true
       }
     ]
   },
@@ -2225,7 +2297,8 @@
                 {}
               ]
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -2249,7 +2322,8 @@
               ],
               "arguments": []
             },
-            "access": "public"
+            "access": "public",
+            "isInput": true
           },
           {
             "kind": "PropertyDeclaration",
@@ -2297,7 +2371,8 @@
           "keywords": [
             "export"
           ]
-        }
+        },
+        "isUI": true
       }
     ]
   }
