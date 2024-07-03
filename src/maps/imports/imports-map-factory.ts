@@ -124,6 +124,7 @@ function parseImportToImportMapElement (
         name,
         module: imprt.moduleSpecifier,
         resolvedModulePath: resolveModulePath(
+          name,
           imprt.moduleSpecifier,
           sourceFile,
           options?.dependencyMap
@@ -144,14 +145,25 @@ function parseImportToImportMapElement (
 }
 
 
-function resolveModulePath(modulePath: string, sourceFile: ts.SourceFile, dependencyMap?: DependencyMap): string {
+function resolveModulePath(
+  name: string,
+  modulePath: string,
+  sourceFile: ts.SourceFile,
+  dependencyMap?: DependencyMap
+): string {
 
   if(modulePath.startsWith('.')) {
     modulePath = path.resolve(path.dirname(sourceFile.fileName), modulePath);
-  }
 
-  if(dependencyMap) {
-    modulePath = dependencyMap.resolvePath(modulePath)
+    if(dependencyMap) {
+      modulePath = dependencyMap.resolvePath(modulePath);
+
+      const dep = dependencyMap.get(modulePath, name);
+
+      if(dep) {
+        modulePath = dep.resolvedPath;
+      }
+    }
   }
 
   return modulePath;
