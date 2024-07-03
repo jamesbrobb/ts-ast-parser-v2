@@ -1,8 +1,15 @@
 import * as ts from "typescript";
-import {getModifierKeywords, getModifiers, ModifierKeywords, Modifiers, setAccess} from "./modifiers";
+import {
+  getDecoratorsAsString, getKeywordsAsString,
+  getModifierKeywords,
+  getModifiers,
+  ModifierKeywords,
+  Modifiers,
+  setAccess
+} from "./modifiers";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
-import {TypeReferenceNode} from "./type";
+import {TypeNode} from "./type";
 import {Expression} from "./expressions";
 import {AccessTypes} from "./common";
 
@@ -13,7 +20,7 @@ export type PropertyDeclaration = {
   access: AccessTypes
   optional: boolean
   exclamation: boolean
-  type?: TypeReferenceNode
+  type?: TypeNode
   initializedValue?: Expression | string
   modifiers?: Modifiers
 } & DeclarationKind<ts.PropertyDeclaration>
@@ -36,7 +43,8 @@ export const propertyDeclarationDefinition: DeclarationDefinition<PropertyDeclar
   },
   postProcess: [
     setAccess
-  ]
+  ],
+  signatureCreationFn: createPropertyDeclarationSignature
 }
 
 
@@ -52,9 +60,6 @@ export const propertySignatureDefinition: DeclarationDefinition<PropertySignatur
   props: ['name', 'type', 'questionToken', 'modifiers'],
   propHandlers: {
     questionToken: { propName: 'optional' },
-    /*type: {
-      parseFn: getType
-    },*/
     modifiers: {
       propName: 'keywords',
       parseFn: getModifierKeywords
@@ -76,10 +81,10 @@ export function isPropertySignature(dec: DeclarationKind<any>): dec is PropertyS
 }
 
 
-/*function getSignature(name: string, modifiers?: Modifiers, optional?: boolean, exclamation?: boolean, type?: string, initializedValue?: string): string {
+function createPropertyDeclarationSignature(dec: PropertyDeclaration): string {
 
-  const decorators = getDecoratorsAsString(modifiers),
-    keywords = getKeywordsAsString(modifiers);
+  const decorators = getDecoratorsAsString(dec.modifiers),
+    keywords = getKeywordsAsString(dec.modifiers);
 
-  return `${decorators}${keywords}${name}${optional ? '?' : ''}${exclamation ? '!' : ''}${type ? ': ' + type : ''}${initializedValue ? ' = ' + initializedValue : ''}`;
-}*/
+  return `${decorators}${keywords}${dec.name}${dec.optional ? '?' : ''}${dec.exclamation ? '!' : ''}${dec.type ? ': ' + dec.type.signature : ''}${dec.initializedValue ? ' = ' + dec.initializedValue : ''}`;
+}

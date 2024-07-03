@@ -1,23 +1,24 @@
 import * as ts from "typescript";
-import {ParameterDeclaration} from "./parameter";
-import {getModifiers, Modifiers, setAccess} from "./modifiers";
-import {TypeParameterDeclaration} from "./type";
+import {getParametersAsString, ParameterDeclaration} from "./parameter";
+import {getDecoratorsAsString, getKeywordsAsString, getModifiers, Modifiers, setAccess} from "./modifiers";
+import {TypeNode, TypeParameterDeclaration} from "./type";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
 import {AccessTypes} from "./common";
+import {Parser} from "../declaration-parser";
+
 
 
 export type MethodDeclaration = {
   name: string
   access: AccessTypes
-  returnType?: string
+  returnType?: TypeNode | string
   typeParameters?: TypeParameterDeclaration[]
   parameters: ParameterDeclaration[]
   modifiers?: Modifiers,
   asteriskToken?: boolean
   questionToken?: boolean
   exclamationToken?: boolean
-  signature: string
 } & DeclarationKind<ts.MethodDeclaration>;
 
 
@@ -40,8 +41,9 @@ export const methodDeclarationDefinition: DeclarationDefinition<MethodDeclaratio
   },
   postProcess: [
     setAccess,
-    //createMethodSignature,
-  ]
+    setMissingReturnType
+  ],
+  signatureCreationFn: createMethodSignature
 }
 
 
@@ -54,13 +56,43 @@ export function isPublicMethodDeclaration(dec: MethodDeclaration): dec is Method
 }
 
 
-/*export function createMethodSignature(dec: MethodDeclaration): string {
 
-  // name: string, parameters: Parameter[], modifiers?: Modifiers, type: string = 'void'
+export function setMissingReturnType(
+  dec: MethodDeclaration,
+  node: ts.MethodDeclaration,
+  sourceFile: ts.SourceFile,
+  parser: Parser<any, any>
+): void {
 
-  const params = getParametersAsString(parameters),
-    decorators = getDecoratorsAsString(modifiers),
-    keywords = getKeywordsAsString(modifiers);
+  if(dec.returnType) {
+    return;
+  }
 
-  return `${decorators}${keywords}${name}(${params}): ${type === 'void' && keywords.includes('async') ? 'Promise<void>' : type}`;
-}*/
+  const returnStatement = node.body?.statements.filter(statement => statement.kind === ts.SyntaxKind.ReturnStatement)
+    .map((statement: ts.ReturnStatement) => {
+      return statement.expression?.getText(sourceFile);
+    });
+
+  //TODO - determine return type from return statement?
+
+  dec.returnType = returnStatement && returnStatement.length > 0 ? '' : 'void';
+}
+
+export function createMethodSignature(dec: MethodDeclaration): string {
+
+  const params = getParametersAsString(dec.parameters),
+    decorators = getDecoratorsAsString(dec.modifiers),
+    keywords = getKeywordsAsString(dec.modifiers),
+    returnType = getReturnType(dec, keywords);
+
+  return `${decorators}${keywords}${dec.name}(${params})${returnType}`;
+}
+
+function getReturnType(dec: MethodDeclaration, keywords: string): string {
+
+  if(dec.returnType && typeof dec.returnType !== 'string') {
+    return `: ${dec.returnType.signature}`;
+  }
+
+  return !dec.returnType ? '' : `: ${dec.returnType === 'void' && keywords.includes('async') ? 'Promise<void>' : dec.returnType}`
+}

@@ -11,7 +11,7 @@ export type DecoratorMetadata = {
 export type DecoratorMetadataTypes = DecoratorMetadata | string | (DecoratorMetadata | string)[]
 
 export type Decorator = {
-  type: string,
+  type: string
   metadata?: DecoratorMetadataTypes
 } & DeclarationKind<ts.Decorator>
 
@@ -26,9 +26,7 @@ export type GetDecoratorMetadata<T extends {}> = {
 
 export type DecoratorDef<T extends string, M extends DecoratorMetadataTypes> = {
   type: T,
-  metadata?: M,
-  raw: string,
-  signature: string
+  metadata?: M
 }
 
 
@@ -53,8 +51,7 @@ export function getDecorator<T extends Decorator>(node: ts.Decorator, sourceFile
   const decorator: Decorator = {
     type,
     metadata,
-    //signature: getDecoratorSignature(type, metadata),
-    //raw: node.getText(sourceFile)
+    signature: getDecoratorSignature(type, metadata),
   }
 
   return decorator as T;
@@ -87,7 +84,7 @@ function getDecoratorMetadata<T extends Decorator['metadata']>(node: ts.CallExpr
 }
 
 
-/*function getDecoratorSignature(type: string, metaData: Decorator['metadata']): string {
+function getDecoratorSignature(type: string, metaData: Decorator['metadata']): string {
 
   switch(typeof metaData) {
     case 'string':
@@ -124,4 +121,4 @@ function convertMetadataToString(metaData: {}): string {
 
       return `${accumulator}${currentIndex === 0 || array[currentIndex - 1].length === 1 ? '{' : ''}${currentValue[0]}: ${currentValue[1]}${currentIndex === array.length - 1 ? '}' : ', '}`;
     }, '')
-}*/
+}

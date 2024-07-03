@@ -51,8 +51,8 @@ export type _DeclarationDefinitionInner<N extends ts.Node, R extends Declaration
   propHandlers?: {
     [K in Exclude<keyof N, keyof ts.Node>]?: PropHandlerEntry<N, K, R>
   },
-  hasModifiers?: boolean,
-  postProcess?: DeclarationPostProcessFn<N, R>[]
+  postProcess?: DeclarationPostProcessFn<N, R>[],
+  signatureCreationFn?: (dec: R) => string
 } & DeclarationKind<N>
 
 export type DeclarationDefinition<

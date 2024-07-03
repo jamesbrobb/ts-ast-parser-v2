@@ -148,7 +148,7 @@ export function isDecoratedWith(type: string, modifiers?: Modifiers): boolean {
   return modifiers.decorators.some(decorator => decorator.type.toLowerCase() === type.toLowerCase());
 }
 
-/*export function getDecoratorsAsString(modifiers?: Modifiers, separator: string = '\n'): string {
+export function getDecoratorsAsString(modifiers?: Modifiers, separator: string = '\n'): string {
 
     if(!isDecorated(modifiers)) {
       return '';
@@ -158,7 +158,7 @@ export function isDecoratedWith(type: string, modifiers?: Modifiers): boolean {
         .map(decorator => decorator.signature)
         .join(separator)
       }${separator}`;
-}*/
+}
 
 
 export function hasKeywords(modifiers?: Modifiers): modifiers is Modifiers & {keywords: ModifierKeywords[]} {
