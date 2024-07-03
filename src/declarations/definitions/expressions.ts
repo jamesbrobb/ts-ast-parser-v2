@@ -2,6 +2,7 @@ import * as ts from "typescript";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
 import {TypeNode} from "./type";
+import {convertExpressionToString} from "../../utils";
 
 
 
@@ -20,7 +21,7 @@ export const callExpressionDefinition: DeclarationDefinition<CallExpression> = {
   removeKind: true,
   props: ['expression', 'questionDotToken', 'typeArguments', 'arguments'],
   signatureCreationFn: (dec: CallExpression) => {
-    const args = dec.arguments.map(arg => arg.signature).join(', '),
+    const args = dec.arguments.map(arg => convertExpressionToString(arg)).join(', '),
       typeArgs = dec.typeArguments && dec.typeArguments.length ? `<${dec.typeArguments.map(arg => arg.signature).join(', ')}>` : '';
 
     return `${typeof dec.expression === 'string' ? dec.expression : dec.expression.signature}${typeArgs}(${args})`;
@@ -30,7 +31,7 @@ export const callExpressionDefinition: DeclarationDefinition<CallExpression> = {
 
 export type PropertyAccessExpression = {
   name: string
-  expression: string
+  expression: string | Expression
   optional?: boolean
 } & DeclarationKind<ts.PropertyAccessExpression>
 
@@ -41,7 +42,10 @@ export const propertyAccessExpressionDefinition: DeclarationDefinition<PropertyA
     questionDotToken: { propName: 'optional' }
   },
   signatureCreationFn: (dec: PropertyAccessExpression) => {
-    return `${dec.expression}.${dec.name}`;
+
+    const expression = typeof dec.expression === 'string' ? dec.expression : dec.expression.signature;
+
+    return `${expression || ''}.${dec.name}`;
   }
 }
 

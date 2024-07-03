@@ -39,7 +39,7 @@ function run() {
         process.chdir(dir);
     }
 
-    const parser = new Parser(defaultDeclarationDefinitionMap);
+    const parser = new Parser(defaultDeclarationDefinitionMap, true);
 
     const source = parse(sourcePath, parser, pathHandlers, {walk: false});
 

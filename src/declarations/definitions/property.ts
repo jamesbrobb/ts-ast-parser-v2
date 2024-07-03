@@ -86,5 +86,15 @@ function createPropertyDeclarationSignature(dec: PropertyDeclaration): string {
   const decorators = getDecoratorsAsString(dec.modifiers),
     keywords = getKeywordsAsString(dec.modifiers);
 
-  return `${decorators}${keywords}${dec.name}${dec.optional ? '?' : ''}${dec.exclamation ? '!' : ''}${dec.type ? ': ' + dec.type.signature : ''}${dec.initializedValue ? ' = ' + dec.initializedValue : ''}`;
+  let initializedValue = '';
+
+  if(dec.initializedValue) {
+    if(typeof dec.initializedValue === 'string') {
+      initializedValue = dec.initializedValue;
+    } else {
+      initializedValue = dec.initializedValue.signature || '';
+    }
+  }
+
+  return `${decorators}${keywords}${dec.name}${dec.optional ? '?' : ''}${dec.exclamation ? '!' : ''}${dec.type ? ': ' + dec.type.signature : ''}${initializedValue ? ' = ' + initializedValue : ''}`;
 }

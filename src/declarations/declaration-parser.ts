@@ -115,6 +115,10 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
       })
     }
 
+    if(def.signatureCreationFn) {
+      res.signature = def.signatureCreationFn(res, node, sourceFile);
+    }
+
     return res;
   }
 }
