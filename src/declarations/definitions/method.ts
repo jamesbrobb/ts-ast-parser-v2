@@ -10,13 +10,14 @@ import {AccessTypes} from "./common";
 export type MethodDeclaration = {
   name: string
   access: AccessTypes
-  type?: string
+  returnType?: string
   typeParameters?: TypeParameterDeclaration[]
   parameters: ParameterDeclaration[]
   modifiers?: Modifiers,
   asteriskToken?: boolean
   questionToken?: boolean
   exclamationToken?: boolean
+  signature: string
 } & DeclarationKind<ts.MethodDeclaration>;
 
 
@@ -32,10 +33,14 @@ export const methodDeclarationDefinition: DeclarationDefinition<MethodDeclaratio
     'exclamationToken',
   ],
   propHandlers: {
-    modifiers: getModifiers
+    modifiers: getModifiers,
+    type: {
+      propName: 'returnType'
+    }
   },
   postProcess: [
-    setAccess
+    setAccess,
+    //createMethodSignature,
   ]
 }
 
@@ -49,7 +54,9 @@ export function isPublicMethodDeclaration(dec: MethodDeclaration): dec is Method
 }
 
 
-/*function getMethodSignature(name: string, parameters: Parameter[], modifiers?: Modifiers, type: string = 'void'): string {
+/*export function createMethodSignature(dec: MethodDeclaration): string {
+
+  // name: string, parameters: Parameter[], modifiers?: Modifiers, type: string = 'void'
 
   const params = getParametersAsString(parameters),
     decorators = getDecoratorsAsString(modifiers),
