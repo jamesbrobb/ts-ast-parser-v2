@@ -11,6 +11,7 @@ import {HeritageClause} from "./heritage";
 import {getModifiers, Modifiers} from "./modifiers";
 
 
+
 export type ClassElement = PropertyDeclaration | MethodDeclaration | GetAccessorDeclaration | SetAccessorDeclaration | ConstructorDeclaration
 
 
@@ -32,13 +33,56 @@ export const classDeclarationDefinition: DeclarationDefinition<ClassDeclaration>
     modifiers: getModifiers
   },
   postProcess: [
-    (dec: ClassDeclaration) => {
-      dec.properties = dec.members.filter(isPublicPropertyDeclaration)
-      dec.methods = dec.members.filter(isPublicMethodDeclaration)
-      dec.accessors = [
-        ...dec.members.filter(isPublicSetAccessorDeclaration),
-        ...dec.members.filter(isPublicGetAccessorDeclaration)
-      ]
-    }
+    addProperties,
+    addMethods,
+    addAccessors,
+    filterMembers
   ]
+}
+
+
+export function isClassDeclaration(dec: DeclarationKind<any>): dec is ClassDeclaration {
+  return dec.kind === ts.SyntaxKind[ts.SyntaxKind.ClassDeclaration];
+}
+
+
+function addProperties(dec: ClassDeclaration): ClassDeclaration {
+  const properties = dec.members.filter(isPublicPropertyDeclaration);
+
+  if(properties && properties.length > 0) {
+    dec.properties = properties
+  }
+
+  return dec;
+}
+
+function addMethods(dec: ClassDeclaration): ClassDeclaration {
+  const methods = dec.members.filter(isPublicMethodDeclaration);
+
+  if(methods && methods.length > 0) {
+    dec.methods = methods
+  }
+
+  return dec;
+}
+
+function addAccessors(dec: ClassDeclaration): ClassDeclaration {
+  const accessors = [
+    ...dec.members.filter(isPublicSetAccessorDeclaration),
+    ...dec.members.filter(isPublicGetAccessorDeclaration)
+  ]
+
+  if(accessors && accessors.length > 0) {
+    dec.accessors = accessors
+  }
+
+  return dec;
+}
+
+function filterMembers(dec: ClassDeclaration): ClassDeclaration {
+  dec.members = dec.members.filter(arg => !dec.properties?.includes(arg as any))
+    .filter(arg => !dec.methods?.includes(arg as any))
+    .filter(arg => !dec.accessors?.includes(arg as any));
+
+  return dec;
 }
