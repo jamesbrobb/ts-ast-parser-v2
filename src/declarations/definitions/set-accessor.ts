@@ -38,3 +38,12 @@ export const setAccessorDeclarationDefinition: DeclarationDefinition<SetAccessor
     setAccess
   ]
 }
+
+
+export function isSetAccessorDeclaration(dec: DeclarationKind<any>): dec is SetAccessorDeclaration {
+  return dec.kind === ts.SyntaxKind[ts.SyntaxKind.SetAccessor];
+}
+
+export function isPublicSetAccessorDeclaration(dec: SetAccessorDeclaration): dec is SetAccessorDeclaration & { access: 'public' } {
+  return isSetAccessorDeclaration(dec) && dec.access === 'public';
+}

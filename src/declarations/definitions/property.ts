@@ -63,6 +63,19 @@ export const propertySignatureDefinition: DeclarationDefinition<PropertySignatur
 }
 
 
+export function isPropertyDeclaration(dec: DeclarationKind<any>): dec is PropertyDeclaration {
+  return dec.kind === ts.SyntaxKind[ts.SyntaxKind.PropertyDeclaration];
+}
+
+export function isPublicPropertyDeclaration(dec: DeclarationKind<any>): dec is PropertyDeclaration & {access: 'public'} {
+  return isPropertyDeclaration(dec) && dec.access === 'public';
+}
+
+export function isPropertySignature(dec: DeclarationKind<any>): dec is PropertySignature {
+  return dec.kind === ts.SyntaxKind[ts.SyntaxKind.PropertySignature];
+}
+
+
 /*function getSignature(name: string, modifiers?: Modifiers, optional?: boolean, exclamation?: boolean, type?: string, initializedValue?: string): string {
 
   const decorators = getDecoratorsAsString(modifiers),

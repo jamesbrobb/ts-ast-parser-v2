@@ -40,11 +40,13 @@ export const methodDeclarationDefinition: DeclarationDefinition<MethodDeclaratio
 }
 
 
-/*export function getPublicMethodSignatures(methods: MethodDeclaration[]): string[] {
-  return methods
-    .filter(mthd => isPublic(mthd.name, mthd))
-    .map(mthd => mthd.signature);
-}*/
+export function isMethodDeclaration(dec: DeclarationKind<any>): dec is MethodDeclaration {
+  return dec.kind === ts.SyntaxKind[ts.SyntaxKind.MethodDeclaration];
+}
+
+export function isPublicMethodDeclaration(dec: MethodDeclaration): dec is MethodDeclaration & { access: 'public' } {
+  return isMethodDeclaration(dec) && dec.access === 'public';
+}
 
 
 /*function getMethodSignature(name: string, parameters: Parameter[], modifiers?: Modifiers, type: string = 'void'): string {
