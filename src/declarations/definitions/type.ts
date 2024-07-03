@@ -2,9 +2,31 @@ import * as ts from "typescript";
 import {getModifierKeywords, Modifiers} from "./modifiers";
 import {PropertySignature} from "./property";
 import {DeclarationKind} from "../declaration-kind.types";
-import {DeclarationDefinition} from "../declaration-definition.types";
+import {DeclarationDefinition, DeclarationPostProcessFn} from "../declaration-definition.types";
 import {Parser} from "../declaration-parser";
+import {getImportsMapElementByName, Maps} from "../../maps";
 
+
+const assignedResolvedPath: DeclarationPostProcessFn<ts.TypeReferenceNode, TypeReferenceNode> = (
+  dec: TypeReferenceNode,
+  node: ts.TypeReferenceNode,
+  sourceFile: ts.SourceFile,
+  parser: Parser<any, any>,
+  maps? : Maps
+) => {
+  if(!maps || !maps.imports) {
+    return;
+  }
+
+  const mapElement = getImportsMapElementByName(maps.imports, dec.name),
+    resolvedPath = mapElement ? mapElement.convertedModulePath || mapElement.resolvedModulePath : null;
+
+  if(!resolvedPath) {
+    return;
+  }
+
+  dec.resolvedPath = resolvedPath;
+}
 
 export type TypeNode = TypeReferenceNode | TypeLiteral | IndexedAccessTypeNode | ArrayTypeNode | UnionTypeNode | LiteralTypeNode | FunctionTypeNode | ExpressionWithTypeArguments | TypeParameterDeclaration | TypeAliasDeclaration;
 
@@ -31,8 +53,8 @@ export const typeParameterDeclarationDefinition: DeclarationDefinition<TypeParam
 
 export type TypeReferenceNode = {
   name: string
-  // typeArguments?: NodeArray<TypeNode> // TODO - check this out
-  raw: string
+  typeArguments?: any[] // TODO - check this out
+  resolvedPath?: string
 } & DeclarationKind<ts.TypeReferenceNode>
 
 export const typeReferenceDefinition: DeclarationDefinition<TypeReferenceNode> = {
@@ -41,9 +63,11 @@ export const typeReferenceDefinition: DeclarationDefinition<TypeReferenceNode> =
     typeName: {
       propName: 'name'
     }
-  }
+  },
+  postProcess: [
+    assignedResolvedPath
+  ]
 }
-
 
 export type ExpressionWithTypeArguments = {
   expression: string

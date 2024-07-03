@@ -8,3 +8,11 @@ export type ImportsMapElement<O extends AdditionalMapProps = {}> = {
 } & O
 
 export type ImportsMap<O extends AdditionalMapProps = {}> = ImportsMapElement<O>[]
+
+
+export function getImportsMapElementByName<O extends AdditionalMapProps = {}>(
+  importsMap: ImportsMap<O>,
+  name: string
+): ImportsMapElement<O> | undefined {
+  return importsMap.find(element => element.name === name);
+}

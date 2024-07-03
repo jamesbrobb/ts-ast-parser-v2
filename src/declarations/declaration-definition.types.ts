@@ -8,18 +8,19 @@ import {
 } from "./declaration-kind.types";
 import {SyntaxKindToTSNodeDeclarationMap} from "../syntax-kind";
 import {Parser} from "./declaration-parser";
+import {Maps} from "../maps";
 
 
 export type NodePropValueParseFunc<
   N extends ts.Node,
   K extends keyof N
-> = (node: N[K] | undefined, sourceFile: ts.SourceFile, parser: any) => any
+> = (node: N[K] | undefined, sourceFile: ts.SourceFile, parser: Parser<any, any>, maps?: Maps) => any
 
 export type PropHandlerPostProcessFn<
   N extends ts.Node,
   K extends keyof N,
   D extends DeclarationKind<N>
-> = (node: N, prop: N[K], dec: D, sourceFile: ts.SourceFile, parser: Parser<any, any>) => any
+> = (node: N, prop: N[K], dec: D, sourceFile: ts.SourceFile, parser: Parser<any, any>, maps?: Maps) => any
 
 export type PropHandlerDefinition<
   N extends ts.Node,
@@ -41,7 +42,7 @@ export type PropHandlerEntry<
 export type DeclarationPostProcessFn<
   N extends ts.Node,
   D extends DeclarationKind<N>
-> = (dec: D, node: N, sourceFile: ts.SourceFile, parser: Parser<any, any>) => void
+> = (dec: D, node: N, sourceFile: ts.SourceFile, parser: Parser<any, any>, maps?: Maps) => void
 
 export type _DeclarationDefinitionInner<N extends ts.Node, R extends DeclarationKind<N>> = {
   __resultType?: R,

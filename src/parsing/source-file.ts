@@ -4,7 +4,7 @@ import * as fs from "node:fs";
 
 import {SyntaxKindToTSNodeDeclarationMap} from "../syntax-kind";
 import {DeclarationKindMap, Parser, ParseReturnType, SourceFile} from "../declarations";
-import {AdditionalMapProps, createImportsMap, ImportsMapFactoryOptions} from "../maps";
+import {AdditionalMapProps, createImportsMap, createLocalMap, ImportsMapFactoryOptions, LocalMap} from "../maps";
 import {getExportedDeclarationsFromSource, getSourceFile} from "../utils";
 
 
@@ -27,9 +27,14 @@ export function parseSourceFile<
 ): SourceFile<O> {
 
   const sourceFile: ts.SourceFile = typeof source === 'string' ? getSourceFile(program, source) : source,
+    imports = createImportsMap(sourceFile, parser, options),
+    local: LocalMap = createLocalMap(program, sourceFile, options.debug),
     exports: ParseReturnType<any>[] = getExportedDeclarationsFromSource(program, sourceFile)
-      .map(value => parser.parse(value, sourceFile)),
-    imports = createImportsMap(sourceFile, parser, options);
+      .map(value => parser.parse(value, sourceFile, undefined, {
+        project: options.dependencyMap,
+        imports,
+        local
+      }));
 
   return {
     fileName: path.basename(sourceFile.fileName),
