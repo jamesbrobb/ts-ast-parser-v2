@@ -41,7 +41,7 @@ function run() {
 
     const parser = new Parser(defaultDeclarationDefinitionMap, true);
 
-    const source = parse(sourcePath, parser, pathHandlers, {walk: false});
+    const source = parse(sourcePath, parser, pathHandlers, {walk: true});
 
     fs.writeFileSync(
       path.join('/Users/James/WebstormProjects/ts-ast-parser-v2/scripts/output', 'test.json'),

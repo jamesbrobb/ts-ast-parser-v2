@@ -19,7 +19,7 @@ export type ClassDeclaration = {
   name: string
   typeParameters?: TypeParameterDeclaration[]
   heritage?: HeritageClause[]
-  members: ClassElement[]
+  members?: ClassElement[]
   modifiers?: Modifiers
   properties?: PropertyDeclaration[]
   accessors?: (GetAccessorDeclaration | SetAccessorDeclaration)[]
@@ -47,7 +47,7 @@ export function isClassDeclaration(dec: DeclarationKind<any>): dec is ClassDecla
 
 
 function addProperties(dec: ClassDeclaration): ClassDeclaration {
-  const properties = dec.members.filter(isPublicPropertyDeclaration);
+  const properties = dec.members?.filter(isPublicPropertyDeclaration);
 
   if(properties && properties.length > 0) {
     dec.properties = properties
@@ -57,7 +57,7 @@ function addProperties(dec: ClassDeclaration): ClassDeclaration {
 }
 
 function addMethods(dec: ClassDeclaration): ClassDeclaration {
-  const methods = dec.members.filter(isPublicMethodDeclaration);
+  const methods = dec.members?.filter(isPublicMethodDeclaration);
 
   if(methods && methods.length > 0) {
     dec.methods = methods
@@ -68,8 +68,8 @@ function addMethods(dec: ClassDeclaration): ClassDeclaration {
 
 function addAccessors(dec: ClassDeclaration): ClassDeclaration {
   const accessors = [
-    ...dec.members.filter(isPublicSetAccessorDeclaration),
-    ...dec.members.filter(isPublicGetAccessorDeclaration)
+    ...dec.members?.filter(isPublicSetAccessorDeclaration) || [],
+    ...dec.members?.filter(isPublicGetAccessorDeclaration) || []
   ]
 
   if(accessors && accessors.length > 0) {
@@ -80,9 +80,13 @@ function addAccessors(dec: ClassDeclaration): ClassDeclaration {
 }
 
 function filterMembers(dec: ClassDeclaration): ClassDeclaration {
-  dec.members = dec.members.filter(arg => !dec.properties?.includes(arg as any))
+  dec.members = dec.members?.filter(arg => !dec.properties?.includes(arg as any))
     .filter(arg => !dec.methods?.includes(arg as any))
     .filter(arg => !dec.accessors?.includes(arg as any));
+
+  if (!dec.members || dec.members.length === 0) {
+    delete dec.members;
+  }
 
   return dec;
 }
