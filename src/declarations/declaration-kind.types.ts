@@ -8,6 +8,7 @@ export type DeclarationKind<N extends ts.Node> = {
   __nodeType?: N
   kind?: SyntaxKindToSyntaxKindValueMap[N['kind']]
   signature?: string
+  raw?: string
 }
 
 export type GetDeclarationTSNodeType<T extends DeclarationKind<any>> = T extends DeclarationKind<infer N> ? N : never

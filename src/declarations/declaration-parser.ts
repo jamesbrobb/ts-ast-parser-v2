@@ -17,25 +17,57 @@ import {Maps} from "../maps";
   (node: N[], sourceFile: ts.SourceFile, debug?: boolean): R[]
 }*/
 
+
+export function addRawText<TThis extends Parser<any, any>, Fn extends (...args: any[]) => any>(
+  originalMethod: Fn,
+  context: ClassMethodDecoratorContext<ThisParameterType<Fn>, Fn>
+) {
+  if (context.kind === "method") {
+    return function(this: TThis, ...args: any[]) {
+      const res: ParseReturnType = originalMethod.apply(this, args),
+        node = args[0],
+        source = args[1],
+        options = args[4];
+
+      if(!options?.debug) {
+        return res;
+      }
+
+      if(isNode(node)) {
+        if (res && typeof res !== 'string' && typeof res !== 'boolean' && 'kind' in res && !res.raw) {
+          res.raw = node.getText(source);
+        }
+      }
+
+      return res;
+    }
+  }
+  return originalMethod;
+}
+
+export type ParserOptions = { // TODO - add user extendable options
+  debug?: boolean
+}
+
 export type ParseReturnType<D = undefined> = Record<PropertyKey, any> | UnregisteredSyntaxKindNode | D | undefined
 
 
 export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends DeclarationKindMap<T>> {
 
   readonly #map: DeclarationDefinitionMap<T, M>;
-  readonly #debug: boolean;
 
-  constructor(map: DeclarationDefinitionMap<T, M>, debug: boolean = false) {
+  constructor(map: DeclarationDefinitionMap<T, M>) {
     this.#map = map;
-    this.#debug = debug;
   }
 
-  readonly parse = <N extends ts.Node, D>(
+  @addRawText
+  parse<N extends ts.Node, D>(
     node: N | ts.NodeArray<N> | undefined,
     sourceFile: ts.SourceFile,
     defaultValue?: D,
-    maps?: Maps
-  ): ParseReturnType<D> => {
+    maps?: Maps,
+    options?: ParserOptions
+  ): ParseReturnType<D> {
 
     // get DecType by T[N['kind']]
     // get return type by M[DecType]
@@ -44,7 +76,7 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
     }
 
     if(isNodeArray(node)) {
-      return node.map(value => this.parse(value, sourceFile, defaultValue, maps));
+      return node.map(value => this.parse(value, sourceFile, defaultValue, maps, options));
     }
 
     // TODO - limit this to only the keys in M
@@ -53,25 +85,26 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
 
     if(!def) {
       // TODO - make unregisteredSyntaxKindParser a dependency
-      return unregisteredSyntaxKindParser(node, sourceFile, this.#debug);
+      return unregisteredSyntaxKindParser(node, sourceFile, !!options?.debug);
     }
 
     if(def instanceof Function) {
       return def(node, sourceFile, this, maps);
     }
 
-    return this.#processDef(def, node, sourceFile, maps);
+    return this.#processDef(def, node, sourceFile, maps, options);
   }
 
   #processDef<D extends DeclarationDefinition<any>, N extends ts.Node>(
     def: D,
     node: N,
     sourceFile: ts.SourceFile,
-    maps?: Maps
+    maps?: Maps,
+    options?: ParserOptions
   ): D['__resultType'] {
     const res: D['__resultType'] = {}
 
-    if(this.#debug || !def.removeKind) {
+    if(!!options?.debug || !def.removeKind) {
       res.kind = ts.SyntaxKind[node.kind];
     }
 
@@ -85,7 +118,7 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
       }
 
       if(!propHandler) {
-        res[prop] = this.parse(cNode, sourceFile, undefined, maps);
+        res[prop] = this.parse(cNode, sourceFile, undefined, maps, options);
         return;
       }
 
@@ -99,7 +132,7 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
       if(propHandler.parseFn) {
         res[propName] = propHandler.parseFn(cNode, sourceFile, this, maps);
       } else {
-        res[propName] = this.parse(cNode, sourceFile, propHandler.defaultValue, maps);
+        res[propName] = this.parse(cNode, sourceFile, propHandler.defaultValue, maps, options);
       }
 
       if(propHandler.postProcess) {

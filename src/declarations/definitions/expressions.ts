@@ -12,7 +12,7 @@ export type Expression = CallExpression | PropertyAccessExpression | NewExpressi
 export type CallExpression = {
   expression: Expression | string
   questionDotToken?: string
-  typeArguments?: TypeNode[]
+  typeArguments?: (TypeNode | string)[]
   arguments: Expression[]
 } & DeclarationKind<ts.CallExpression>
 
@@ -22,7 +22,7 @@ export const callExpressionDefinition: DeclarationDefinition<CallExpression> = {
   props: ['expression', 'questionDotToken', 'typeArguments', 'arguments'],
   signatureCreationFn: (dec: CallExpression) => {
     const args = dec.arguments.map(arg => convertExpressionToString(arg)).join(', '),
-      typeArgs = dec.typeArguments && dec.typeArguments.length ? `<${dec.typeArguments.map(arg => arg.signature).join(', ')}>` : '';
+      typeArgs = dec.typeArguments && dec.typeArguments.length ? `<${dec.typeArguments.map(arg => typeof arg === 'string' ? arg : arg.signature).join(', ')}>` : '';
 
     return `${typeof dec.expression === 'string' ? dec.expression : dec.expression.signature}${typeArgs}(${args})`;
   }

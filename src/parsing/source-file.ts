@@ -34,7 +34,7 @@ export function parseSourceFile<
         project: options.dependencyMap,
         imports,
         local
-      }));
+      }, {debug: options.debug}));
 
   return {
     fileName: path.basename(sourceFile.fileName),

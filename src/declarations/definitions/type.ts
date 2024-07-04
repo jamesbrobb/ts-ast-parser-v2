@@ -8,18 +8,19 @@ import {Expression} from "./expressions";
 import {ParameterDeclaration} from "./parameter";
 
 
-const assignedResolvedPath: DeclarationPostProcessFn<ts.TypeReferenceNode, TypeReferenceNode> = (
-  dec: TypeReferenceNode,
-  node: ts.TypeReferenceNode,
+function assignResolvedPath (
+  dec: TypeReferenceNode | ExpressionWithTypeArguments,
+  node: ts.TypeReferenceNode | ts.ExpressionWithTypeArguments,
   sourceFile: ts.SourceFile,
   parser: Parser<any, any>,
   maps? : Maps
-) => {
+) {
   if(!maps || !maps.imports) {
     return;
   }
 
-  const mapElement = getImportsMapElementByName(maps.imports, dec.name),
+  const identity = isTypeReferenceNode(dec) ? dec.name : dec.expression,
+    mapElement = getImportsMapElementByName(maps.imports, identity),
     resolvedPath = mapElement ? mapElement.convertedModulePath || mapElement.resolvedModulePath : null;
 
   if(!resolvedPath) {
@@ -67,20 +68,24 @@ export const typeReferenceDefinition: DeclarationDefinition<TypeReferenceNode> =
     }
   },
   postProcess: [
-    assignedResolvedPath
+    assignResolvedPath
   ],
   signatureCreationFn: createTypeReferenceSignature
 }
 
 export type ExpressionWithTypeArguments = {
   expression: string
-  typeArguments?: TypeNode[]
+  typeArguments?: (TypeNode | string)[]
+  resolvedPath?: string
 } & DeclarationKind<ts.ExpressionWithTypeArguments>
 
 export const expressionWithTypeArgumentsDefinition: DeclarationDefinition<ExpressionWithTypeArguments> = {
   props: ['expression', 'typeArguments'],
+  postProcess: [
+    assignResolvedPath
+  ],
   signatureCreationFn: (dec: ExpressionWithTypeArguments) => {
-    return `${dec.expression}${dec.typeArguments ? `<${dec.typeArguments.map(arg => arg.signature).join(', ')}>` : ''}`;
+    return `${dec.expression}${dec.typeArguments ? `<${dec.typeArguments.map(arg => typeof arg === 'string' ? arg : arg.signature).join(', ')}>` : ''}`;
   }
 }
 
@@ -189,7 +194,14 @@ export type LiteralTypeNode = {
 export const literalTypeNodeDefinition: DeclarationDefinition<LiteralTypeNode> = {
   props: ['literal'],
   propHandlers: {
-    literal: { propName: 'value' }
+    literal: {
+      propName: 'value',
+      parseFn: (node: ts.Node | undefined, sourceFile) => {
+        const val = node ? node.getText(sourceFile) : node;
+        //console.log(val);
+        return val;
+      }
+    }
   },
   signatureCreationFn: (dec: LiteralTypeNode) => dec.value
 }

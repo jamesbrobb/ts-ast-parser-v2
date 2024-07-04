@@ -65,22 +65,20 @@
             "kind": "PropertyDeclaration",
             "name": "id",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 "string"
               ],
               "arguments": [],
-              "signature": "input<>()"
+              "signature": "input<string>()"
             },
             "access": "public",
-            "signature": "id = input<>()"
+            "signature": "id = input<string>()"
           },
           {
             "kind": "PropertyDeclaration",
             "name": "options",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -108,7 +106,6 @@
             "kind": "PropertyDeclaration",
             "name": "markers",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -212,7 +209,6 @@
             "kind": "PropertyDeclaration",
             "name": "#chart",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 {
@@ -230,6 +226,7 @@
                       "signature": "HorzScaleItem"
                     }
                   ],
+                  "resolvedPath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/core/tv-chart/tv-chart",
                   "signature": "TVChart<T, HorzScaleItem>"
                 }
               ],
@@ -264,14 +261,11 @@
             "kind": "PropertyDeclaration",
             "name": "initialised",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "outputFromObservable",
               "arguments": [
                 {
-                  "kind": "PropertyAccessExpression",
                   "name": "initialised$",
                   "expression": {
-                    "kind": "PropertyAccessExpression",
                     "name": "#chart",
                     "expression": "this",
                     "signature": "this.#chart"
@@ -293,14 +287,11 @@
             "kind": "PropertyDeclaration",
             "name": "chartClick",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "outputFromObservable",
               "arguments": [
                 {
-                  "kind": "PropertyAccessExpression",
                   "name": "click$",
                   "expression": {
-                    "kind": "PropertyAccessExpression",
                     "name": "#chart",
                     "expression": "this",
                     "signature": "this.#chart"
@@ -322,14 +313,11 @@
             "kind": "PropertyDeclaration",
             "name": "chartDBLClick",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "outputFromObservable",
               "arguments": [
                 {
-                  "kind": "PropertyAccessExpression",
                   "name": "dblClick$",
                   "expression": {
-                    "kind": "PropertyAccessExpression",
                     "name": "#chart",
                     "expression": "this",
                     "signature": "this.#chart"
@@ -351,14 +339,11 @@
             "kind": "PropertyDeclaration",
             "name": "crosshairMoved",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "outputFromObservable",
               "arguments": [
                 {
-                  "kind": "PropertyAccessExpression",
                   "name": "crossHairMove$",
                   "expression": {
-                    "kind": "PropertyAccessExpression",
                     "name": "#chart",
                     "expression": "this",
                     "signature": "this.#chart"
@@ -380,14 +365,11 @@
             "kind": "PropertyDeclaration",
             "name": "visibleTimeRangeChanged",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "outputFromObservable",
               "arguments": [
                 {
-                  "kind": "PropertyAccessExpression",
                   "name": "visibleTimeRangeChange$",
                   "expression": {
-                    "kind": "PropertyAccessExpression",
                     "name": "#chart",
                     "expression": "this",
                     "signature": "this.#chart"
@@ -409,14 +391,11 @@
             "kind": "PropertyDeclaration",
             "name": "visibleLogicalRangeChanged",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "outputFromObservable",
               "arguments": [
                 {
-                  "kind": "PropertyAccessExpression",
                   "name": "visibleLogicalRangeChange$",
                   "expression": {
-                    "kind": "PropertyAccessExpression",
                     "name": "#chart",
                     "expression": "this",
                     "signature": "this.#chart"
@@ -438,14 +417,11 @@
             "kind": "PropertyDeclaration",
             "name": "sizeChanged",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "outputFromObservable",
               "arguments": [
                 {
-                  "kind": "PropertyAccessExpression",
                   "name": "sizeChange$",
                   "expression": {
-                    "kind": "PropertyAccessExpression",
                     "name": "#chart",
                     "expression": "this",
                     "signature": "this.#chart"
@@ -467,14 +443,11 @@
             "kind": "PropertyDeclaration",
             "name": "dataChanged",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "outputFromObservable",
               "arguments": [
                 {
-                  "kind": "PropertyAccessExpression",
                   "name": "dataChange$",
                   "expression": {
-                    "kind": "PropertyAccessExpression",
                     "name": "#chart",
                     "expression": "this",
                     "signature": "this.#chart"
@@ -668,7 +641,6 @@
           "crosshair": {
             "vertLine": {
               "style": {
-                "kind": "PropertyAccessExpression",
                 "name": "LargeDashed",
                 "expression": "LineStyle",
                 "signature": "LineStyle.LargeDashed"
@@ -676,7 +648,6 @@
             },
             "horzLine": {
               "style": {
-                "kind": "PropertyAccessExpression",
                 "name": "LargeDashed",
                 "expression": "LineStyle",
                 "signature": "LineStyle.LargeDashed"
@@ -703,7 +674,6 @@
           "signature": "DeepPartial<ChartOptions>"
         },
         "initializer": {
-          "kind": "CallExpression",
           "expression": "deepmerge",
           "arguments": [
             "DEFAULT_CHART_OPTIONS",
@@ -711,7 +681,6 @@
               "layout": {
                 "background": {
                   "type": {
-                    "kind": "PropertyAccessExpression",
                     "name": "Solid",
                     "expression": "ColorType",
                     "signature": "ColorType.Solid"
@@ -742,7 +711,6 @@
                   "color": "#fff",
                   "labelBackgroundColor": "#aaa",
                   "style": {
-                    "kind": "PropertyAccessExpression",
                     "name": "SparseDotted",
                     "expression": "LineStyle",
                     "signature": "LineStyle.SparseDotted"
@@ -752,7 +720,6 @@
                   "color": "#fff",
                   "labelBackgroundColor": "#aaa",
                   "style": {
-                    "kind": "PropertyAccessExpression",
                     "name": "SparseDotted",
                     "expression": "LineStyle",
                     "signature": "LineStyle.SparseDotted"
@@ -790,7 +757,6 @@
             "kind": "PropertyDeclaration",
             "name": "#inputs",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 "TVChartInputsDirective"
@@ -809,10 +775,8 @@
             "kind": "PropertyDeclaration",
             "name": "#element",
             "initializedValue": {
-              "kind": "PropertyAccessExpression",
               "name": "nativeElement",
               "expression": {
-                "kind": "CallExpression",
                 "expression": "inject",
                 "arguments": [
                   {
@@ -825,6 +789,7 @@
                         "signature": "HTMLElement"
                       }
                     ],
+                    "resolvedPath": "https://angular.dev/api/core/ElementRef",
                     "signature": "ElementRef<HTMLElement>"
                   }
                 ],
@@ -844,7 +809,6 @@
             "kind": "PropertyDeclaration",
             "name": "#chart",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 {
@@ -862,6 +826,7 @@
                       "signature": "HorzScaleItem"
                     }
                   ],
+                  "resolvedPath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/core/tv-chart/tv-chart",
                   "signature": "TVChart<T, HorzScaleItem>"
                 }
               ],
@@ -888,11 +853,13 @@
               {
                 "kind": "ExpressionWithTypeArguments",
                 "expression": "OnInit",
+                "resolvedPath": "https://angular.dev/api/core/OnInit",
                 "signature": "OnInit"
               },
               {
                 "kind": "ExpressionWithTypeArguments",
                 "expression": "OnDestroy",
+                "resolvedPath": "https://angular.dev/api/core/OnDestroy",
                 "signature": "OnDestroy"
               }
             ]
@@ -925,9 +892,7 @@
             "kind": "PropertyDeclaration",
             "name": "type",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": {
-                "kind": "PropertyAccessExpression",
                 "name": "required",
                 "expression": "input",
                 "signature": "input.required"
@@ -953,7 +918,6 @@
             "kind": "PropertyDeclaration",
             "name": "seriesOptions",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -982,7 +946,6 @@
             "kind": "PropertyDeclaration",
             "name": "data",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -1022,7 +985,6 @@
             "kind": "PropertyDeclaration",
             "name": "customSeriesView",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -1316,7 +1278,6 @@
                 "templateUrl": "./custom-chart.component.html",
                 "styleUrl": "./custom-chart.component.scss",
                 "changeDetection": {
-                  "kind": "PropertyAccessExpression",
                   "name": "OnPush",
                   "expression": "ChangeDetectionStrategy",
                   "signature": "ChangeDetectionStrategy.OnPush"
@@ -1334,7 +1295,6 @@
             "kind": "PropertyDeclaration",
             "name": "seriesOptions",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -1356,7 +1316,6 @@
             "kind": "PropertyDeclaration",
             "name": "data",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -1387,7 +1346,6 @@
             "kind": "PropertyDeclaration",
             "name": "customSeriesView",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -1414,7 +1372,6 @@
             "kind": "PropertyDeclaration",
             "name": "inputs",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 "TVChartInputsDirective"
@@ -1549,8 +1506,8 @@
               "typeArguments": [
                 {
                   "kind": "LiteralType",
-                  "value": "Histogram",
-                  "signature": "Histogram"
+                  "value": "'Histogram'",
+                  "signature": "'Histogram'"
                 },
                 {
                   "kind": "TypeReference",
@@ -1559,11 +1516,11 @@
                 }
               ],
               "resolvedPath": "https://tradingview.github.io/lightweight-charts/docs/api/interfaces/iseriesapi",
-              "signature": "ISeriesApi<Histogram, HorzScaleItem>"
+              "signature": "ISeriesApi<'Histogram', HorzScaleItem>"
             },
             "optional": true,
             "access": "private",
-            "signature": "#histogramSeries?: ISeriesApi<Histogram, HorzScaleItem>"
+            "signature": "#histogramSeries?: ISeriesApi<'Histogram', HorzScaleItem>"
           },
           {
             "kind": "Constructor",
@@ -1641,7 +1598,6 @@
             "kind": "PropertyDeclaration",
             "name": "seriesOptions",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -1663,7 +1619,6 @@
             "kind": "PropertyDeclaration",
             "name": "volumeOptions",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -1685,7 +1640,6 @@
             "kind": "PropertyDeclaration",
             "name": "data",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -1716,7 +1670,6 @@
             "kind": "PropertyDeclaration",
             "name": "volume",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -1747,7 +1700,6 @@
             "kind": "PropertyDeclaration",
             "name": "chart",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "viewChild",
               "typeArguments": [
                 {
@@ -1756,8 +1708,8 @@
                   "typeArguments": [
                     {
                       "kind": "LiteralType",
-                      "value": "Candlestick",
-                      "signature": "Candlestick"
+                      "value": "'Candlestick'",
+                      "signature": "'Candlestick'"
                     },
                     {
                       "kind": "TypeReference",
@@ -1766,7 +1718,7 @@
                     }
                   ],
                   "resolvedPath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/chart.directive",
-                  "signature": "TVChartDirective<Candlestick, HorzScaleItem>"
+                  "signature": "TVChartDirective<'Candlestick', HorzScaleItem>"
                 },
                 {
                   "kind": "TypeReference",
@@ -1774,8 +1726,8 @@
                   "typeArguments": [
                     {
                       "kind": "LiteralType",
-                      "value": "Candlestick",
-                      "signature": "Candlestick"
+                      "value": "'Candlestick'",
+                      "signature": "'Candlestick'"
                     },
                     {
                       "kind": "TypeReference",
@@ -1784,7 +1736,7 @@
                     }
                   ],
                   "resolvedPath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/core/tv-chart/tv-chart",
-                  "signature": "TVChart<Candlestick, HorzScaleItem>"
+                  "signature": "TVChart<'Candlestick', HorzScaleItem>"
                 }
               ],
               "arguments": [
@@ -1794,8 +1746,8 @@
                   "typeArguments": [
                     {
                       "kind": "LiteralType",
-                      "value": "Candlestick",
-                      "signature": "Candlestick"
+                      "value": "'Candlestick'",
+                      "signature": "'Candlestick'"
                     },
                     {
                       "kind": "TypeReference",
@@ -1803,22 +1755,22 @@
                       "signature": "HorzScaleItem"
                     }
                   ],
-                  "signature": "TVChartDirective<Candlestick, HorzScaleItem>"
+                  "resolvedPath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/chart.directive",
+                  "signature": "TVChartDirective<'Candlestick', HorzScaleItem>"
                 },
                 {
                   "read": "TVChart"
                 }
               ],
-              "signature": "viewChild<TVChartDirective<Candlestick, HorzScaleItem>, TVChart<Candlestick, HorzScaleItem>>(TVChartDirective<Candlestick, HorzScaleItem>, { read: TVChart })"
+              "signature": "viewChild<TVChartDirective<'Candlestick', HorzScaleItem>, TVChart<'Candlestick', HorzScaleItem>>(TVChartDirective<'Candlestick', HorzScaleItem>, { read: TVChart })"
             },
             "access": "public",
-            "signature": "chart = viewChild<TVChartDirective<Candlestick, HorzScaleItem>, TVChart<Candlestick, HorzScaleItem>>(TVChartDirective<Candlestick, HorzScaleItem>, { read: TVChart })"
+            "signature": "chart = viewChild<TVChartDirective<'Candlestick', HorzScaleItem>, TVChart<'Candlestick', HorzScaleItem>>(TVChartDirective<'Candlestick', HorzScaleItem>, { read: TVChart })"
           },
           {
             "kind": "PropertyDeclaration",
             "name": "inputs",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 {
@@ -1831,6 +1783,7 @@
                       "signature": "HorzScaleItem"
                     }
                   ],
+                  "resolvedPath": "Users/James/WebstormProjects/ngx-lightweight-charts/library/src/lib/ng/charts/chart-inputs.directive",
                   "signature": "TVChartInputsDirective<HorzScaleItem>"
                 }
               ],
@@ -1944,7 +1897,6 @@
                 "templateUrl": "./histogram-chart.component.html",
                 "styleUrl": "./histogram-chart.component.scss",
                 "changeDetection": {
-                  "kind": "PropertyAccessExpression",
                   "name": "OnPush",
                   "expression": "ChangeDetectionStrategy",
                   "signature": "ChangeDetectionStrategy.OnPush"
@@ -1962,7 +1914,6 @@
             "kind": "PropertyDeclaration",
             "name": "seriesOptions",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -1984,7 +1935,6 @@
             "kind": "PropertyDeclaration",
             "name": "data",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -2016,7 +1966,6 @@
             "kind": "PropertyDeclaration",
             "name": "inputs",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 "TVChartInputsDirective"
@@ -2131,7 +2080,6 @@
                 "templateUrl": "./line-chart.component.html",
                 "styleUrl": "./line-chart.component.scss",
                 "changeDetection": {
-                  "kind": "PropertyAccessExpression",
                   "name": "OnPush",
                   "expression": "ChangeDetectionStrategy",
                   "signature": "ChangeDetectionStrategy.OnPush"
@@ -2149,7 +2097,6 @@
             "kind": "PropertyDeclaration",
             "name": "seriesOptions",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -2171,7 +2118,6 @@
             "kind": "PropertyDeclaration",
             "name": "data",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -2203,7 +2149,6 @@
             "kind": "PropertyDeclaration",
             "name": "inputs",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 "TVChartInputsDirective"
@@ -2318,7 +2263,6 @@
                 "templateUrl": "./bar-chart.component.html",
                 "styleUrl": "./bar-chart.component.scss",
                 "changeDetection": {
-                  "kind": "PropertyAccessExpression",
                   "name": "OnPush",
                   "expression": "ChangeDetectionStrategy",
                   "signature": "ChangeDetectionStrategy.OnPush"
@@ -2336,7 +2280,6 @@
             "kind": "PropertyDeclaration",
             "name": "seriesOptions",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -2358,7 +2301,6 @@
             "kind": "PropertyDeclaration",
             "name": "data",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -2390,7 +2332,6 @@
             "kind": "PropertyDeclaration",
             "name": "inputs",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 "TVChartInputsDirective"
@@ -2505,7 +2446,6 @@
                 "templateUrl": "./baseline-chart.component.html",
                 "styleUrl": "./baseline-chart.component.scss",
                 "changeDetection": {
-                  "kind": "PropertyAccessExpression",
                   "name": "OnPush",
                   "expression": "ChangeDetectionStrategy",
                   "signature": "ChangeDetectionStrategy.OnPush"
@@ -2523,7 +2463,6 @@
             "kind": "PropertyDeclaration",
             "name": "seriesOptions",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -2545,7 +2484,6 @@
             "kind": "PropertyDeclaration",
             "name": "data",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -2577,7 +2515,6 @@
             "kind": "PropertyDeclaration",
             "name": "inputs",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 "TVChartInputsDirective"
@@ -2692,7 +2629,6 @@
                 "templateUrl": "./area-chart.component.html",
                 "styleUrl": "./area-chart.component.scss",
                 "changeDetection": {
-                  "kind": "PropertyAccessExpression",
                   "name": "OnPush",
                   "expression": "ChangeDetectionStrategy",
                   "signature": "ChangeDetectionStrategy.OnPush"
@@ -2710,7 +2646,6 @@
             "kind": "PropertyDeclaration",
             "name": "seriesOptions",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -2732,7 +2667,6 @@
             "kind": "PropertyDeclaration",
             "name": "data",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "input",
               "typeArguments": [
                 {
@@ -2764,7 +2698,6 @@
             "kind": "PropertyDeclaration",
             "name": "inputs",
             "initializedValue": {
-              "kind": "CallExpression",
               "expression": "inject",
               "arguments": [
                 "TVChartInputsDirective"

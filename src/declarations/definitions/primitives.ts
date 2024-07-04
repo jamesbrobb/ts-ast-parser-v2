@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import {stripQuotes} from "../../utils/string";
+import {stripQuotes} from "../../utils";
 import {Parser} from "../declaration-parser";
 
 
@@ -33,5 +33,18 @@ export function parseBoolean(node: ts.BooleanLiteral, sourceFile: ts.SourceFile)
 }
 
 export function parseString(node: ts.Node, sourceFile: ts.SourceFile): string {
+
+  /*if(ts.isStringLiteral(node)) {
+    console.log('isStringLiteral');
+    console.log(ts.SyntaxKind[node.kind]);
+    console.log(node.text);
+
+  } else {
+    console.log('not');
+    console.log(ts.SyntaxKind[node.kind]);
+    console.log(node.getText(sourceFile));
+  }
+
+  console.log('=============================');*/
   return stripQuotes(ts.isStringLiteral(node) ? node.text : node.getText(sourceFile));
 }
