@@ -140,16 +140,6 @@ export type TypeElement = {
   optional?: boolean
 } & DeclarationKind<ts.TypeElement>
 
-export const typeElementDefinition: DeclarationDefinition<TypeElement> = {
-  props: ['name', 'questionToken'],
-  propHandlers: {
-    questionToken: {
-      propName: 'optional'
-    }
-  },
-  signatureCreationFn: (dec: TypeElement) => `${dec.name}${dec.optional ? '?' : ''}`
-}
-
 
 export type IndexedAccessTypeNode = {
   objectType: TypeNode
@@ -195,12 +185,7 @@ export const literalTypeNodeDefinition: DeclarationDefinition<LiteralTypeNode> =
   props: ['literal'],
   propHandlers: {
     literal: {
-      propName: 'value',
-      parseFn: (node: ts.Node | undefined, sourceFile) => {
-        const val = node ? node.getText(sourceFile) : node;
-        //console.log(val);
-        return val;
-      }
+      propName: 'value'
     }
   },
   signatureCreationFn: (dec: LiteralTypeNode) => dec.value

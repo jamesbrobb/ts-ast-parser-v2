@@ -2,7 +2,7 @@ import * as ts from "typescript";
 import {
   getDecoratorsAsString, getKeywordsAsString,
   getModifierKeywords,
-  getModifiers,
+  getModifiers, isDecoratedWith,
   ModifierKeywords,
   Modifiers,
   setAccess
@@ -12,6 +12,7 @@ import {DeclarationDefinition} from "../declaration-definition.types";
 import {TypeNode} from "./type";
 import {Expression} from "./expressions";
 import {AccessTypes} from "./common";
+import {findKeyWithValue, walkObjectTree} from "../../utils";
 
 
 
@@ -78,6 +79,20 @@ export function isPublicPropertyDeclaration(dec: DeclarationKind<any>): dec is P
 
 export function isPropertySignature(dec: DeclarationKind<any>): dec is PropertySignature {
   return dec.kind === ts.SyntaxKind[ts.SyntaxKind.PropertySignature];
+}
+
+
+export function checkPropertyForKeyWithValue(property: PropertyDeclaration, key: string, value: string): boolean {
+
+  if(isDecoratedWith(value, property.modifiers)) {
+    return true;
+  }
+
+  if (typeof property.initializedValue === 'string') {
+    return property.initializedValue === value;
+  }
+
+  return findKeyWithValue(property.initializedValue, key, value);
 }
 
 

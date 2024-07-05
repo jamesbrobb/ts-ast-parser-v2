@@ -46,5 +46,15 @@ export function parseString(node: ts.Node, sourceFile: ts.SourceFile): string {
   }
 
   console.log('=============================');*/
+
+  if(ts.isStringLiteral(node)) {
+    // TODO - return node.getText(sourceFile), which includes the quotes, and then strip at dec source if required
+    /*console.log(node.text);
+    console.log(node.getText(sourceFile));
+    console.log(ts.SyntaxKind[node.kind]);
+    console.log('=============================');*/
+  }
+
+
   return stripQuotes(ts.isStringLiteral(node) ? node.text : node.getText(sourceFile));
 }

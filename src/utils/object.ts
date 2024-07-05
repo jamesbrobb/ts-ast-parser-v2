@@ -9,3 +9,16 @@ export function walkObjectTree(obj: any, callback: WalkCallbackFn, key: string) 
     }
   }
 }
+
+
+export function findKeyWithValue(obj: any, key: string, value: string): any {
+  let res = false
+
+  walkObjectTree(obj, (ky: string, val: any) => {
+    if(ky === key && typeof val === 'string' && val === value) {
+      res = true;
+    }
+  }, key);
+
+  return res;
+}
