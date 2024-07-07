@@ -1,15 +1,11 @@
 import * as ts from "typescript";
-import {
-  DeclarationDefinition,
-  DeclarationDefinitionMap,
-  DeclarationDefinitionMapEntry,
-  PropHandlerEntry
-} from "./declaration-definition.types";
+import {DeclarationDefinition, PropHandlerEntry} from "./declaration-definition.types";
 import {SyntaxKindToTSNodeDeclarationMap} from "../syntax-kind";
 import {DeclarationKindMap} from "./declaration-kind.types";
 import {isNode, isNodeArray} from "../utils";
 import {UnregisteredSyntaxKindNode, unregisteredSyntaxKindParser} from "../syntax-kind/syntax-kind.parser";
 import {Maps} from "../maps";
+import {DeclarationDefinitionMap, DeclarationDefinitionMapEntry} from "./declaration-definition.map.types";
 
 
 /*export type ParseOverload<N extends ts.Node, R> = {
@@ -95,7 +91,7 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
     return this.#processDef(def, node, sourceFile, maps, options);
   }
 
-  #processDef<D extends DeclarationDefinition<any>, N extends ts.Node>(
+  #processDef<N extends ts.Node, D extends DeclarationDefinition<any>>(
     def: D,
     node: N,
     sourceFile: ts.SourceFile,
@@ -110,7 +106,7 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
 
     def.props.forEach((prop: keyof N) => {
 
-      const propHandler: PropHandlerEntry<N, keyof N, D['__resultType'] > | undefined = def.propHandlers?.[prop],
+      const propHandler: PropHandlerEntry<N, keyof N, D['__resultType']> | undefined = def.propHandlers?.[prop],
         cNode = node[prop] as any;
 
       if(!cNode && !isNodeArray(cNode) && !isNode(cNode)) {

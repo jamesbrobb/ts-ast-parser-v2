@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import {getModifierKeywords, Modifiers} from "./modifiers";
+import {getModifierKeywords, ModifierKeywords, Modifiers} from "./modifiers";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition, DeclarationPostProcessFn} from "../declaration-definition.types";
 import {Parser} from "../declaration-parser";
@@ -38,7 +38,7 @@ export type TypeParameterDeclaration = {
   name: string
   constraint?: TypeNode
   default?: TypeNode
-  modifiers?: Modifiers
+  keywords?: ModifierKeywords[]
   expression: Expression
 } & DeclarationKind<ts.TypeParameterDeclaration>
 

@@ -5,6 +5,7 @@
   "main": "public-api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "test:types": "npx tsd -f=src/declarations/test-d",
     "build": "tsc -p tsconfig.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/src",
     "build:prod": "tsc -p tsconfig.prod.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/src",
     "release:beta": "npm version prerelease --preid=beta && npm run build:prod && cd dist/@jamesbenrobb/ts-ast-parser/src && npm publish --tag beta",
@@ -17,10 +18,14 @@
   "devDependencies": {
     "@types/node": "^20.11.30",
     "copyfiles": "^2.4.1",
+    "tsd": "^0.31.1",
     "tsx": "^4.15.6"
   },
   "dependencies": {
     "deepmerge": "^4.3.1",
     "typescript": "^5.4.3"
+  },
+  "tsd": {
+    "directory": "./"
   }
 }

@@ -1,11 +1,6 @@
 import * as ts from "typescript";
 
-import {
-  DeclarationKind,
-  DeclarationKindMap,
-  DeclarationParseFn,
-  GetDeclarationTSNodeType
-} from "./declaration-kind.types";
+import {DeclarationKind, GetDeclarationTSNodeType} from "./declaration-kind.types";
 import {SyntaxKindToTSNodeDeclarationMap} from "../syntax-kind";
 import {Parser} from "./declaration-parser";
 import {Maps} from "../maps";
@@ -28,7 +23,7 @@ export type PropHandlerDefinition<
   D extends DeclarationKind<N>
 > = {
   parseFn?: NodePropValueParseFunc<N, K>
-  propName?: string
+  propName?: string //Exclude<keyof Omit<D, keyof DeclarationKind<N>>, keyof N>
   defaultValue?: string
   postProcess?: PropHandlerPostProcessFn<N, K, D>[]
 }
@@ -58,14 +53,3 @@ export type _DeclarationDefinitionInner<N extends ts.Node, R extends Declaration
 export type DeclarationDefinition<
   T extends DeclarationKind<any>
 > = _DeclarationDefinitionInner<GetDeclarationTSNodeType<T>, T>
-
-export type DeclarationDefinitionMapEntry<
-  T extends DeclarationKind<any>
-> = DeclarationDefinition<T> | DeclarationParseFn<T>
-
-export type DeclarationDefinitionMap<
-  T extends SyntaxKindToTSNodeDeclarationMap,
-  M extends DeclarationKindMap<T>
-> = {
-  [K in keyof M]: M[K] extends DeclarationKind<any> ? DeclarationDefinitionMapEntry<M[K]> : never
-}

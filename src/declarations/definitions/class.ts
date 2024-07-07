@@ -30,7 +30,10 @@ export type ClassDeclaration = {
 export const classDeclarationDefinition: DeclarationDefinition<ClassDeclaration> = {
   props: ['name', 'typeParameters', 'members', 'heritageClauses', 'modifiers'],
   propHandlers: {
-    modifiers: getModifiers
+    modifiers: getModifiers,
+    members: {
+
+    }
   },
   postProcess: [
     addProperties,
