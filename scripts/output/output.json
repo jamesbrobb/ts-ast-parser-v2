@@ -1,0 +1,173 @@
+{
+  "fileName": "my-component.ts",
+  "path": "/Users/James/WebstormProjects/jbr/libraries/ui/src/lib",
+  "imports": [
+    {
+      "name": "Component",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core",
+      "convertedModulePath": "https://angular.dev/api/core/Component"
+    },
+    {
+      "name": "EventEmitter",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core",
+      "convertedModulePath": "https://angular.dev/api/core/EventEmitter"
+    },
+    {
+      "name": "Input",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core",
+      "convertedModulePath": "https://angular.dev/api/core/Input"
+    },
+    {
+      "name": "Output",
+      "module": "@angular/core",
+      "resolvedModulePath": "@angular/core",
+      "convertedModulePath": "https://angular.dev/api/core/Output"
+    },
+    {
+      "name": "NgFor",
+      "module": "@angular/common",
+      "resolvedModulePath": "@angular/common",
+      "convertedModulePath": "https://angular.dev/api/common/NgFor"
+    },
+    {
+      "name": "NgIf",
+      "module": "@angular/common",
+      "resolvedModulePath": "@angular/common",
+      "convertedModulePath": "https://angular.dev/api/common/NgIf"
+    },
+    {
+      "name": "Observable",
+      "module": "rxjs",
+      "resolvedModulePath": "rxjs",
+      "convertedModulePath": "https://rxjs.dev/api/index/class/Observable"
+    }
+  ],
+  "exports": [
+    {
+      "kind": "ClassDeclaration",
+      "name": "MyComponent",
+      "modifiers": {
+        "decorators": [
+          {
+            "type": "Component",
+            "metadata": {
+              "selector": "my-component",
+              "templateUrl": "my-component.html",
+              "styleUrls": [
+                "my-component.css"
+              ],
+              "standalone": true,
+              "imports": [
+                "NgIf",
+                "NgFor"
+              ]
+            },
+            "signature": "@Component({selector: my-component, templateUrl: my-component.html, styleUrls: my-component.css, standalone: true, imports: NgIf,NgFor})"
+          }
+        ],
+        "keywords": [
+          "export"
+        ]
+      },
+      "properties": [
+        {
+          "kind": "PropertyDeclaration",
+          "name": "myRequiredInput",
+          "type": "string",
+          "optional": true,
+          "modifiers": {
+            "decorators": [
+              {
+                "type": "Input",
+                "metadata": {
+                  "required": true
+                },
+                "signature": "@Input({required: true})"
+              }
+            ]
+          },
+          "access": "public",
+          "signature": "@Input({required: true})\nmyRequiredInput?: undefined"
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "myAliasedInput",
+          "type": "string",
+          "optional": true,
+          "modifiers": {
+            "decorators": [
+              {
+                "type": "Input",
+                "metadata": "alias",
+                "signature": "@Input('alias')"
+              }
+            ]
+          },
+          "access": "public",
+          "signature": "@Input('alias')\nmyAliasedInput?: undefined"
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "myOutput",
+          "initializedValue": {
+            "expression": "EventEmitter",
+            "typeArguments": [
+              "string"
+            ],
+            "arguments": [],
+            "signature": "new EventEmitter()"
+          },
+          "modifiers": {
+            "decorators": [
+              {
+                "type": "Output",
+                "signature": "@Output()"
+              }
+            ]
+          },
+          "access": "public",
+          "signature": "@Output()\nmyOutput = new EventEmitter()"
+        },
+        {
+          "kind": "PropertyDeclaration",
+          "name": "someValue",
+          "type": {
+            "kind": "TypeReference",
+            "name": "Observable",
+            "typeArguments": [
+              "boolean"
+            ],
+            "resolvedPath": "https://rxjs.dev/api/index/class/Observable",
+            "signature": "Observable<>"
+          },
+          "optional": true,
+          "modifiers": {
+            "keywords": [
+              "public"
+            ]
+          },
+          "access": "public",
+          "signature": " someValue?: Observable<>"
+        }
+      ],
+      "methods": [
+        {
+          "kind": "MethodDeclaration",
+          "name": "myMethod",
+          "parameters": [],
+          "modifiers": {
+            "keywords": [
+              "public"
+            ]
+          },
+          "access": "public",
+          "returnType": "",
+          "signature": " myMethod()"
+        }
+      ]
+    }
+  ]
+}

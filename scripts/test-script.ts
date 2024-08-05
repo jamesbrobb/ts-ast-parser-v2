@@ -41,10 +41,17 @@ function run() {
 
     const parser = new Parser(defaultDeclarationDefinitionMap);
 
-    const source = parse(sourcePath, parser, pathHandlers, {walk: true, debug: false});
+    const source = parse(
+      sourcePath,
+      parser,
+      pathHandlers, {
+          walk: stats.isDirectory(),
+          debug: false
+      }
+    );
 
     fs.writeFileSync(
-      path.join('/Users/James/WebstormProjects/ts-ast-parser-v2/scripts/output', 'test.json'),
+      path.join('/Users/James/WebstormProjects/ts-ast-parser-v2/scripts/output', 'output.json'),
       JSON.stringify(source, null, '  ')
     );
 }

@@ -4,7 +4,6 @@
   "description": "",
   "main": "public-api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "test:types": "npx tsd -f=src/declarations/test-d",
     "build": "tsc -p tsconfig.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/src",
     "build:prod": "tsc -p tsconfig.prod.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/src",
