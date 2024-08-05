@@ -1,7 +1,7 @@
 // ts playground code https://tsplay.dev/mxpQbm
 
 import * as ts from "typescript";
-import {EnumToMappedType} from "../utils";
+import {EnumToMappedType, ExtendsType} from "../utils";
 
 
 export type SyntaxKinds = `${ts.SyntaxKind}` extends `${infer T extends number}` ? T : never;
@@ -13,7 +13,7 @@ export type SyntaxKindToTSNodeDeclarationMap = {
   [K in keyof SyntaxKindToSyntaxKindValueMap]?: {kind: K} & ts.Node
 }
 
-export type DefaultSyntaxKindToTSNodeDeclarationMap = {
+export type DefaultSyntaxKindToTSNodeDeclarationMap = ExtendsType<SyntaxKindToTSNodeDeclarationMap, {
   [ts.SyntaxKind.ImportDeclaration]: ts.ImportDeclaration
   [ts.SyntaxKind.ImportClause]: ts.ImportClause
   [ts.SyntaxKind.NamespaceImport]: ts.NamespaceImport
@@ -54,4 +54,4 @@ export type DefaultSyntaxKindToTSNodeDeclarationMap = {
   [ts.SyntaxKind.ArrayLiteralExpression]: ts.ArrayLiteralExpression
   [ts.SyntaxKind.ArrayType]: ts.ArrayTypeNode
   [ts.SyntaxKind.Identifier]: ts.Identifier
-}
+}>

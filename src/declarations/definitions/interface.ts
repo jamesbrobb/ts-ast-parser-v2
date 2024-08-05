@@ -15,10 +15,23 @@ export type InterfaceDeclaration = {
   members: ClassElement[]
 } & DeclarationKind<ts.InterfaceDeclaration>
 
+const props = [
+  'name',
+  'typeParameters',
+  'members',
+  'heritageClauses',
+  'modifiers'
+] as const;
 
-export const interfaceDeclarationDefinition: DeclarationDefinition<InterfaceDeclaration> = {
-  props: ['name', 'typeParameters', 'members', 'heritageClauses', 'modifiers'],
+export const interfaceDeclarationDefinition: DeclarationDefinition<
+  InterfaceDeclaration,
+  typeof props
+> = {
+  props,
   propHandlers: {
-    modifiers: getModifiers
+    modifiers: getModifiers,
+    heritageClauses: {
+      propName: 'heritage'
+    }
   }
 }

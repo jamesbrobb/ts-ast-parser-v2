@@ -2,6 +2,7 @@ import * as ts from "typescript";
 import {Parser} from "../declaration-parser";
 import {DeclarationKind} from "../declaration-kind.types";
 import {DeclarationDefinition} from "../declaration-definition.types";
+import {Expression} from "./expressions";
 
 
 export type DecoratorMetadata = {
@@ -15,8 +16,13 @@ export type Decorator = {
   metadata?: DecoratorMetadataTypes
 } & DeclarationKind<ts.Decorator>
 
-export const decoratorDefinition: DeclarationDefinition<Decorator> = {
-  props: ['expression']
+export const decoratorDefinition: DeclarationDefinition<Decorator, ['expression']> = {
+  props: ['expression'],
+  propHandlers: {
+    expression: {
+      propName: 'type'
+    }
+  }
 }
 
 

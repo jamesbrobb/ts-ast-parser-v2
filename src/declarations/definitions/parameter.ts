@@ -16,16 +16,20 @@ export type ParameterDeclaration = {
   dotDotDotToken?: boolean
 } & DeclarationKind<ts.ParameterDeclaration>;
 
+const props = [
+  'name',
+  'questionToken',
+  'type',
+  'initializer',
+  'modifiers',
+  'dotDotDotToken'
+] as const;
 
-export const parameterDeclarationDefinition: DeclarationDefinition<ParameterDeclaration> = {
-  props: [
-    'name',
-    'questionToken',
-    'type',
-    'initializer',
-    'modifiers',
-    'dotDotDotToken'
-  ],
+export const parameterDeclarationDefinition: DeclarationDefinition<
+  ParameterDeclaration,
+  typeof props
+> = {
+  props,
   propHandlers: {
     questionToken: { propName: 'optional'},
     modifiers: getModifiers

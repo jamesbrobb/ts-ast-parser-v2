@@ -12,7 +12,7 @@ export function createProgram(debug?: boolean): ts.Program {
     console.log('================= PROGRAM =================')
     console.log('root file:', program.getRootFileNames()[0]);
     console.log('current directory:', program.getCurrentDirectory());
-    console.log('compiler options: ', program.getCompilerOptions());
+    console.log('compiler options:', program.getCompilerOptions());
     console.log('===========================================')
   }
 

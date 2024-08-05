@@ -11,8 +11,17 @@ export type ImportDeclaration = {
   modifiers?: Modifiers,
 } & DeclarationKind<ts.ImportDeclaration>
 
-export const importDeclarationDefinition: DeclarationDefinition<ImportDeclaration> = {
-  props: ['moduleSpecifier', 'importClause', 'modifiers', 'attributes'],
+const impProps = [
+  'moduleSpecifier',
+  'importClause',
+  'modifiers'
+] as const
+
+export const importDeclarationDefinition: DeclarationDefinition<
+  ImportDeclaration,
+  typeof impProps
+> = {
+  props: impProps,
   propHandlers: {
     modifiers: getModifiers
   }
@@ -25,7 +34,10 @@ export type ImportClause = {
   namedBindings?: NamespaceImport | NamedImports
 } & DeclarationKind<ts.ImportClause>
 
-export const importClauseDefinition: DeclarationDefinition<ImportClause> = {
+export const importClauseDefinition: DeclarationDefinition<
+  ImportClause,
+  ['name', 'isTypeOnly', 'namedBindings']
+> = {
   props: ['name', 'isTypeOnly', 'namedBindings']
 }
 
@@ -34,7 +46,10 @@ export type NamedImports = {
   elements: ImportSpecifier[]
 } & DeclarationKind<ts.NamedImports>
 
-export const namedImportsDefinition: DeclarationDefinition<NamedImports> = {
+export const namedImportsDefinition: DeclarationDefinition<
+  NamedImports,
+  ['elements']
+> = {
   props: ['elements']
 }
 
@@ -45,7 +60,10 @@ export type ImportSpecifier = {
   isTypeOnly: boolean
 } & DeclarationKind<ts.ImportSpecifier>
 
-export const importSpecifierDefinition: DeclarationDefinition<ImportSpecifier> = {
+export const importSpecifierDefinition: DeclarationDefinition<
+  ImportSpecifier,
+  ['name', 'propertyName', 'isTypeOnly']
+> = {
   props: ['name', 'propertyName', 'isTypeOnly']
 }
 
@@ -54,7 +72,7 @@ export type NamespaceImport = {
   name: string,
 } & DeclarationKind<ts.NamespaceImport>
 
-export const namespaceImportDefinition: DeclarationDefinition<NamespaceImport> = {
+export const namespaceImportDefinition: DeclarationDefinition<NamespaceImport, ['name']> = {
   props: ['name']
 }
 

@@ -20,19 +20,24 @@ export type SetAccessorDeclaration = {
 } & DeclarationKind<ts.SetAccessorDeclaration>;
 
 
-export const setAccessorDeclarationDefinition: DeclarationDefinition<SetAccessorDeclaration> = {
-  props: [
-    'name',
-    'type',
-    'typeParameters',
-    'parameters',
-    'modifiers',
-    'asteriskToken',
-    'questionToken',
-    'exclamationToken',
-  ],
+const props = [
+  'name',
+  'type',
+  'typeParameters',
+  'parameters',
+  'modifiers',
+  'asteriskToken',
+  'questionToken',
+  'exclamationToken'
+] as const;
+
+export const setAccessorDeclarationDefinition: DeclarationDefinition<
+  SetAccessorDeclaration,
+  typeof props
+> = {
+  props,
   propHandlers: {
-    modifiers: getModifiers
+    modifiers: getModifiers,
   },
   postProcess: [
     setAccess

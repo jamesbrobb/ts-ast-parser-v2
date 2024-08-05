@@ -1,5 +1,5 @@
 import * as ts from "typescript";
-import {getModifierKeywords, getModifiers, Modifiers, setAccess} from "./modifiers";
+import {getModifierKeywords, getModifiers, ModifierKeywords, Modifiers, setAccess} from "./modifiers";
 import {TypeParameterDeclaration} from "./type";
 import {ParameterDeclaration} from "./parameter";
 import {DeclarationKind} from "../declaration-kind.types";
@@ -19,17 +19,22 @@ export type FunctionDeclaration = {
   exclamationToken?: boolean
 } & DeclarationKind<ts.FunctionDeclaration>
 
-export const functionDeclarationDefinition: DeclarationDefinition<FunctionDeclaration> = {
-  props: [
-    'name',
-    'type',
-    'typeParameters',
-    'parameters',
-    'modifiers',
-    'asteriskToken',
-    'questionToken',
-    'exclamationToken',
-  ],
+const funcProps = [
+  'name',
+  'type',
+  'typeParameters',
+  'parameters',
+  'modifiers',
+  'asteriskToken',
+  'questionToken',
+  'exclamationToken',
+] as const
+
+export const functionDeclarationDefinition: DeclarationDefinition<
+  FunctionDeclaration,
+  typeof funcProps
+> = {
+  props: funcProps,
   propHandlers: {
     modifiers: getModifiers
   },
@@ -43,17 +48,21 @@ export type ArrowFunction = {
   type?: string
   typeParameters?: TypeParameterDeclaration[]
   parameters: ParameterDeclaration[]
-  modifiers?: Modifiers
+  modifiers?: ModifierKeywords[]
 } & DeclarationKind<ts.ArrowFunction>
 
-export const arrowFunctionDefinition: DeclarationDefinition<ArrowFunction> = {
-  props: [
-    'type',
-    'typeParameters',
-    'parameters',
-    'modifiers',
-    'body'
-  ],
+const arrowFuncProps = [
+  'type',
+  'typeParameters',
+  'parameters',
+  'modifiers',
+] as const
+
+export const arrowFunctionDefinition: DeclarationDefinition<
+  ArrowFunction,
+  typeof arrowFuncProps
+> = {
+  props: arrowFuncProps,
   propHandlers: {
     modifiers: getModifierKeywords
   }

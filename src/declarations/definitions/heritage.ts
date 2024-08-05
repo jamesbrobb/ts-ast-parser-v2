@@ -11,9 +11,13 @@ export type HeritageClause = {
   types: string[]
 } & DeclarationKind<ts.HeritageClause>
 
+const props = ['token', 'types'] as const;
 
-export const heritageClauseDefinition: DeclarationDefinition<HeritageClause> = {
-  props: ['token', 'types']
+export const heritageClauseDefinition: DeclarationDefinition<
+  HeritageClause,
+  typeof props
+> = {
+  props
 }
 
 

@@ -7,7 +7,7 @@ export type TupleTypeNode = {
   elements: string
 } & DeclarationKind<ts.TupleTypeNode>
 
-export const tupleTypeNodeDefinition: DeclarationDefinition<TupleTypeNode> = {
+export const tupleTypeNodeDefinition: DeclarationDefinition<TupleTypeNode, ["elements"]> = {
   props: ["elements"]
 }
 
@@ -19,8 +19,15 @@ export type NamedTupleMember = {
   optional: boolean
 } & DeclarationKind<ts.NamedTupleMember>
 
-export const namedTupleMemberDefinition: DeclarationDefinition<NamedTupleMember> = {
-  props: ["name", "type", "dotDotDotToken", "questionToken"],
+const props = [
+  "name", "type", "dotDotDotToken", "questionToken"
+] as const;
+
+export const namedTupleMemberDefinition: DeclarationDefinition<
+  NamedTupleMember,
+  typeof props
+> = {
+  props,
   propHandlers: {
     dotDotDotToken: { propName: 'rest' },
     questionToken: { propName: 'optional' }

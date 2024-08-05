@@ -27,12 +27,20 @@ export type ClassDeclaration = {
 } & DeclarationKind<ts.ClassDeclaration>
 
 
-export const classDeclarationDefinition: DeclarationDefinition<ClassDeclaration> = {
-  props: ['name', 'typeParameters', 'members', 'heritageClauses', 'modifiers'],
+const props = [
+  'name', 'typeParameters', 'members', 'heritageClauses', 'modifiers'
+] as const;
+
+
+export const classDeclarationDefinition: DeclarationDefinition<
+  ClassDeclaration,
+  typeof props
+> = {
+  props,
   propHandlers: {
     modifiers: getModifiers,
-    members: {
-
+    heritageClauses: {
+      propName: 'heritage'
     }
   },
   postProcess: [

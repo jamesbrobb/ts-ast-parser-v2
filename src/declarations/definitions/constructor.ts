@@ -11,8 +11,14 @@ export type ConstructorDeclaration = {
 } & DeclarationKind<ts.ConstructorDeclaration>
 
 
-export const constructorDeclarationDefinition: DeclarationDefinition<ConstructorDeclaration> = {
-  props: ['parameters', 'modifiers'],
+const props = ['parameters', 'modifiers'] as const;
+
+
+export const constructorDeclarationDefinition: DeclarationDefinition<
+  ConstructorDeclaration,
+  typeof props
+> = {
+  props,
   propHandlers: {
     modifiers: getModifiers
   }

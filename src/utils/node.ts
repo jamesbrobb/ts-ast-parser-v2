@@ -9,7 +9,7 @@ export function isNode(value: any): value is ts.Node {
   }
 }
 
-export function isNodeArray(value: any): value is ts.NodeArray<any> {
+export function isNodeArray<T extends ts.Node>(value: T | ts.NodeArray<T>): value is ts.NodeArray<T> {
   return Array.isArray(value) && value.every(isNode);
 }
 

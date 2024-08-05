@@ -16,10 +16,19 @@ export type CallExpression = {
   arguments: Expression[]
 } & DeclarationKind<ts.CallExpression>
 
+const callExpProps = [
+  'expression',
+  'questionDotToken',
+  'typeArguments',
+  'arguments'
+] as const;
 
-export const callExpressionDefinition: DeclarationDefinition<CallExpression> = {
+export const callExpressionDefinition: DeclarationDefinition<
+  CallExpression,
+  typeof callExpProps
+> = {
   removeKind: true,
-  props: ['expression', 'questionDotToken', 'typeArguments', 'arguments'],
+  props: callExpProps,
   signatureCreationFn: (dec: CallExpression) => {
     const args = dec.arguments.map(arg => convertExpressionToString(arg)).join(', '),
       typeArgs = dec.typeArguments && dec.typeArguments.length ? `<${dec.typeArguments.map(arg => typeof arg === 'string' ? arg : arg.signature).join(', ')}>` : '';
@@ -35,7 +44,10 @@ export type PropertyAccessExpression = {
   optional?: boolean
 } & DeclarationKind<ts.PropertyAccessExpression>
 
-export const propertyAccessExpressionDefinition: DeclarationDefinition<PropertyAccessExpression> = {
+export const propertyAccessExpressionDefinition: DeclarationDefinition<
+  PropertyAccessExpression,
+  ['name', 'expression', 'questionDotToken']
+> = {
   removeKind: true,
   props: ['name', 'expression', 'questionDotToken'],
   propHandlers: {
@@ -56,7 +68,10 @@ export type NewExpression = {
   arguments?: Expression[]
 } & DeclarationKind<ts.NewExpression>
 
-export const newExpressionDefinition: DeclarationDefinition<NewExpression> = {
+export const newExpressionDefinition: DeclarationDefinition<
+  NewExpression,
+  ['expression', 'typeArguments', 'arguments']
+> = {
   removeKind: true,
   props: ['expression', 'typeArguments', 'arguments'],
   signatureCreationFn: (dec: NewExpression) => {
@@ -70,7 +85,7 @@ export type BinaryExpression = {
   right: Expression
 } & DeclarationKind<ts.BinaryExpression>
 
-export const binaryExpressionDefinition: DeclarationDefinition<BinaryExpression> = {
+export const binaryExpressionDefinition: DeclarationDefinition<BinaryExpression, ['left', 'right']> = {
   removeKind: true,
   props: ['left', 'right'],
    signatureCreationFn: (dec: BinaryExpression) => {

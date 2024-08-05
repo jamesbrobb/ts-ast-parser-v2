@@ -30,14 +30,18 @@ const modifiersMap: {[key: number]: ModifierKeywords} = {
 }
 
 
-export function getModifierKeywords(nodes: NodeArray<Modifier>): ModifierKeywords[] {
-  return nodes.map(node => modifiersMap[node.kind])
+export function getModifierKeywords(nodes: NodeArray<Modifier> | undefined): ModifierKeywords[] {
+  return nodes?.map(node => modifiersMap[node.kind]) || [];
 }
 
 
-export function getModifiers(nodes: NodeArray<ModifierLike>, sourceFile: ts.SourceFile, parser: Parser<any, any>): Modifiers {
+export function getModifiers(nodes: NodeArray<ModifierLike> | undefined, sourceFile: ts.SourceFile, parser: Parser<any, any>): Modifiers {
 
   const modifiers: Modifiers = {};
+
+  if(!nodes) {
+    return modifiers;
+  }
 
   nodes.forEach(node => {
     if(ts.isDecorator(node)) {

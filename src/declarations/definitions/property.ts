@@ -12,7 +12,7 @@ import {DeclarationDefinition} from "../declaration-definition.types";
 import {TypeNode} from "./type";
 import {Expression} from "./expressions";
 import {AccessTypes} from "./common";
-import {findKeyWithValue, walkObjectTree} from "../../utils";
+import {findKeyWithValue} from "../../utils";
 
 
 
@@ -26,16 +26,20 @@ export type PropertyDeclaration = {
   modifiers?: Modifiers
 } & DeclarationKind<ts.PropertyDeclaration>
 
+const propDecProps = [
+  'name',
+  'type',
+  'questionToken',
+  'exclamationToken',
+  'initializer',
+  'modifiers'
+] as const
 
-export const propertyDeclarationDefinition: DeclarationDefinition<PropertyDeclaration> = {
-  props: [
-    'name',
-    'type',
-    'questionToken',
-    'exclamationToken',
-    'initializer',
-    'modifiers'
-  ],
+export const propertyDeclarationDefinition: DeclarationDefinition<
+  PropertyDeclaration,
+  typeof propDecProps
+> = {
+  props: propDecProps,
   propHandlers: {
     questionToken: { propName: 'optional' },
     exclamationToken: { propName: 'exclamation' },
@@ -56,9 +60,18 @@ export type PropertySignature = {
   keywords?: ModifierKeywords[]
 } & DeclarationKind<ts.PropertySignature>
 
+const propSigProps = [
+  'name',
+  'type',
+  'questionToken',
+  'modifiers'
+] as const
 
-export const propertySignatureDefinition: DeclarationDefinition<PropertySignature> = {
-  props: ['name', 'type', 'questionToken', 'modifiers'],
+export const propertySignatureDefinition: DeclarationDefinition<
+  PropertySignature,
+  typeof propSigProps
+> = {
+  props: propSigProps,
   propHandlers: {
     questionToken: { propName: 'optional' },
     modifiers: {

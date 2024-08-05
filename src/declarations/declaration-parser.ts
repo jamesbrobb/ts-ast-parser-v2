@@ -6,6 +6,7 @@ import {isNode, isNodeArray} from "../utils";
 import {UnregisteredSyntaxKindNode, unregisteredSyntaxKindParser} from "../syntax-kind/syntax-kind.parser";
 import {Maps} from "../maps";
 import {DeclarationDefinitionMap, DeclarationDefinitionMapEntry} from "./declaration-definition.map.types";
+import {GetDeclarationKind} from "./declaration-parser.types";
 
 
 /*export type ParseOverload<N extends ts.Node, R> = {
@@ -75,9 +76,7 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
       return node.map(value => this.parse(value, sourceFile, defaultValue, maps, options));
     }
 
-    // TODO - limit this to only the keys in M
-    // (M[N['kind']] extends DeclarationDefinition<infer U> ? DeclarationDefinition<U> : never) | undefined
-    const def: DeclarationDefinitionMapEntry<any> | undefined = this.#map[node.kind] as any;
+    const def: DeclarationDefinitionMapEntry<GetDeclarationKind<N, T, M>> | undefined = this.#map[node.kind];
 
     if(!def) {
       // TODO - make unregisteredSyntaxKindParser a dependency
@@ -91,7 +90,7 @@ export class Parser<T extends SyntaxKindToTSNodeDeclarationMap, M extends Declar
     return this.#processDef(def, node, sourceFile, maps, options);
   }
 
-  #processDef<N extends ts.Node, D extends DeclarationDefinition<any>>(
+  #processDef<N extends ts.Node, D extends DeclarationDefinition<any, any>>(
     def: D,
     node: N,
     sourceFile: ts.SourceFile,

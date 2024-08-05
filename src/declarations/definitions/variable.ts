@@ -12,9 +12,15 @@ export type VariableDeclaration = {
   raw: string
 } & DeclarationKind<ts.VariableDeclaration>
 
+const props = [
+  'name', 'type', 'exclamationToken', 'initializer'
+] as const;
 
-export const variableDeclarationDefinition: DeclarationDefinition<VariableDeclaration> = {
-  props: ['name', 'type', 'exclamationToken', 'initializer'],
+export const variableDeclarationDefinition: DeclarationDefinition<
+  VariableDeclaration,
+  typeof props
+> = {
+  props,
   propHandlers: {
     exclamationToken: {
       propName: 'exclamation'

@@ -1,11 +1,16 @@
-import {DeclarationKind, DeclarationKindMap, DeclarationParseFn} from "./declaration-kind.types";
+import {
+  DeclarationKind,
+  DeclarationKindMap,
+  DeclarationParseFn,
+  GetDeclarationTSNodeType
+} from "./declaration-kind.types";
 import {SyntaxKindToTSNodeDeclarationMap} from "../syntax-kind";
-import {DeclarationDefinition} from "./declaration-definition.types";
+import {DeclarationDefinition, GetReadOnlyNodePropsArray,} from "./declaration-definition.types";
 
 
 export type DeclarationDefinitionMapEntry<
   T extends DeclarationKind<any>
-> = DeclarationDefinition<T> | DeclarationParseFn<T>
+> = DeclarationDefinition<T, GetReadOnlyNodePropsArray<GetDeclarationTSNodeType<T>>> | DeclarationParseFn<T>
 
 export type DeclarationDefinitionMap<
   T extends SyntaxKindToTSNodeDeclarationMap,

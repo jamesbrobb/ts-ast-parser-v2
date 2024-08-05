@@ -5,7 +5,7 @@
   "main": "public-api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:types": "npx tsd -f=src/declarations/test-d",
+    "test:types": "npx tsd -f=${npm_config_path}",
     "build": "tsc -p tsconfig.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/src",
     "build:prod": "tsc -p tsconfig.prod.json && copyfiles ./package.json ./README.md dist/@jamesbenrobb/ts-ast-parser/src",
     "release:beta": "npm version prerelease --preid=beta && npm run build:prod && cd dist/@jamesbenrobb/ts-ast-parser/src && npm publish --tag beta",

@@ -1,6 +1,13 @@
 import * as ts from 'typescript';
 import {expectAssignable, expectNotAssignable, expectNotType, expectType} from 'tsd';
-import {DeclarationKind, GetDeclarationTSNodeType} from "../declaration-kind.types";
+import {DeclarationKind} from "../declaration-kind.types";
+
+import {
+  DeclarationDefinition,
+  ExcludeTsNodeProps,
+  ExcludeTsNodePropsFromDeclaration, GetDistinctKeys, GetOverlappingKeys,
+  OmitBaseDeclarationKindProps, PropHandlerDefinition, PropHandlerEntry, PropHandlers
+} from "../declaration-definition.types";
 
 
 export type TestClassDeclaration = {
@@ -14,8 +21,6 @@ export type TestClassDeclaration = {
 } & DeclarationKind<ts.ClassDeclaration>
 
 
-export type ExcludeTsNodeProps<N extends ts.Node> = Exclude<keyof N, keyof ts.Node>
-
 // ExcludeTsNodeProps
 
 expectAssignable<ExcludeTsNodeProps<ts.ClassDeclaration>>("modifiers");
@@ -28,10 +33,39 @@ expectAssignable<ExcludeTsNodeProps<ts.ClassDeclaration>>("_jsdocContainerBrand"
 expectAssignable<ExcludeTsNodeProps<ts.ClassDeclaration>>("_statementBrand");
 expectNotAssignable<ExcludeTsNodeProps<ts.ClassDeclaration>>("frog");
 
-export type ExcludeTsNodePropsFromDeclaration<
-  N extends ts.Node,
-  D extends DeclarationKind<N>
-> = Exclude<keyof Omit<D, keyof DeclarationKind<N>>, keyof N>
+
+// OmitBaseDeclarationKindProps
+
+expectAssignable<OmitBaseDeclarationKindProps<TestClassDeclaration>>({
+  name: 'test',
+  typeParameters: [1, 2],
+  heritage: ['test'],
+  modifiers: 'test',
+  properties: ['test'],
+  accessors: ['test'],
+  methods: ['test']
+});
+
+expectNotAssignable<OmitBaseDeclarationKindProps<TestClassDeclaration>>({
+  name: 'test',
+  __nodeType: undefined
+});
+
+expectNotAssignable<OmitBaseDeclarationKindProps<TestClassDeclaration>>({
+  name: 'test',
+  kind: undefined
+});
+
+expectNotAssignable<OmitBaseDeclarationKindProps<TestClassDeclaration>>({
+  name: 'test',
+  signature: undefined
+});
+
+expectNotAssignable<OmitBaseDeclarationKindProps<TestClassDeclaration>>({
+  name: 'test',
+  raw: undefined
+});
+
 
 // ExcludeTsNodePropsFromDeclaration
 
@@ -41,57 +75,30 @@ expectAssignable<ExcludeTsNodePropsFromDeclaration<ts.ClassDeclaration, TestClas
 expectAssignable<ExcludeTsNodePropsFromDeclaration<ts.ClassDeclaration, TestClassDeclaration>>("methods");
 expectNotAssignable<ExcludeTsNodePropsFromDeclaration<ts.ClassDeclaration, TestClassDeclaration>>("cat");
 
-export type NodePropValueParseFunc<
-  N extends ts.Node,
-  D extends DeclarationKind<N>,
-  NK extends ExcludeTsNodeProps<N>,
-  DK extends keyof Omit<D, keyof DeclarationKind<N>>
-> = (node: N[NK], sourceFile: ts.SourceFile, parser: any) => D[DK]
 
-// NodePropValueParseFunc
+// GetOverlappingKeys
 
-expectAssignable<
-  NodePropValueParseFunc<
-    ts.ClassDeclaration,
-    TestClassDeclaration,
-    "members",
-    "methods"
-  >
->((node: ts.NodeArray<ts.ClassElement>, sourceFile: ts.SourceFile, parser: any) => ['test', 'test2']);
+const oKeys = ['name', 'typeParameters', 'modifiers'] as const;
 
-expectNotAssignable<
-  NodePropValueParseFunc<
-    ts.ClassDeclaration,
-    TestClassDeclaration,
-    "members",
-    "methods"
-  >
->((node: ts.NodeArray<ts.ClassElement>, sourceFile: ts.SourceFile, parser: any) => [1, 2]);
+expectAssignable<GetOverlappingKeys<ts.ClassDeclaration, TestClassDeclaration, typeof oKeys>>("name");
+expectAssignable<GetOverlappingKeys<ts.ClassDeclaration, TestClassDeclaration, typeof oKeys>>("typeParameters");
+expectAssignable<GetOverlappingKeys<ts.ClassDeclaration, TestClassDeclaration, typeof oKeys>>("modifiers");
+expectNotAssignable<GetOverlappingKeys<ts.ClassDeclaration, TestClassDeclaration, typeof oKeys>>("heritageClauses");
+expectNotAssignable<GetOverlappingKeys<ts.ClassDeclaration, TestClassDeclaration, typeof oKeys>>("members");
+expectNotAssignable<GetOverlappingKeys<ts.ClassDeclaration, TestClassDeclaration, typeof oKeys>>("frog");
 
 
-export type _PropHandlerDefinitionOptions<
-  N extends ts.Node,
-  D extends DeclarationKind<N>,
-  K extends ExcludeTsNodeProps<N>,
-  P extends ExcludeTsNodePropsFromDeclaration<N, D> | undefined = undefined
-> = {
-  parseFn?: P extends undefined ?
-    (node: N[K], sourceFile: ts.SourceFile, parser: any) => D[K & keyof D] :
-    (node: N[K], sourceFile: ts.SourceFile, parser: any) => D[P & keyof D]
-  defaultValue?: P extends undefined ? D[K & keyof D] : D[P & keyof D]
-  postProcess?: P extends undefined ?
-    (node: N, prop: N[K], dec: D, sourceFile: ts.SourceFile, parser: any) => D[K & keyof D] :
-    (node: N, prop: N[K], dec: D, sourceFile: ts.SourceFile, parser: any) => D[P & keyof D]
-}
+// GetDistinctKeys
 
-export type PropHandlerDefinition<
-  N extends ts.Node,
-  D extends DeclarationKind<N>,
-  K extends ExcludeTsNodeProps<N>,
-  P extends ExcludeTsNodePropsFromDeclaration<N, D> | undefined = undefined
-> = K extends keyof D ?
-  _PropHandlerDefinitionOptions<N, D, K>:
-  _PropHandlerDefinitionOptions<N, D, K, P> & { propName: P extends undefined ? never : P }
+const dKeys = ['heritageClauses', 'members'] as const;
+
+expectAssignable<GetDistinctKeys<ts.ClassDeclaration, TestClassDeclaration, typeof dKeys>>("members");
+expectAssignable<GetDistinctKeys<ts.ClassDeclaration, TestClassDeclaration, typeof dKeys>>("heritageClauses");
+expectNotAssignable<GetDistinctKeys<ts.ClassDeclaration, TestClassDeclaration, typeof dKeys>>("name");
+expectNotAssignable<GetDistinctKeys<ts.ClassDeclaration, TestClassDeclaration, typeof dKeys>>("typeParameters");
+expectNotAssignable<GetDistinctKeys<ts.ClassDeclaration, TestClassDeclaration, typeof dKeys>>("modifiers");
+expectNotAssignable<GetDistinctKeys<ts.ClassDeclaration, TestClassDeclaration, typeof dKeys>>("frog");
+
 
 // PropHandlerDefinition
 
@@ -185,16 +192,6 @@ expectNotAssignable<
     parser: any
   ) => ['test', 'test2']
 });
-
-
-export type PropHandlerEntry<
-  N extends ts.Node,
-  D extends DeclarationKind<N>,
-  K extends ExcludeTsNodeProps<N>,
-  P extends ExcludeTsNodePropsFromDeclaration<N, D> | undefined = undefined
-> = K extends keyof D ?
-  PropHandlerDefinition<N, D, K> | ((node: N[K], sourceFile: ts.SourceFile, parser: any) => D[K & keyof D]) :
-  PropHandlerDefinition<N, D, K, P>
 
 
 // PropHandlerEntry
@@ -343,49 +340,97 @@ expectType<
 });
 
 
-export type DeclarationPostProcessFn<
-  N extends ts.Node,
-  D extends DeclarationKind<N>
-> = (dec: D, node: N, sourceFile: ts.SourceFile, parser: any) => void
+// PropHandlers
 
+const props = ['name', 'typeParameters', 'heritageClauses', 'modifiers', 'members'] as const;
 
-export type PropHandlers<N extends ts.Node, D extends DeclarationKind<N>> = {
-  [K in ExcludeTsNodeProps<N>]?: PropHandlerEntry<N, D, K, ExcludeTsNodePropsFromDeclaration<N, D> | undefined>
-}
-
-export type _DeclarationDefinitionInner<N extends ts.Node, D extends DeclarationKind<N>> =
-  ([ExcludeTsNodePropsFromDeclaration<N, D>] extends [never] ? {
-    propHandlers?: PropHandlers<N, D>
-  } : {
-    propHandlers: PropHandlers<N, D>
-  }) & ({
-    __resultType?: D,
-    removeKind?: boolean,
-    props: ExcludeTsNodeProps<N>[],
-    postProcess?: DeclarationPostProcessFn<N, D>[],
-    signatureCreationFn?: (dec: D, node: N, sourceFile: ts.SourceFile) => string
-  } & DeclarationKind<N>)
-
-export type DeclarationDefinition<
-  T extends DeclarationKind<any>
-> = _DeclarationDefinitionInner<GetDeclarationTSNodeType<T>, T>
+expectAssignable<
+  PropHandlers<ts.ClassDeclaration, TestClassDeclaration, typeof props>
+>({
+  name: {
+    defaultValue: 'name'
+  },
+  modifiers: (node: ts.NodeArray<ts.ModifierLike>  | undefined, sourceFile: ts.SourceFile, parser: any) => 'test',
+  typeParameters: {
+    parseFn: (node: ts.NodeArray<ts.TypeParameterDeclaration> | undefined, sourceFile: ts.SourceFile, parser: any) => [1, 2]
+  },
+  heritageClauses: {
+    propName: 'heritage'
+  },
+  members: {
+    propName: 'methods',
+    parseFn: (node: ts.NodeArray<ts.ClassElement>, sourceFile: ts.SourceFile, parser: any) => ['test', 'test2']
+  },
+});
 
 
 expectAssignable<
-  DeclarationDefinition<TestClassDeclaration>
+  PropHandlers<ts.ClassDeclaration, TestClassDeclaration, typeof props>
+>({
+  heritageClauses: {
+    propName: 'heritage'
+  },
+  members: {
+    propName: 'methods',
+    parseFn: (node: ts.NodeArray<ts.ClassElement>, sourceFile: ts.SourceFile, parser: any) => ['test', 'test2']
+  },
+});
+
+expectNotAssignable<
+  PropHandlers<ts.ClassDeclaration, TestClassDeclaration, typeof props>
+>({});
+
+expectNotAssignable<
+  PropHandlers<ts.ClassDeclaration, TestClassDeclaration, typeof props>
+>({
+  name: {
+    propName: 'heritage'
+  }
+});
+
+
+// DeclarationDefinition
+
+expectAssignable<
+  DeclarationDefinition<TestClassDeclaration, typeof props>
 >({
   props: ['name', 'typeParameters', 'heritageClauses', 'modifiers', 'members'],
   propHandlers: {
-    name: (node: ts.Identifier | undefined, sourceFile: ts.SourceFile, parser: any) => 'test'
+    name: (node: ts.Identifier | undefined, sourceFile: ts.SourceFile, parser: any) => 'test',
+    members: {
+      propName: 'methods'
+    },
+    heritageClauses: {
+      propName: 'heritage'
+    }
   }
 })
 
-expectType<
-  DeclarationDefinition<TestClassDeclaration>
+expectNotAssignable<
+  DeclarationDefinition<TestClassDeclaration, typeof props>
 >({
   props: ['name', 'typeParameters', 'heritageClauses', 'modifiers', 'members'],
   propHandlers: {
-    name: (node: ts.Identifier | undefined, sourceFile: ts.SourceFile, parser: any) => 'test'
+    name: (node: ts.Identifier | undefined, sourceFile: ts.SourceFile, parser: any) => 'test',
+    members: {
+      parseFn: (node: ts.NodeArray<ts.ClassElement>, sourceFile: ts.SourceFile, parser: any) => ['test', 'test2']
+    }
+  }
+});
+
+expectType<
+  DeclarationDefinition<TestClassDeclaration, typeof props>
+>({
+  props: ['name', 'typeParameters', 'heritageClauses', 'modifiers', 'members'],
+  propHandlers: {
+    name: (node: ts.Identifier | undefined, sourceFile: ts.SourceFile, parser: any) => 'test',
+    heritageClauses: {
+      propName: 'heritage'
+    },
+    members: {
+      propName: 'methods',
+      parseFn: (node: ts.NodeArray<ts.ClassElement>, sourceFile: ts.SourceFile, parser: any) => ['test', 'test2']
+    }
   }
 })
 

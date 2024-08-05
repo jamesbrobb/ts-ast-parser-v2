@@ -21,18 +21,22 @@ export type MethodDeclaration = {
   exclamationToken?: boolean
 } & DeclarationKind<ts.MethodDeclaration>;
 
+const props = [
+  'name',
+  'type',
+  'typeParameters',
+  'parameters',
+  'modifiers',
+  'asteriskToken',
+  'questionToken',
+  'exclamationToken',
+] as const;
 
-export const methodDeclarationDefinition: DeclarationDefinition<MethodDeclaration> = {
-  props: [
-    'name',
-    'type',
-    'typeParameters',
-    'parameters',
-    'modifiers',
-    'asteriskToken',
-    'questionToken',
-    'exclamationToken',
-  ],
+export const methodDeclarationDefinition: DeclarationDefinition<
+  MethodDeclaration,
+  typeof props
+> = {
+  props,
   propHandlers: {
     modifiers: getModifiers,
     type: {
@@ -68,8 +72,8 @@ export function setMissingReturnType(
     return;
   }
 
-  const returnStatement = node.body?.statements.filter(statement => statement.kind === ts.SyntaxKind.ReturnStatement)
-    .map((statement: ts.ReturnStatement) => {
+  const returnStatement = node.body?.statements.filter(ts.isReturnStatement)
+    .map((statement) => {
       return statement.expression?.getText(sourceFile);
     });
 

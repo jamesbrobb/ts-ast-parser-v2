@@ -1,7 +1,7 @@
 import * as ts from "typescript";
 import {getModifierKeywords, ModifierKeywords, Modifiers} from "./modifiers";
 import {DeclarationKind} from "../declaration-kind.types";
-import {DeclarationDefinition, DeclarationPostProcessFn} from "../declaration-definition.types";
+import {DeclarationDefinition} from "../declaration-definition.types";
 import {Parser} from "../declaration-parser";
 import {getImportsMapElementByName, Maps} from "../../maps";
 import {Expression} from "./expressions";
@@ -42,7 +42,10 @@ export type TypeParameterDeclaration = {
   expression: Expression
 } & DeclarationKind<ts.TypeParameterDeclaration>
 
-export const typeParameterDeclarationDefinition: DeclarationDefinition<TypeParameterDeclaration> = {
+export const typeParameterDeclarationDefinition: DeclarationDefinition<
+  TypeParameterDeclaration,
+  ['name', 'constraint', 'default', 'modifiers']
+> = {
   props: ['name', 'constraint', 'default', 'modifiers'],
   propHandlers: {
     modifiers: {
@@ -60,7 +63,10 @@ export type TypeReferenceNode = {
   resolvedPath?: string
 } & DeclarationKind<ts.TypeReferenceNode>
 
-export const typeReferenceDefinition: DeclarationDefinition<TypeReferenceNode> = {
+export const typeReferenceDefinition: DeclarationDefinition<
+  TypeReferenceNode,
+  ['typeName', 'typeArguments']
+> = {
   props: ['typeName', 'typeArguments'],
   propHandlers: {
     typeName: {
@@ -79,7 +85,10 @@ export type ExpressionWithTypeArguments = {
   resolvedPath?: string
 } & DeclarationKind<ts.ExpressionWithTypeArguments>
 
-export const expressionWithTypeArgumentsDefinition: DeclarationDefinition<ExpressionWithTypeArguments> = {
+export const expressionWithTypeArgumentsDefinition: DeclarationDefinition<
+  ExpressionWithTypeArguments,
+  ['expression', 'typeArguments']
+> = {
   props: ['expression', 'typeArguments'],
   postProcess: [
     assignResolvedPath
@@ -97,7 +106,10 @@ export type TypeAliasDeclaration = {
   type: TypeNode
 } & DeclarationKind<ts.TypeAliasDeclaration>
 
-export const typeAliasDeclarationDefinition: DeclarationDefinition<TypeAliasDeclaration> = {
+export const typeAliasDeclarationDefinition: DeclarationDefinition<
+  TypeAliasDeclaration,
+  ['name', 'typeParameters', 'type', 'modifiers']
+> = {
   props: ['name', 'typeParameters', 'type', 'modifiers'],
   signatureCreationFn: (dec: TypeAliasDeclaration) => {
     return `type ${dec.name}${dec.typeParameters ? `<${dec.typeParameters.map(param => param.signature).join(', ')}>` : ''} = ${dec.type.signature}`;
@@ -109,7 +121,10 @@ export type TypeLiteral = {
   members: TypeElement[],
 } & DeclarationKind<ts.TypeLiteralNode>
 
-export const typeLiteralDefinition: DeclarationDefinition<TypeLiteral> = {
+export const typeLiteralDefinition: DeclarationDefinition<
+  TypeLiteral,
+  ['members']
+> = {
   props: ['members'],
   /*propHandlers: {
     members: {
@@ -146,7 +161,10 @@ export type IndexedAccessTypeNode = {
   indexType: TypeNode
 } & DeclarationKind<ts.IndexedAccessTypeNode>
 
-export const indexedAccessTypeNodeDefinition: DeclarationDefinition<IndexedAccessTypeNode> = {
+export const indexedAccessTypeNodeDefinition: DeclarationDefinition<
+  IndexedAccessTypeNode,
+  ['objectType', 'indexType']
+> = {
   props: ['objectType', 'indexType'],
   signatureCreationFn: (dec: IndexedAccessTypeNode) => {
     return `${dec.objectType.signature}[${dec.indexType.signature}]`;
@@ -158,7 +176,7 @@ export type ArrayTypeNode = {
   elementType: TypeNode
 } & DeclarationKind<ts.ArrayTypeNode>
 
-export const arrayTypeNodeDefinition: DeclarationDefinition<ArrayTypeNode> = {
+export const arrayTypeNodeDefinition: DeclarationDefinition<ArrayTypeNode, ['elementType']> = {
   props: ['elementType'],
   signatureCreationFn: (dec: ArrayTypeNode) => `${dec.elementType.signature}[]`
 }
@@ -168,7 +186,7 @@ export type UnionTypeNode = {
   types: TypeNode[]
 } & DeclarationKind<ts.UnionTypeNode>
 
-export const unionTypeNodeDefinition: DeclarationDefinition<UnionTypeNode> = {
+export const unionTypeNodeDefinition: DeclarationDefinition<UnionTypeNode, ['types']> = {
   removeKind: true,
   props: ['types'],
   signatureCreationFn: (dec: UnionTypeNode) => {
@@ -181,7 +199,7 @@ export type LiteralTypeNode = {
   value: string
 } & DeclarationKind<ts.LiteralTypeNode>
 
-export const literalTypeNodeDefinition: DeclarationDefinition<LiteralTypeNode> = {
+export const literalTypeNodeDefinition: DeclarationDefinition<LiteralTypeNode, ['literal']> = {
   props: ['literal'],
   propHandlers: {
     literal: {
@@ -200,7 +218,10 @@ export type FunctionTypeNode = {
   signature: string
 } & DeclarationKind<ts.FunctionTypeNode>
 
-export const functionTypeDefinition: DeclarationDefinition<FunctionTypeNode> = {
+export const functionTypeDefinition: DeclarationDefinition<
+  FunctionTypeNode,
+  ['name', 'parameters', 'type', 'typeParameters']
+> = {
   props: ['name', 'parameters', 'type', 'typeParameters'],
   signatureCreationFn: (dec: FunctionTypeNode) => {
     return `(${dec.parameters.map(param => param.signature).join(', ')}) => ${dec.type ? dec.type.signature : 'void'}`;

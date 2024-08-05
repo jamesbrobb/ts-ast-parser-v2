@@ -13,8 +13,14 @@ export type EnumDeclaration = {
 } & DeclarationKind<ts.EnumDeclaration>
 
 
-export const enumDeclarationDefinition: DeclarationDefinition<EnumDeclaration> = {
-  props: ["name", "members", "modifiers"],
+const enumProps = ["name", "members", "modifiers"] as const
+
+
+export const enumDeclarationDefinition: DeclarationDefinition<
+  EnumDeclaration,
+  typeof enumProps
+> = {
+  props: enumProps,
   propHandlers: {
     modifiers: getModifiers
   },
@@ -30,7 +36,12 @@ export type EnumMember = {
 } & DeclarationKind<ts.EnumMember>
 
 
-export const enumMemberDefinition: DeclarationDefinition<EnumMember> = {
+const enumMemProps = ["name", "initializer"] as const;
+
+export const enumMemberDefinition: DeclarationDefinition<
+  EnumMember,
+  typeof enumMemProps
+> = {
   kind: "EnumMember",
-  props: ["name", "initializer"]
+  props: enumMemProps
 }

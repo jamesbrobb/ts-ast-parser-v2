@@ -19,18 +19,22 @@ export type GetAccessorDeclaration = {
   exclamationToken?: boolean
 } & DeclarationKind<ts.GetAccessorDeclaration>
 
+const props = [
+  'name',
+  'type',
+  'typeParameters',
+  'parameters',
+  'modifiers',
+  'asteriskToken',
+  'questionToken',
+  'exclamationToken',
+] as const
 
-export const getAccessorDeclarationDefinition: DeclarationDefinition<GetAccessorDeclaration> = {
-  props: [
-    'name',
-    'type',
-    'typeParameters',
-    'parameters',
-    'modifiers',
-    'asteriskToken',
-    'questionToken',
-    'exclamationToken',
-  ],
+export const getAccessorDeclarationDefinition: DeclarationDefinition<
+  GetAccessorDeclaration,
+  typeof props
+> = {
+  props,
   propHandlers: {
     modifiers: getModifiers
   },
