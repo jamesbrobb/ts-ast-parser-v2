@@ -1,10 +1,8 @@
 # Typescript AST Parser
 
-A parser that converts `.ts` files into human readable objects.
+A parser to convert `.ts` files into human readable objects.
 
 ---
-Example usage of `parse` function from `./parser.ts`:
-
 1) [Example file to parse](#1)
 2) [Calling the `parse` function](#2)
 3) [Example output from `parse`](#3)
